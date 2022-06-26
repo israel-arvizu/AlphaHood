@@ -2,16 +2,9 @@ from .db import db
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from .watchlist import watchlists
 
 Base=db.declarative_base()
-
-watchlists = db.Table(
-    'watchlists',
-    Base.metadata,
-    db.Column("stock_id", db.ForeignKey("stocks.id"), primary_key=True),
-    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True)
-)
 
 
 class User(Base, UserMixin):
@@ -44,31 +37,3 @@ class User(Base, UserMixin):
 
     stocks = db.relationship("Stock", secondary=watchlists, back_populates="users")
     portfolios = db.relationship("Portfolio", back_populates="users")
-
-
-
-class Portfolio(Base):
-    __tablename__ = 'portfolios'
-
-    id = db.Column(db.Integer, primary_key=True)
-    userid = db.Column(db.Integer, db.ForeignKey("users.id"))
-    stockid = db.Column(db.Integer, db.ForeignKey("stocks.id"))
-    shares = db.Column(db.Integer)
-    priceBought = db.Column(db.Float)
-    dateBought = db.Column(db.Date)
-
-    user = db.relationship("User", back_populates="portfolios")
-    stocks = db.relationship("Stock", back_populates="portfolios")
-
-class Stock(Base):
-    __tablename__ = 'stocks'
-
-    id = db.Column(db.Integer, primary_key=True)
-    Name = db.Column(db.String(60))
-    Ticker = db.Column(db.String(5))
-    MarketCap = db.Column(db.Float)
-    HighToday = db.Column(db.Float)
-    LowToday= db.Column(db.Float)
-
-    users = db.relationship("User", secondary=watchlists, back_populates="stocks")
-    portfolio = db.relationship("Portfolio", back_populates="stocks")
