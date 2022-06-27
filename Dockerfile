@@ -2,7 +2,7 @@
 FROM python:3.9
 # Set the following enviroment variables
 
-ENV REACT_APP_BASE_URL=http://feb-starter.app.herokuapp.com
+ENV REACT_APP_BASE_URL=https://alphahood.herokuapp.com/
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=True
