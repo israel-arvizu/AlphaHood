@@ -25,6 +25,7 @@ def upgrade():
     sa.Column('marketCap', sa.Float(), nullable=True),
     sa.Column('highToday', sa.Float(), nullable=True),
     sa.Column('lowToday', sa.Float(), nullable=True),
+    sa.Column('price', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
