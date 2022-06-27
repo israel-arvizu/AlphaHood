@@ -1,3 +1,5 @@
+from turtle import back
+from .purchase_history import Purchase_History
 from .db import db
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -15,7 +17,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     birthday = db.Column(db.Date, nullable=False)
-    balance = db.Column(db.Integer, nullable=False)
+    balance = db.Column(db.Float, nullable=False)
 
     @property
     def password(self):
@@ -38,5 +40,6 @@ class User(db.Model, UserMixin):
 
         }
 
-    stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users")
+    stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users", cascade="all,delete-orphan")
     portfolios = db.relationship("Portfolio", back_populates="users")
+    purchase_history = db.relationship("Purchase_History", back_populates="users", cascade="all,delete-orphan")
