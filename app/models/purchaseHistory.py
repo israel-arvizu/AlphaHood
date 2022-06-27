@@ -6,11 +6,11 @@ class PurchaseHistory(db.Model):
     __tablename__ = 'purchaseHistories'
 
     id = db.Column(db.Integer, primary_key=True)
-    userid = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    stockid = db.Column(db.Integer, db.ForeignKey("stocks.id"), nullable=False)
-    sharesBought = db.Column(db.Integer)
-    priceBought = db.Column(db.Float)
-    dateBought = db.Column(db.Date)
+    userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    stockId = db.Column(db.Integer, db.ForeignKey("stocks.id"), nullable=False)
+    sharesBought = db.Column(db.Integer, nullable=False)
+    priceBought = db.Column(db.Float, nullable=False)
+    dateBought = db.Column(db.Date, nullable=False)
     priceSold = db.Column(db.Float)
     sharesSold = db.Column(db.Float)
     dateSold = db.Column(db.Date)
@@ -22,8 +22,8 @@ class PurchaseHistory(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "userid": self.userid,
-            "stockid": self.stockid,
+            "userId": self.userId,
+            "stockId": self.stockId,
             "sharesBought": self.sharesBought,
             "priceBought": self.priceBought,
             "dateBought": self.dateBought,

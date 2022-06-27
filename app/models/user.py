@@ -2,9 +2,8 @@ from .db import db
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from .watchlist import watchlists
+from .watchlist import watchlist
 
-Base=db.declarative_base()
 
 
 class User(db.Model, UserMixin):
@@ -38,6 +37,6 @@ class User(db.Model, UserMixin):
 
         }
 
-    stocks = db.relationship("Stock", secondary=watchlists, back_populates="users")
+    stocks = db.relationship("Stock", secondary=watchlist, back_populates="users")
     portfolios = db.relationship("Portfolio", back_populates="users", cascade="all,delete-orphan")
     purchaseHistories = db.relationship("PurchaseHistory", back_populates='users')
