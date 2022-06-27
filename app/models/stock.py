@@ -1,7 +1,7 @@
 from .db import db
 from .watchlist import watchlists
 
-Base=db.declarative_base()
+
 
 
 class Stock(db.Model):
@@ -16,3 +16,14 @@ class Stock(db.Model):
 
     users = db.relationship("User", secondary=watchlists, back_populates="stocks")
     portfolios = db.relationship("Portfolio", back_populates="stocks")
+
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "Name": self.Name,
+            "Ticker": self.Ticker,
+            "MarketCap": self.MarketCap,
+            "HighToday": self.HighToday,
+            "LowToday": self.LowToday
+        }

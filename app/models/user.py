@@ -32,7 +32,10 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'birthday': self.birthday,
+            'balance': self.balance
+
         }
 
     stocks = db.relationship("Stock", secondary=watchlists, back_populates="users")
