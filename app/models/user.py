@@ -1,6 +1,10 @@
 from .db import db
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .watchlist import watchlists
+
+Base=db.declarative_base()
 
 
 class User(db.Model, UserMixin):
@@ -10,6 +14,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    birthday=db.Column(db.Date, nullable=False)
+    balance=db.Column(db.Integer, nullable=False)
 
     @property
     def password(self):
@@ -26,5 +32,11 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'birthday': self.birthday,
+            'balance': self.balance
+
         }
+
+    stocks = db.relationship("Stock", secondary=watchlists, back_populates="users")
+    portfolios = db.relationship("Portfolio", back_populates="users")
