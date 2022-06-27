@@ -8,7 +8,7 @@ def seed_users():
     marnie = User(
         username='marnie', email='marnie@aa.io', password='password', birthday='2012-05-20', balance=30.00)
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', birthday='2012-05-20', balance=50.00)
+        username='bobbie', email='bobbie@aa.io', password='password', birthday='2012-05-20', balance=50.51)
 
 
     db.session.add(demo)

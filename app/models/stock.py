@@ -16,6 +16,7 @@ class Stock(db.Model):
 
     users = db.relationship("User", secondary=watchlists, back_populates="stocks")
     portfolios = db.relationship("Portfolio", back_populates="stocks")
+    purchaseHistories = db.relationship("PurchaseHistory", back_populates='stocks')
 
 
     def to_dict(self):

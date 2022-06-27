@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     birthday=db.Column(db.Date, nullable=False)
-    balance=db.Column(db.Integer, nullable=False)
+    balance=db.Column(db.Float, nullable=False)
 
     @property
     def password(self):
@@ -39,4 +39,5 @@ class User(db.Model, UserMixin):
         }
 
     stocks = db.relationship("Stock", secondary=watchlists, back_populates="users")
-    portfolios = db.relationship("Portfolio", back_populates="users")
+    portfolios = db.relationship("Portfolio", back_populates="users", cascade="all,delete-orphan")
+    purchaseHistories = db.relationship("PurchaseHistory", back_populates='users')
