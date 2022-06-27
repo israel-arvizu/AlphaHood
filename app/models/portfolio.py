@@ -1,8 +1,8 @@
 from .db import db
 
-Base=db.declarative_base()
 
-class Portfolio(Base):
+
+class Portfolio(db.Model):
     __tablename__ = 'portfolios'
 
     id = db.Column(db.Integer, primary_key=True)

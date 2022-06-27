@@ -7,7 +7,7 @@ from .watchlist import watchlists
 Base=db.declarative_base()
 
 
-class User(Base, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)

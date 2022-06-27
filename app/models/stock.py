@@ -4,7 +4,7 @@ from .watchlist import watchlists
 Base=db.declarative_base()
 
 
-class Stock(Base):
+class Stock(db.Model):
     __tablename__ = 'stocks'
 
     id = db.Column(db.Integer, primary_key=True)
