@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, jsonify, session, request
-from AlphaHood.app.models.purchase_history import Purchase_History
+from AlphaHood.app.models.transaction import Purchase_History
 from app.models import User, db, Stock, Portfolio
 import datetime
 
@@ -79,11 +79,11 @@ def sell_shares():
 
 # add stock to portfolio
     def ownedStock(userId, stockId):
-        rowCheck = Portfolio.query.filter(Portfolio.userId == userId).filter(Portfolio.stockId == stockId)
-        if (rowCheck):
-            if (rowCheck.shares - soldShares > 0):
-                Portfolio.query.filter(Portfolio.id == rowCheck.id).update({
-                    'soldShares': rowCheck.shares - soldShares
+        portfolioCheck = Portfolio.query.filter(Portfolio.userId == userId).filter(Portfolio.stockId == stockId)
+        if (portfolioCheck):
+            if (portfolioCheck.shares - soldShares > 0):
+                Portfolio.query.filter(Portfolio.id == portfolioCheck.id).update({
+                    'soldShares': portfolioCheck.shares - soldShares
             })
         else:
             return ("error")

@@ -1,5 +1,5 @@
 from turtle import back
-from .purchase_history import Purchase_History
+from .transaction import Purchase_History
 from .db import db
 
 from werkzeug.security import generate_password_hash, check_password_hash
