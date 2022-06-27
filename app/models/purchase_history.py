@@ -1,7 +1,7 @@
 from collections import UserString
 from .db import db
 from .stock import Stock
-from .user import User
+
 
 
 class Purchase_History(db.Model):
@@ -17,8 +17,8 @@ class Purchase_History(db.Model):
     sharesSold= db.Column(db.Float)
     dateSold = db.Column(db.Date)
 
-    users = db.relationship("User", back_populates="purchaseHistory")
-    stocks = db.relationship("Stock", back_populates="purchaseHistory")
+    users = db.relationship("User", back_populates="purchase_histories")
+    stocks = db.relationship("Stock", back_populates="purchase_histories")
 
 
     def to_dict(self):

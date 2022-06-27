@@ -20,11 +20,14 @@ def get_stock(id):
 @login_required
 def buy_shares():
     req = request.get_json()
-    user_id = req['user_id']
-    stock_id = req['stock_id']
-    portfolio = Portfolio.query.filter_by(user=userid)
+    userId = req['userId']
+    stockId = req['stockId']
+    portfolio = Portfolio.query.filter_by(user=userId)
 
 # Change user balance
+    user = User.query.get(userId)
+    user.balance = User.query
+
 # add stock to portfolio
 # put buy order on purchase history
 #
