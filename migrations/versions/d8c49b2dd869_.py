@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: d8c49b2dd869
-Revises: 
+Revises:
 Create Date: 2022-06-26 23:31:49.752861
 
 """
@@ -40,23 +40,39 @@ def upgrade():
     )
     op.create_table('portfolios',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('userid', sa.Integer(), nullable=True),
-    sa.Column('stockid', sa.Integer(), nullable=True),
+    sa.Column('userId', sa.Integer(), nullable=True),
+    sa.Column('stockId', sa.Integer(), nullable=True),
     sa.Column('shares', sa.Integer(), nullable=True),
     sa.Column('priceBought', sa.Float(), nullable=True),
     sa.Column('dateBought', sa.Date(), nullable=True),
-    sa.ForeignKeyConstraint(['stockid'], ['stocks.id'], ),
-    sa.ForeignKeyConstraint(['userid'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
+    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlists',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('stock_id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['stock_id'], ['stocks.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('stock_id', 'user_id')
+    sa.Column('stockId', sa.Integer(), nullable=False),
+    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
+    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('purchaseHistories',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.Column('stockId', sa.Integer(), nullable=False),
+    sa.Column('priceBought', sa.Float(), nullable=False),
+    sa.Column('sharesBought', sa.Integer(), nullable=False),
+    sa.Column('dateBought', sa.Date(), nullable=False),
+    sa.Column('priceSold', sa.Float(), nullable=True),
+    sa.Column('sharesSold', sa.Float(), nullable=True),
+    sa.Column('dateSold', sa.Date(), nullable=True),
+    sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
+    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
     # ### end Alembic commands ###
 
 
@@ -66,4 +82,5 @@ def downgrade():
     op.drop_table('portfolios')
     op.drop_table('users')
     op.drop_table('stocks')
+    op.drop_table('purchaseHistories')
     # ### end Alembic commands ###

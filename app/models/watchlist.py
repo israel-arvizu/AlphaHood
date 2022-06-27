@@ -3,12 +3,20 @@ from .db import db
 
 
 
-watchlists = db.Table(
-    'watchlists',
-    db.Model.metadata,
-    db.Column('name',db.String(100), nullable=False, unique=True),
-    db.Column("stock_id", db.ForeignKey("stocks.id"), primary_key=True),
-    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True)
+class Watchlist(db.Model):
+    __tablename__= 'watchlists'
 
+    db.Model.metadata
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    stockId= db.Column(db.ForeignKey("stocks.id"))
+    userId=db.Column(db.ForeignKey("users.id"))
 
-)
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "stockId": self.stockId,
+            "userId": self.userId
+
+        }
