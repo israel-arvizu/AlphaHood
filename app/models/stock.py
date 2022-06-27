@@ -15,4 +15,4 @@ class Stock(db.Model):
     LowToday= db.Column(db.Float)
 
     users = db.relationship("User", secondary=watchlists, back_populates="stocks")
-    portfolio = db.relationship("Portfolio", back_populates="stocks")
+    portfolios = db.relationship("Portfolio", back_populates="stocks")

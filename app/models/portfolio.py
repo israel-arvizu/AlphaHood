@@ -12,5 +12,5 @@ class Portfolio(db.Model):
     priceBought = db.Column(db.Float)
     dateBought = db.Column(db.Date)
 
-    user = db.relationship("User", back_populates="portfolios")
+    users = db.relationship("User", back_populates="portfolios")
     stocks = db.relationship("Stock", back_populates="portfolios")
