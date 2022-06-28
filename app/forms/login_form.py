@@ -16,6 +16,7 @@ def password_matches(form, field):
     # Checking if password matches
     password = field.data
     email = form.data['email']
+    print(f"This is email{email}, {password}-----------------")
     user = User.query.filter(User.email == email).first()
     if not user:
         raise ValidationError('No such user exists.')

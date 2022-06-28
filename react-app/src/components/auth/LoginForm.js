@@ -11,6 +11,8 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
+    console.log('entered route')
+    console.log(email, password)
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
