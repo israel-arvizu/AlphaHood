@@ -1,7 +1,6 @@
 from datetime import date
 from flask import Blueprint, jsonify, session, request
-from AlphaHood.app.models.transaction import Purchase_History
-from app.models import User, db, Stock, Portfolio
+from app.models import User, db, Stock, Portfolio, Transaction
 import datetime
 
 from flask_login import current_user, login_user, logout_user, login_required
