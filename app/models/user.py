@@ -27,6 +27,7 @@ class User(db.Model, UserMixin):
         self.hashed_password = generate_password_hash(password)
 
     def check_password(self, password):
+        print(check_password_hash(self.password, password), '--------------------')
         return check_password_hash(self.password, password)
 
     def to_dict(self):
@@ -39,6 +40,6 @@ class User(db.Model, UserMixin):
 
         }
 
-    stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users", cascade="all,delete-orphan")
+    stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users", cascade="all")
     portfolios = db.relationship("Portfolio", back_populates="users")
     transactions = db.relationship("Transaction", back_populates="users", cascade="all,delete-orphan")
