@@ -1,5 +1,4 @@
-from turtle import back
-from .purchase_history import Purchase_History
+from .transaction import Transaction
 from .db import db
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -42,4 +41,4 @@ class User(db.Model, UserMixin):
 
     stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users", cascade="all,delete-orphan")
     portfolios = db.relationship("Portfolio", back_populates="users")
-    purchase_history = db.relationship("Purchase_History", back_populates="users", cascade="all,delete-orphan")
+    transactions = db.relationship("Transaction", back_populates="users", cascade="all,delete-orphan")
