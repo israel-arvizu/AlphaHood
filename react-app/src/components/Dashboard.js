@@ -7,6 +7,8 @@ import { loadHomeNews } from '../store/news';
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
+
+
     useEffect(() => {
         dispatch(loadHomeNews())
     }, [dispatch])
