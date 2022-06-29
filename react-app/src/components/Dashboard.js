@@ -1,5 +1,6 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
 
 
@@ -20,7 +21,7 @@ function Dashboard() {
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
                     <div>
-                        <button><a href="/trendinglists/top-hot-10">Top Hot 10</a></button>
+                        <button><a href='/trendinglists/top-hot-10'>Top Hot 10</a></button>
                         <button><a href='/trendinglists/creators-choice'>Creators Choice</a></button>
                         <button><a href='/trendinglists/25-most-popular'>25 Most Popular</a></button>
                         <button><a href='/trendinglists/technology'>Technology</a></button>
@@ -31,7 +32,7 @@ function Dashboard() {
                 {newsArticles.map((article) => {
                     if(article.thumbnail !== undefined)
                         return (
-                            <div>
+                            <div key={article.title}>
                                 <hr></hr>
                                 <a href={article.link}>
                                     <img src={article.thumbnail.resolutions[1].url} alt='thumbnail' />

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 
@@ -12,12 +12,12 @@ const tech = ["HPE", "MNDT", "ARW", "HPO","INTC","GDDY","BKI","SNX","ON","NATI",
 const auto = ["TSLA", "GM","F","TM","KMX","CVNA","RACE","STLA","NIO","HMC"]
 
 
-
-
 function TrendingLists() {
     let dispatch = useDispatch()
     let topic = []
     let {list} = useParams()
+    const stocks = useSelector(state => state.stocks.stocks)
+
     switch (list){
         case "top-hot-10":
             topic = topTen
@@ -38,21 +38,17 @@ function TrendingLists() {
             topic = []
     }
 
-
-
     let listarray = list.split("-")
     let titlearray = listarray.map(word=>{
         return word[0].toUpperCase() + word.slice(1, word.length)
     })
     let title = titlearray.join(" ")
-    console.log(title)
 
     useEffect(()=>{
         dispatch(loadstocklist(topic))
-
     }, [dispatch])
 
-
+    if(!stocks) return <h2>Loading</h2>
     return(
         <div>
             <div>
@@ -71,13 +67,17 @@ function TrendingLists() {
                                 <th>Today</th>
                                 <th>Market Cap</th>
                             </tr>
-                             <tr>
-                                {topic.map(stock=>{
-                                    <td></td>
+                                {stocks.map(stock=>{
+                                    return (
+                                        <tr>
+                                            <td>{stock.name}</td>
+                                            <td>{stock.ticker}</td>
+                                            <td>{stock.price}</td>
+                                            <td>{stock.todayPerformance + "%"}</td>
+                                            <td>{stock.marketCap}</td>
+                                        </tr>
+                                    )
                                 })}
-
-                             <td></td>
-                            </tr>
                         </table>
                     </div>
                 </div>

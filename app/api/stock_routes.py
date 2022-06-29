@@ -116,16 +116,20 @@ def sell_shares():
 @stock_routes.route('/loadfeaturelists', methods=["POST"])
 def featurelists():
     tickerList = []
+    i = 0
     req = request.get_json()
     for stock in req:
-        currentStock = yf.Ticker(stock)
-        currentStockInfo=currentStock.info
-
-        performancePercentage = currentStockInfo['currentPrice'] - currentStockInfo['regularMarketOpen'] * .1 * 100
-        currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"today": performancePercentage, "marketCap": currentStockInfo['marketCap']}
-        print("======================================")
-        print(currentStockobj)
-        tickerList.append(currentStockobj)
-    print(tickerList)
+        try:
+            currentStock = yf.Ticker(stock)
+            currentStockInfo=currentStock.info
+            # increase / original * 100
+            performancePercentage = ((currentStockInfo['currentPrice'] - currentStockInfo['regularMarketOpen']) / currentStockInfo['regularMarketOpen']) * 100
+            performancePercentage = round(performancePercentage, 2)
+            currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"todayPerformance": performancePercentage, "marketCap": currentStockInfo['marketCap']}
+            tickerList.append(currentStockobj)
+            i += 1
+            print(i)
+        except:
+            print("Something went wrong!")
 
     return jsonify(tickerList)
