@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import Dashboard from './components/Dashboard';
 import User from './components/User';
 import TrendingLists from './components/TrendingLists'
+import StockDetail from './components/StockDetail'
 import { authenticate } from './store/session';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -37,7 +38,7 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/trendinglists/:list' exact={true} >
           <TrendingLists />
+        </ProtectedRoute>
+        <ProtectedRoute path='/stocks/:ticker' exact={true}>
+          <StockDetail />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
