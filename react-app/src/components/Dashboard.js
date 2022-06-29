@@ -16,10 +16,15 @@ function Dashboard() {
         <>
             <div>
                 LeftSection
-                <h2>Portfolion Graph</h2>
+                <h2>Portfolio Graph</h2>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
                     <div>
+                        <button><a href="/trendinglists/top-hot-10">Top Hot 10</a></button>
+                        <button><a href='/trendinglists/creators-choice'>Creators Choice</a></button>
+                        <button><a href='/trendinglists/25-most-popular'>25 Most Popular</a></button>
+                        <button><a href='/trendinglists/technology'>Technology</a></button>
+                        <button><a href='/trendinglists/automotive'>Automotive</a></button>
 
                     </div>
                 <h2>News</h2>

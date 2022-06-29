@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import Dashboard from './components/Dashboard';
 import User from './components/User';
+import TrendingLists from './components/TrendingLists'
 import { authenticate } from './store/session';
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path='/trendinglists/:list' exact={true} >
+          <TrendingLists />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

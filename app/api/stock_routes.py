@@ -2,6 +2,7 @@ from datetime import date
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db, Stock, Portfolio, Transaction
 import datetime
+import yfinance as yf
 
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -110,3 +111,21 @@ def sell_shares():
 # @login_required
 # def random():
 #     pass
+
+
+@stock_routes.route('/loadfeaturelists', methods=["POST"])
+def featurelists():
+    tickerList = []
+    req = request.get_json()
+    for stock in req:
+        currentStock = yf.Ticker(stock)
+        currentStockInfo=currentStock.info
+
+        performancePercentage = currentStockInfo['currentPrice'] - currentStockInfo['regularMarketOpen'] * .1 * 100
+        currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"today": performancePercentage, "marketCap": currentStockInfo['marketCap']}
+        print("======================================")
+        print(currentStockobj)
+        tickerList.append(currentStockobj)
+    print(tickerList)
+
+    return jsonify(tickerList)
