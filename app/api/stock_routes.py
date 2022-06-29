@@ -2,18 +2,51 @@ from datetime import date
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db, Stock, Portfolio, Transaction
 import datetime
+import yfinance as yf
 
 from flask_login import current_user, login_user, logout_user, login_required
 
-stock_routes = Blueprint('stock', __name__)
+stock_routes = Blueprint('stocks', __name__)
 
 # load / get
-@stock_routes.route('/<int:id>', methods=["GET"])
+@stock_routes.route('/<ticker>', methods=["GET"])
 @login_required
-def get_stock(id):
-    stocks = Stock.query.get(id)
-    return stocks.to_dict()
+def get_stock(ticker):
+    tickerUpper = ticker.upper()
+    selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
+    # newStock = yf.Ticker(selectedStock.ticker).info
+    # print(newStock)
+    return jsonify(selectedStock.to_dict())
 
+@stock_routes.route('/update/<ticker>', methods=["POST"])
+@login_required
+def update_stock(ticker):
+    print('I RUN')
+    tickerUpper = ticker.upper()
+    selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
+    newStock = yf.Ticker(selectedStock.ticker).info
+
+    print(newStock['currentPrice'])
+    print('ABOVE ME')
+
+    selectedStock.marketCap = newStock['marketCap']
+    selectedStock.dayHigh = newStock['dayHigh']
+    selectedStock.dayLow = newStock['dayLow']
+    selectedStock.currentPrice = newStock['currentPrice']
+    selectedStock.fullTimeEmployees = newStock['fullTimeEmployees']
+    selectedStock.trailingPE = newStock['trailingPE']
+    selectedStock.dividendYield = newStock['dividendYield']
+    selectedStock.averageVolume = newStock['averageVolume']
+    selectedStock.regularMarketOpen = newStock['regularMarketOpen']
+    selectedStock.volume = newStock['volume']
+    selectedStock.fiftyTwoWeekHigh = newStock['fiftyTwoWeekHigh']
+    selectedStock.fiftyTwoWeekLow = newStock['fiftyTwoWeekLow']
+    selectedStock.recommendationKey = newStock['recommendationKey']
+
+    db.session.commit()
+    # print(selectedStock.currentPrice)
+    # print(newStock['currentPrice'])
+    return jsonify(selectedStock.to_dict())
 
 # buy /create
 
@@ -110,3 +143,25 @@ def sell_shares():
 # @login_required
 # def random():
 #     pass
+
+
+@stock_routes.route('/loadfeaturelists', methods=["POST"])
+def featurelists():
+    tickerList = []
+    i = 0
+    req = request.get_json()
+    for stock in req:
+        try:
+            currentStock = yf.Ticker(stock)
+            currentStockInfo=currentStock.info
+            # increase / original * 100
+            performancePercentage = ((currentStockInfo['currentPrice'] - currentStockInfo['regularMarketOpen']) / currentStockInfo['regularMarketOpen']) * 100
+            performancePercentage = round(performancePercentage, 2)
+            currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"todayPerformance": performancePercentage, "marketCap": currentStockInfo['marketCap']}
+            tickerList.append(currentStockobj)
+            i += 1
+            print(i)
+        except:
+            print("Something went wrong!")
+
+    return jsonify(tickerList)
