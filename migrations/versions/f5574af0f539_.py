@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 108878142da7
+Revision ID: f5574af0f539
 Revises: 
-Create Date: 2022-06-28 09:31:18.273040
+Create Date: 2022-06-29 09:19:18.740397
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '108878142da7'
+revision = 'f5574af0f539'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,10 +22,23 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=60), nullable=True),
     sa.Column('ticker', sa.String(length=5), nullable=True),
-    sa.Column('marketCap', sa.Float(), nullable=True),
-    sa.Column('highToday', sa.Float(), nullable=True),
-    sa.Column('lowToday', sa.Float(), nullable=True),
-    sa.Column('price', sa.Float(), nullable=True),
+    sa.Column('marketCap', sa.BigInteger(), nullable=True),
+    sa.Column('dayHigh', sa.Float(), nullable=True),
+    sa.Column('dayLow', sa.Float(), nullable=True),
+    sa.Column('currentPrice', sa.Float(), nullable=True),
+    sa.Column('longBusinessSummary', sa.String(), nullable=True),
+    sa.Column('fullTimeEmployees', sa.BigInteger(), nullable=True),
+    sa.Column('city', sa.String(), nullable=True),
+    sa.Column('state', sa.String(), nullable=True),
+    sa.Column('trailingPE', sa.Float(), nullable=True),
+    sa.Column('dividendYield', sa.Float(), nullable=True),
+    sa.Column('averageVolume', sa.BigInteger(), nullable=True),
+    sa.Column('regularMarketOpen', sa.Float(), nullable=True),
+    sa.Column('volume', sa.BigInteger(), nullable=True),
+    sa.Column('fiftyTwoWeekHigh', sa.Float(), nullable=True),
+    sa.Column('fiftyTwoWeekLow', sa.Float(), nullable=True),
+    sa.Column('recommendationKey', sa.String(), nullable=True),
+    sa.Column('industry', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
