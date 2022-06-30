@@ -69,11 +69,11 @@ export default function stocksReducer(state = initialState, action) {
             return {...state, stocks : action.payload}
         case LOAD_PORTFOLIO:
             return {...state, portfolio: action.payload}
-            const allStocks = []
-            action.stocks.forEach(stock => {
-                allStocks[stock.id] = stock
-            })
-            return allStocks
+            //const allStocks = []
+            //action.stocks.forEach(stock => {
+               // allStocks[stock.id] = stock
+            //})
+            //return allStocks
         case GET_STOCK:
             newState = {}
             newState[action.payload.ticker] = action.payload
