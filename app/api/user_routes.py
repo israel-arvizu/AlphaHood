@@ -12,6 +12,8 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
+
+# Profile Page ???
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):

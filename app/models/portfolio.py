@@ -19,8 +19,13 @@ class Portfolio(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
+<<<<<<< HEAD
             "userid": self.userId,
             "stockid": self.stockId,
+=======
+            "userId": self.userId,
+            "stockId": self.stockId,
+>>>>>>> origin/main
             "shares": self.shares,
             "priceBought": self.priceBought,
             "dateBought": self.dateBought,
