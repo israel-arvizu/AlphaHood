@@ -16,11 +16,11 @@ function LineChart(){
 
     const dayData1 =  {
 
-        labels:["test", "test2", "test3", "test4", "test5", "test6"],
+        labels:[],
 
         datasets:[{
             label:"price",
-        data: graphData,
+        data: [],
         fill: false,
         backgroundColor:"black",
         borderColor:"#5AC53B",
@@ -32,7 +32,16 @@ function LineChart(){
         pointHoverBorderWidth: 4,
         pointHoverRadius: 6,
     }]}
-
+    console.log(portfolio)
+    if(!portfolio) return <h2>Loading</h2>
+    Object.values(portfolio).forEach(val => {
+        dayData1.datasets[0].data.push(val)
+    })
+    Object.keys(portfolio).forEach(key => {
+        const dateTime = key.split(' ')
+        if(dateTime[1][4] == 0 || dateTime[1][4] == 5 && dateTime[1].substring(6, 8) == '00')
+            dayData1.labels.push(dateTime[1].substring(5, 0))
+    })
     return (
         <div className='linegraph'>
             <Line

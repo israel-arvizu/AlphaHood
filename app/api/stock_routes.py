@@ -186,7 +186,8 @@ def portfolioList(id):
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
-            data = yf.download(stock.ticker, group_by="Ticker", period="1d", interval="1h")
+            data = yf.download(stock.ticker, group_by="Ticker", period="1d", interval="5m")
+            print(data)
             data = data[['Open']]
             data.columns =  [data.columns[0]]
             separated = [data.iloc[:,i] for i in range(len(data.columns))]
