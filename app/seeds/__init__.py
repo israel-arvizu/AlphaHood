@@ -16,8 +16,9 @@ def seed():
     seed_users()
     seed_stocks()
     seed_portfolio()
-    seed_lists()
     seed_watchlists()
+    seed_lists()
+
     # Add other seed functions here
 
 
@@ -27,6 +28,7 @@ def undo():
     undo_users()
     undo_stocks()
     undo_portfolio()
-    undo_lists()
     undo_watchlists()
+    undo_lists()
+
     # Add other undo functions here

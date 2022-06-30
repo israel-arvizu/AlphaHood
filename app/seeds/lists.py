@@ -2,10 +2,10 @@ from app.models import db, List
 
 def seed_lists():
     first=List(
-        stockId=1, listIdentifier=1
+        stockId=1, watchlistId=1
     )
     listStock = List(
-        stockId=2, listIdentifier=1
+        stockId=2, watchlistId=1
     )
 
     db.session.add(first)

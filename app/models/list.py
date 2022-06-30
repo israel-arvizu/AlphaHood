@@ -7,6 +7,6 @@ class List(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     stockId = db.Column(db.Integer, db.ForeignKey("stocks.id"))
-    listIdentifier=db.Column(db.Integer)
+    watchlistId = db.Column(db.Integer, db.ForeignKey("watchlists.id"))
 
     watchlists = db.relationship("Watchlist", back_populates="lists")
