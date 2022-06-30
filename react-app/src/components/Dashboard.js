@@ -1,18 +1,33 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
+import { addNewList } from '../store/list';
 import LineChart from './Linechart-Component/Linechart';
 
 
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
+    const userId = useSelector(state=> state.session.user.id)
+    const [watchlistName, setWatchlistName]=useState(false)
+    const [newListName, setNewListName] = useState("")
 
 
     useEffect(() => {
         dispatch(loadHomeNews())
     }, [dispatch])
+
+    const createlist = async(e)=>{
+        e.preventDefault()
+        const newlist = {
+            name: newListName,
+            userId: userId
+        }
+
+
+        const data = await dispatch(addNewList(newlist))
+    }
 
     if (newsArticles === undefined) return <h2>Loading</h2>
     // console.log(newsArticles[0].thumbnail.resolutions[2].url);
@@ -55,6 +70,20 @@ function Dashboard() {
             </div>
             <div>
                 WatchList
+                <button onClick={()=>setWatchlistName(true)}>+</button>
+                {watchlistName &&
+                    <form
+                    onSubmit={createlist}>
+                        <input name="listName"
+                        type="text"
+                        placeholder='Your list name'
+                        value={newListName}
+                        onChange={(e)=>setNewListName(e.target.value)}></input>
+                        <button type="submit">Add List</button>
+                    </form>
+
+                }
+
             </div>
         </>
     )

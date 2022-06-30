@@ -1,11 +1,27 @@
 from flask import Blueprint, json, jsonify, request
 from app.models import User, db, Stock, Watchlist
 from flask_login import login_required
-import os
 
 
-dashboard_routes = Blueprint('dashboard', __name__)
 
+lists_routes = Blueprint('lists', __name__)
+
+@lists_routes.route('/new', methods=['post'])
+@login_required
+def add_list():
+    print("----------------addlist----------------")
+    req = request.get_json()
+    newlist= Watchlist(
+        name=req['name'],
+        userId= req['userId']
+    )
+
+    db.session.add(newlist)
+    db.session.commit()
+
+
+
+    return "success"
 
 
 # api keys ???

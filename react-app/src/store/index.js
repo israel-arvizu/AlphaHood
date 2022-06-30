@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session'
 import newsReducer from './news';
 import stocksReducer from './stocks';
+import listsReducer from './list';
 
 const rootReducer = combineReducers({
   session,
   newsReducer,
-  stocks: stocksReducer
+  stocks: stocksReducer,
+  lists: listsReducer
 
 });
 

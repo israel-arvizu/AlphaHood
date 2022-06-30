@@ -10,7 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.stock_routes import stock_routes
 from .api.news_routes import news_routes
-
+from .api.lists_routes import lists_routes
 from .seeds import seed_commands
 
 from .config import Config
@@ -35,6 +35,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(stock_routes, url_prefix='/api/stocks')
 app.register_blueprint(news_routes, url_prefix='/api/news')
+app.register_blueprint(lists_routes, url_prefix='/api/lists')
 db.init_app(app)
 Migrate(app, db)
 
