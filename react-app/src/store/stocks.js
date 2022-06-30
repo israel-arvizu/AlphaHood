@@ -33,7 +33,7 @@ export const loadstocklist = (list) => async (dispatch) => {
 
 
 //GETS USERS POTFOLIO STOCKS
-export const loadPortfolio = (id) => async(dispatch) =>{
+export const loadPortfolio = (id) => async (dispatch) => {
     const response = await fetch(`/api/stocks/loadportfolio/${id}`);
     const data = await response.json()
     dispatch(loadportfolio(data));
@@ -42,13 +42,28 @@ export const loadPortfolio = (id) => async(dispatch) =>{
 
 export const getOneStock = (ticker) => async (dispatch) => {
     const response = await fetch(`/api/stocks/${ticker}`) //GRAB STOCK FROM DB
-    const data = await response.json()
-    dispatch(getStock(data))
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getStock(data))
+    }
     //check time for market open
-    const updateStock = await fetch(`/api/stocks/update/${ticker}`,
+    // const updateStock = await fetch(`/api/stocks/update/${ticker}`,
+    //     {
+    //         method: "POST"
+    //     })
+}
+export const updateStock = (ticker) => async dispatch => {
+    // console.log('Hit Update Stock')
+    const response = await fetch(`/api/stocks/update/${ticker}`,
         {
             method: "POST"
         })
+    if (response.ok) {
+        const data = await response.json()
+        // console.log(data, 'DATA')
+        dispatch(getStock(data))
+    }
 }
 
 export const getStocks = () => async dispatch => {
@@ -61,19 +76,20 @@ export const getStocks = () => async dispatch => {
 }
 
 
+
 let initialState = {};
 export default function stocksReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case LOAD_STOCKS:
-            return {...state, stocks : action.payload}
+            return { ...state, stocks: action.payload }
         case LOAD_PORTFOLIO:
-            return {...state, portfolio: action.payload}
-            //const allStocks = []
-            //action.stocks.forEach(stock => {
-               // allStocks[stock.id] = stock
-            //})
-            //return allStocks
+            return { ...state, portfolio: action.payload }
+        // const allStocks = []
+        // action.stocks.forEach(stock => {
+        //    allStocks[stock.id] = stock
+        // })
+        // return allStocks
         case GET_STOCK:
             newState = {}
             newState[action.payload.ticker] = action.payload

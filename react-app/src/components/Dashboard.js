@@ -15,7 +15,7 @@ function Dashboard() {
     }, [dispatch])
 
     if (newsArticles === undefined) return <h2>Loading</h2>
-    // console.log(newsArticles[0].thumbnail.resolutions[2].url);
+    console.log(newsArticles[0].thumbnail.resolutions[2].url);
     return (
         <>
             <div>
