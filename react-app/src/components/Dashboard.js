@@ -1,6 +1,6 @@
-import {useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+// import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
 import LineChart from './Linechart-Component/Linechart';
 
@@ -14,9 +14,9 @@ function Dashboard() {
         dispatch(loadHomeNews())
     }, [dispatch])
 
-    if(newsArticles === undefined) return <h2>Loading</h2>
+    if (newsArticles === undefined) return <h2>Loading</h2>
     // console.log(newsArticles[0].thumbnail.resolutions[2].url);
-    return(
+    return (
         <>
             <div>
                 LeftSection
@@ -25,17 +25,17 @@ function Dashboard() {
                 </div>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
-                    <div>
-                        <button><a href='/trendinglists/top-hot-10'>Top Hot 10</a></button>
-                        <button><a href='/trendinglists/creators-choice'>Creators Choice</a></button>
-                        <button><a href='/trendinglists/25-most-popular'>25 Most Popular</a></button>
-                        <button><a href='/trendinglists/technology'>Technology</a></button>
-                        <button><a href='/trendinglists/automotive'>Automotive</a></button>
+                <div>
+                    <button><a href='/trendinglists/top-hot-10'>Top Hot 10</a></button>
+                    <button><a href='/trendinglists/creators-choice'>Creators Choice</a></button>
+                    <button><a href='/trendinglists/25-most-popular'>25 Most Popular</a></button>
+                    <button><a href='/trendinglists/technology'>Technology</a></button>
+                    <button><a href='/trendinglists/automotive'>Automotive</a></button>
 
-                    </div>
+                </div>
                 <h2>News</h2>
                 {newsArticles.map((article) => {
-                    if(article.thumbnail !== undefined)
+                    if (article.thumbnail !== undefined)
                         return (
                             <div key={article.title}>
                                 <hr></hr>
