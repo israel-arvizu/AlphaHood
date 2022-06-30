@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f5574af0f539
+Revision ID: 39aeb4ecf06b
 Revises: 
-Create Date: 2022-06-29 09:19:18.740397
+Create Date: 2022-06-30 10:18:42.315505
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f5574af0f539'
+revision = '39aeb4ecf06b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -52,6 +52,13 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    op.create_table('lists',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('stockId', sa.Integer(), nullable=True),
+    sa.Column('listIdentifier', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('portfolios',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=True),
@@ -76,11 +83,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('watchlists',
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('stockId', sa.Integer(), nullable=True),
     sa.Column('userId', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
+    sa.Column('listId', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['listId'], ['lists.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
     # ### end Alembic commands ###
@@ -91,6 +100,7 @@ def downgrade():
     op.drop_table('watchlists')
     op.drop_table('transactions')
     op.drop_table('portfolios')
+    op.drop_table('lists')
     op.drop_table('users')
     op.drop_table('stocks')
     # ### end Alembic commands ###

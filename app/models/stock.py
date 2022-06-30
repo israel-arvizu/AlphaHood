@@ -30,7 +30,7 @@ class Stock(db.Model):
 
 
 
-    users = db.relationship("User", secondary=Watchlist, back_populates="stocks")
+
     portfolios = db.relationship("Portfolio", back_populates="stocks")
     transactions = db.relationship("Transaction", back_populates="stocks")
 
