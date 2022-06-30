@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
+import LineChart from './Linechart-Component/Linechart';
 
 
 function Dashboard() {
@@ -19,7 +20,9 @@ function Dashboard() {
         <>
             <div>
                 LeftSection
-                <h2>Portfolio Graph</h2>
+                <div>
+                    <LineChart />
+                </div>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
                     <div>
