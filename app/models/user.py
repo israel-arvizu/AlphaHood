@@ -40,6 +40,7 @@ class User(db.Model, UserMixin):
 
         }
 
-    stocks = db.relationship("Stock", secondary=Watchlist, back_populates="users", cascade="all")
+
     portfolios = db.relationship("Portfolio", back_populates="users")
     transactions = db.relationship("Transaction", back_populates="users", cascade="all,delete-orphan")
+    watchlists = db.relationship("Watchlist", back_populates="users")
