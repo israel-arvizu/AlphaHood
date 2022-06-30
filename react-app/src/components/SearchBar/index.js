@@ -22,7 +22,7 @@ function SearchBar() {
 
     useEffect((() => {
 
-        const searchBarResults = stockResults?.filter(name => name.toUpperCase().includes(searchStock.toLocaleUpperCase()));
+        const searchBarResults = stockResults?.filter(name => name.toUpperCase().includes(searchStock.toUpperCase()));
         setSearchResults(searchBarResults)
 
 
