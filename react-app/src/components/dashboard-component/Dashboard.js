@@ -6,6 +6,7 @@ import LineChart from '../../components/Linechart-Component/Linechart';
 import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
+import { NavLink } from 'react-router-dom';
 
 
 function Dashboard() {
@@ -15,6 +16,8 @@ function Dashboard() {
     const [watchlistName, setWatchlistName]=useState(false)
     const [newListName, setNewListName] = useState("")
     const [displayPort, setDisplayPort] = useState(0)
+    const [portfolioHistory, setPortfolioHistory] = useState({})
+    const [portfolioGraph, setPortfolioGraph] = useState(false)
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const watchlists = useSelector(state=>state.lists)
@@ -48,14 +51,26 @@ function Dashboard() {
     }
 
 
-    if (newsArticles === undefined || portfolio === undefined){
-        return <h2>Loading</h2>
+    if (portfolio === undefined){
+        return <h2>Loading portfolio</h2>
     }
+
+    // if(newsArticles === undefined){
+    //     dispatch(loadHomeNews())
+    //     return <h2>Loading News Articles</h2>
+    // }
     if(currentPortfolio !== undefined && !updated){
         let price = currentPortfolio
+        price = price.toFixed(2)
         setDisplayPort(price)
         setUpdate(true)
         setUpdateLog("")
+    }
+
+    if(portfolio !== undefined && !portfolioGraph){
+        let portfolioHist = portfolio
+        setPortfolioHistory(portfolioHist)
+        setPortfolioGraph(true)
     }
 
     return (
@@ -67,27 +82,26 @@ function Dashboard() {
                         <h3>{updateLog}</h3>
                         <h2>${displayPort}</h2>
                     </div>
-                    <LineChart portfolio={portfolio}/>
+                    <LineChart portfolio={portfolioHistory}/>
                 </div>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
                 <div>
-                    <button><a href='/trendinglists/top-hot-10'>Top Hot 10</a></button>
-                    <button><a href='/trendinglists/creators-choice'>Creators Choice</a></button>
-                    <button><a href='/trendinglists/25-most-popular'>25 Most Popular</a></button>
-                    <button><a href='/trendinglists/technology'>Technology</a></button>
-                    <button><a href='/trendinglists/automotive'>Automotive</a></button>
-
+                    <NavLink to='/trendinglists/top-hot-10'><button>Top Hot 10</button></NavLink>
+                    <NavLink to='/trendinglists/creators-choice'><button>Creators Choice</button></NavLink>
+                    <NavLink to='/trendinglists/25-most-popular'><button>25 Most Popular</button></NavLink>
+                    <NavLink to='/trendinglists/technology'><button>Technology</button></NavLink>
+                    <NavLink to='/trendinglists/automotive'><button>Automotive</button></NavLink>
                 </div>
                 <h2>News</h2>
-                {newsArticles.map((article) => {
+                {/* {newsArticles.map((article) => {
                     if (article.thumbnail !== undefined)
                         return (
                             <div key={article.title}>
                                 <hr></hr>
                                 <a href={article.link}>
                                     <img src={article.thumbnail.resolutions[1].url} alt='thumbnail' />
-                                    <a>{article.publisher}</a>
+                                    <p>{article.publisher}</p>
                                     <h3>{article.title}</h3>
                                 </a>
                                 <div>
@@ -97,7 +111,7 @@ function Dashboard() {
                             </div>
                         )
                     return null
-                })}
+                })} */}
             </div>
             <div>
                 WatchList
@@ -124,7 +138,7 @@ function Dashboard() {
                     <ul>
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>(
-                            <li>{watchlist.name}
+                            <li key={watchlist.name}>{watchlist.name}
                             <EditList id={watchlist.id} />
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
