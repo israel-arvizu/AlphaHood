@@ -36,6 +36,17 @@ def load_list():
 
     return {'watchlists': [watchlist.to_dict() for watchlist in watchlists]}
 
+@lists_routes.route('/<int:id>/edit', methods=['post'])
+@login_required
+def update_list(id):
+    req = request.get_json()
+
+    watchlist = Watchlist.query.get(id)
+    watchlist.name = req
+    db.session.commit()
+
+    return watchlist.to_dict()
+
 
 
 
