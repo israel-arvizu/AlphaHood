@@ -68,6 +68,19 @@ def add_stock():
 
     return "hello"
 
+@lists_routes.route('/<int:id>/', methods=['post'])
+@login_required
+def delete_list(id):
+
+    req = request.get_json()
+    watchlist = Watchlist.query.filter_by(id=id)
+    watchlist.delete()
+
+    db.session.commit()
+
+
+
+    return jsonify(id)
 
 # api keys ???
 
