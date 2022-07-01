@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { loadHomeNews } from '../store/news';
-import { addNewList, loadAllLists, deleteList } from '../store/list';
-import LineChart from './Linechart-Component/Linechart';
-import EditListModal from './EditListModal';
-import EditList from './EditListModal/EditListForm';
+import { loadHomeNews } from '../../store/news'
+import { addNewList, loadAllLists, deleteList } from '../../store/list';
+import LineChart from '../../components/Linechart-Component/Linechart';
+import EditListModal from '../EditListModal';
+import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 
 
