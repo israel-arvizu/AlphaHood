@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
-import { addNewList, loadAllLists, deleteList } from '../store/list';
+import { addNewList, loadAllLists, deleteList} from '../store/list';
+import { loadStocksforList } from '../store/liststock'
 import LineChart from './Linechart-Component/Linechart';
 import EditListModal from './EditListModal';
 import EditList from './EditListModal/EditListForm';
@@ -16,11 +17,15 @@ function Dashboard() {
     const [watchlistName, setWatchlistName]=useState(false)
     const [newListName, setNewListName] = useState("")
     const watchlists = useSelector(state=>state.lists)
-    console.log(watchlists)
+    const liststocks = useSelector(state=>state.liststock)
+    console.log(liststocks)
+
 
     useEffect(() => {
 
         dispatch(loadAllLists(userId))
+        dispatch(loadStocksforList(userId))
+
     }, [dispatch])
 
     useEffect(() => {
@@ -110,11 +115,13 @@ function Dashboard() {
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>(
                             <li>{watchlist.name}
+                            <button>Load Stocks</button>
+                            <ul>
+
+                            </ul>
                             <EditList id={watchlist.id} />
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
-
-
 
 
                     ))}

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Watchlist, List
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -74,6 +74,50 @@ def sign_up():
             )
         db.session.add(user)
         db.session.commit()
+        watchlist = Watchlist(
+            name="My First List",
+            userId=user.id
+        )
+        db.session.add(watchlist)
+        db.session.commit()
+
+        liststock = List(
+            stockId=22,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock)
+        db.session.commit()
+        liststock1 = List(
+            stockId=23,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock1)
+        db.session.commit()
+        liststock2 = List(
+            stockId=19,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock2)
+        db.session.commit()
+        liststock3 = List(
+            stockId=223,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock3)
+        db.session.commit()
+        liststock4 = List(
+            stockId=101,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock4)
+        db.session.commit()
+        liststock5 = List(
+            stockId=322,
+            watchlistId=watchlist.id
+        )
+        db.session.add(liststock5)
+        db.session.commit()
+
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

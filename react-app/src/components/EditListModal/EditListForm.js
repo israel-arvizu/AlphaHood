@@ -8,10 +8,7 @@ const EditList = ({ id, closeModal}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const [errorMessages, setErrorMessages] = useState([])
-  console.log(useSelector(state=>state.lists))
   const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id==id)
-  console.log(list[0])
-  console.log(id)
   const [name, setName] = useState(list[0].name)
 
 
