@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
-import { addNewList, loadAllLists } from '../store/list';
+import { addNewList, loadAllLists, deleteList } from '../store/list';
 import LineChart from './Linechart-Component/Linechart';
 import EditListModal from './EditListModal';
 import EditList from './EditListModal/EditListForm';
@@ -27,12 +27,12 @@ function Dashboard() {
         dispatch(loadHomeNews())
 
     }, [dispatch])
+    const deleteAList = async(e)=>{
+        dispatch(deleteList(e.target.id))
+        console.log(e.target.id)
+        e.preventDefault()
 
-    console.log()
-
-
-
-
+    }
     const createlist = async(e)=>{
         e.preventDefault()
         const newlist = {
@@ -111,7 +111,7 @@ function Dashboard() {
                         watchlists.map(watchlist=>(
                             <li>{watchlist.name}
                             <EditList id={watchlist.id} />
-                            <button>Delete</button>
+                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
 
 

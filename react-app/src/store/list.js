@@ -1,6 +1,7 @@
 const LOAD_LISTS = 'list/LOAD_LISTS'
 const ADD_LIST = 'list/ADD_LIST'
 const EDIT_LIST = 'list/EDIT_LIST'
+const DELETE_LIST = 'list/DELETE_LIST'
 const ADD_STOCK_TO_LIST = 'list/ADD_STOCK_TO_LIST'
 
 
@@ -22,6 +23,11 @@ const addstocktolist=(stock)=>({
 const editlist=(list)=>({
     type:EDIT_LIST,
     list
+})
+
+const deletelist=(id)=>({
+    type: DELETE_LIST,
+    id
 })
 
 
@@ -47,6 +53,21 @@ export const addNewList = (list) => async(dispatch)=>{
     const data = await response.json()
     dispatch(addlist(data));
     return response
+
+
+}
+
+export const deleteList = (id) => async(dispatch)=>{
+    const response=await fetch(`/api/lists/${id}/`,
+    {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify("hello")
+
+    })
+
+    dispatch(deletelist(id))
+
 
 
 }
@@ -101,6 +122,20 @@ export default function listsReducer(state = [], action) {
                 list.id===action.list.id? list.name = action.list.name: list.name
             ))
             return [...state]
+
+        case DELETE_LIST:
+            let newState = []
+            console.log(state[0].id)
+            state.forEach(list=>{
+                console.log(list.id, action.id)
+                if(list.id!==action.id){
+                    newState.push(list)
+                }
+    })
+            console.log(newState)
+
+            return newState
+
         default:
             return state;
     }
