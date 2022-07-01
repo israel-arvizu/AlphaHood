@@ -49,14 +49,14 @@ def update_stock(ticker):
 
 @stock_routes.route('/<ticker>/buy', methods=['GET','POST'])
 @login_required
-def buy_stock(ticker, shares):
+def buy_stock(ticker):
     currentStock = yf.Ticker(ticker.upper())
-    price = currentStock.info['currentPrice'] * shares
+    price = currentStock.info['currentPrice']
 
     #get user
-
+    user = User.query.get(current_user.id)
     #withdraw money from user, add stock to portfolio, add stock to purchaseHistory
-    return None
+
 
 
 
