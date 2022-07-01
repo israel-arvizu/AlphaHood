@@ -1,30 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Line} from "react-chartjs-2"
 import Chart from 'chart.js/auto';
-import { dayData, graphData } from './LinechartData';
+import {valuesToArray, keysToArray} from './LinechartData';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPortfolio } from '../../store/stocks';
 
-function LineChart(){
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
-    const portfolio = useSelector(state => state.stocks.portfolio)
+function LineChart({portfolio}){
 
-    useEffect(() => {
-        dispatch(loadPortfolio(user.id))
-    }, [])
-
-    const dayData1 =  {
-
+    const dayData =  {
         labels:[],
-
         datasets:[{
-            label:"price",
         data: [],
         fill: false,
         backgroundColor:"black",
         borderColor:"#5AC53B",
         borderWidth: 2,
+        pointStyle: Line,
         pointBorderColor:'rgba(0,0,0,0)',
         pointBackgroundColor:'rbga(0,0,0,0)',
         pointHoverBackgroundColor:'#5AC53B',
@@ -32,21 +22,16 @@ function LineChart(){
         pointHoverBorderWidth: 4,
         pointHoverRadius: 6,
     }]}
-    console.log(portfolio)
-    if(!portfolio) return <h2>Loading</h2>
-    Object.values(portfolio).forEach(val => {
-        dayData1.datasets[0].data.push(val)
-    })
-    Object.keys(portfolio).forEach(key => {
-        const dateTime = key.split(' ')
-        if(dateTime[1][4] == 0 || dateTime[1][4] == 5 && dateTime[1].substring(6, 8) == '00')
-            dayData1.labels.push(dateTime[1].substring(5, 0))
-    })
+
+        if(portfolio != undefined){
+            dayData.datasets[0].data = valuesToArray(portfolio)
+            dayData.labels = keysToArray(portfolio)
+        }
+
     return (
         <div className='linegraph'>
             <Line
-
-            data={dayData1}
+            data={dayData}
             options={{
                 plugins:{
                 legend:{

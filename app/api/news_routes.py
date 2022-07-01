@@ -10,7 +10,11 @@ def loadNews():
     Loads news in dashboard
     """
     newsList = ['APPL', 'TSLA', 'MSFT', 'NVDA', 'GOOGL', 'AMD', 'TWTR'];
+    currentNews = {}
 
-    currentNews = yf.Ticker(newsList[random.randrange(0, 6)]);
+    try:
+        currentNews = yf.Ticker(newsList[random.randrange(0, 6)])
+    except:
+        raise NewsError("Couldn't Fetch News")
 
     return jsonify(currentNews.news);

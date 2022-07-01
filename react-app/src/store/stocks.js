@@ -1,5 +1,6 @@
 const LOAD_STOCKS = 'stocks/LOAD_STOCKS'
 const LOAD_PORTFOLIO = 'stocks/LOAD_PORTFOLIO'
+const LOAD_CURR_PORTFOLIO = 'stocks/LOAD_CURR_PORTFOLIO'
 const GET_STOCK = 'stocks/GET_STOCK'
 
 const loadstocks = (stocks) => ({
@@ -7,6 +8,10 @@ const loadstocks = (stocks) => ({
     payload: stocks
 })
 
+const loadcurrportfolio = (stocks) => ({
+    type: LOAD_CURR_PORTFOLIO,
+    payload: stocks
+})
 
 const loadportfolio = (stocks) => ({
     type: LOAD_PORTFOLIO,
@@ -31,6 +36,12 @@ export const loadstocklist = (list) => async (dispatch) => {
     return response
 }
 
+export const loadCurrentPortfolio = (id) => async(dispatch) =>{
+    const response = await fetch(`/api/stocks/getportfolio/${id}`);
+    const data = await response.json()
+    dispatch(loadcurrportfolio(data));
+    return response
+}
 
 //GETS USERS POTFOLIO STOCKS
 export const loadPortfolio = (id) => async(dispatch) =>{
@@ -69,11 +80,10 @@ export default function stocksReducer(state = initialState, action) {
             return {...state, stocks : action.payload}
         case LOAD_PORTFOLIO:
             return {...state, portfolio: action.payload}
-            //const allStocks = []
-            //action.stocks.forEach(stock => {
-               // allStocks[stock.id] = stock
-            //})
-            //return allStocks
+        case LOAD_CURR_PORTFOLIO:
+            newState = {...state}
+            newState["CurrentPortfolio"] = action.payload
+            return newState
         case GET_STOCK:
             newState = {}
             newState[action.payload.ticker] = action.payload

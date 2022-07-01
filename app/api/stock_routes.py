@@ -161,11 +161,32 @@ def featurelists():
             currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"todayPerformance": performancePercentage, "marketCap": currentStockInfo['marketCap']}
             tickerList.append(currentStockobj)
             i += 1
-            print(i)
         except:
-            print("Something went wrong!")
+            tickerList.error.append("Something went wrong!")
 
     return jsonify(tickerList)
+
+@stock_routes.route('/getportfolio/<int:id>')
+def portfolio(id):
+    userId = id;
+    stocks = Portfolio.query.filter(Portfolio.userId == userId);
+    stockList = []
+    portfolioValue = 0;
+    for stock in stocks:
+        newDict = {"id": stock.id, "userId": stock.userId,
+        "stockId": stock.stockId,
+        "shares": stock.shares,
+        }
+        stockList.append(newDict)
+
+    for stock in stockList:
+        stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
+        for stock in stockTicker:
+            tick = yf.Ticker(stock.ticker)
+            currentStock = tick.info
+            portfolioValue += currentStock["currentPrice"];
+
+    return jsonify(portfolioValue);
 
 @stock_routes.route('/loadportfolio/<int:id>')
 def portfolioList(id):
@@ -187,7 +208,6 @@ def portfolioList(id):
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
             data = yf.download(stock.ticker, group_by="Ticker", period="1d", interval="5m")
-            print(data)
             data = data[['Open']]
             data.columns =  [data.columns[0]]
             separated = [data.iloc[:,i] for i in range(len(data.columns))]
@@ -198,10 +218,8 @@ def portfolioList(id):
         for timeFrames in stockFrames:
             splitList = timeFrames.split("    ")
             if splitList[0] in portDict:
-                print(portDict[splitList[0]])
                 portDict[splitList[0]] += float(splitList[1])
             else:
                 portDict[splitList[0]] = float(splitList[1])
 
-    print(portDict)
     return jsonify(portDict)

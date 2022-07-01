@@ -1,27 +1,40 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom';
-import { loadHomeNews } from '../store/news';
-import LineChart from './Linechart-Component/Linechart';
+import { loadHomeNews } from '../../store/news';
+import LineChart from '../Linechart-Component/Linechart';
+import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 
 
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
-
+    const user = useSelector(state => state.session.user);
+    const portfolio = useSelector(state => state.stocks.portfolio);
+    const currentPortfolio = useSelector(state => state.stocks.CurrentPortfolio)
 
     useEffect(() => {
         dispatch(loadHomeNews())
+        dispatch(loadPortfolio(user.id))
+        dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
 
-    if (newsArticles === undefined) return <h2>Loading</h2>
-    // console.log(newsArticles[0].thumbnail.resolutions[2].url);
+    if (newsArticles === undefined || portfolio === undefined){
+        return <h2>Loading</h2>
+    }
+    if(currentPortfolio == undefined){
+        return <h2>Still Loading</h2>
+    }
+
     return (
         <>
             <div>
                 LeftSection
                 <div>
-                    <LineChart />
+                    <div>
+                        <h2>${currentPortfolio}</h2>
+                    </div>
+                    <LineChart portfolio={portfolio}/>
                 </div>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
@@ -54,7 +67,7 @@ function Dashboard() {
                 })}
             </div>
             <div>
-                WatchList
+
             </div>
         </>
     )
