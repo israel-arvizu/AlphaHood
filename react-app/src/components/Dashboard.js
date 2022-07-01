@@ -2,21 +2,31 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom';
 import { loadHomeNews } from '../store/news';
-import { addNewList } from '../store/list';
+import { addNewList, loadAllLists } from '../store/list';
 import LineChart from './Linechart-Component/Linechart';
+import EditListModal from './EditListModal';
+import EditList from './EditListModal/EditListForm';
 
 
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state=> state.session.user.id)
+    const watchlists= useSelector(state=>state.lists.lists)
     const [watchlistName, setWatchlistName]=useState(false)
     const [newListName, setNewListName] = useState("")
 
 
+
+
+
+
     useEffect(() => {
         dispatch(loadHomeNews())
+        dispatch(loadAllLists(userId))
     }, [dispatch])
+
+
 
     const createlist = async(e)=>{
         e.preventDefault()
@@ -28,6 +38,7 @@ function Dashboard() {
 
         const data = await dispatch(addNewList(newlist))
     }
+
 
     if (newsArticles === undefined) return <h2>Loading</h2>
     // console.log(newsArticles[0].thumbnail.resolutions[2].url);
@@ -71,7 +82,9 @@ function Dashboard() {
             <div>
                 WatchList
                 <button onClick={()=>setWatchlistName(true)}>+</button>
+
                 {watchlistName &&
+                <div>
                     <form
                     onSubmit={createlist}>
                         <input name="listName"
@@ -80,9 +93,30 @@ function Dashboard() {
                         value={newListName}
                         onChange={(e)=>setNewListName(e.target.value)}></input>
                         <button type="submit">Add List</button>
+
                     </form>
 
+                </div>
+
                 }
+
+                <div>
+                    <ul>
+                        {watchlists &&
+                        watchlists.watchlists.map(watchlist=>(
+                            <li>{watchlist.name}
+                            <EditList id={watchlist.id} />
+                            <button>Delete</button>
+                            </li>
+
+
+
+
+                    ))}
+                    </ul>
+
+
+                </div>
 
             </div>
         </>

@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import User from './components/User';
 import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
+import SplashPage  from './components/splashpage/splashpage';
 import { authenticate } from './store/session';
 
 function App() {
@@ -29,8 +30,12 @@ function App() {
 
   return (
     <BrowserRouter>
+
       <NavBar />
+
+
       <Switch>
+
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

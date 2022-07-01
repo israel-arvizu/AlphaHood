@@ -1,5 +1,6 @@
 const LOAD_LISTS = 'list/LOAD_LISTS'
 const ADD_LIST = 'list/ADD_LIST'
+const EDIT_LIST = 'list/EDIT_LIST'
 const ADD_STOCK_TO_LIST = 'list/ADD_STOCK_TO_LIST'
 
 
@@ -18,6 +19,22 @@ const addstocktolist=(stock)=>({
     payload: stock
 })
 
+const editlist=(list)=>({
+    type:EDIT_LIST,
+    list
+})
+
+
+export const loadAllLists =(userId)=>async(dispatch)=>{
+    const response = await fetch(`api/lists/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userId)
+    })
+    const data = await response.json()
+    dispatch (loadlists(data))
+    return response
+}
 
 export const addNewList = (list) => async(dispatch)=>{
     const response=await fetch('/api/lists/new',
@@ -29,6 +46,23 @@ export const addNewList = (list) => async(dispatch)=>{
 
     const data = await response.json()
     dispatch(addlist(data));
+    return response
+
+
+}
+
+
+export const editNewList = (id, name) => async(dispatch)=>{
+    const response=await fetch(`/api/lists/${id}/edit`,
+    {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(name)
+    })
+
+    const data = await response.json()
+    console.log("!@#!#", data)
+    dispatch(editlist(data));
     return response
 
 }
@@ -56,6 +90,9 @@ export default function listsReducer(state = {}, action) {
             return {...state, lists: action.payload}
         case ADD_STOCK_TO_LIST:
             return {...state, lists: action.payload}
+        case EDIT_LIST:
+            console.log(action.list)
+            return {...state, [action.list.id]: action.list}
         default:
             return state;
     }
