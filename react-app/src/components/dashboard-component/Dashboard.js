@@ -14,6 +14,9 @@ function Dashboard() {
     const userId = useSelector(state=> state.session.user.id)
     const [watchlistName, setWatchlistName]=useState(false)
     const [newListName, setNewListName] = useState("")
+    const [displayPort, setDisplayPort] = useState(0)
+    const [updated, setUpdate] = useState(false)
+    const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const watchlists = useSelector(state=>state.lists)
 
     const user = useSelector(state => state.session.user);
@@ -48,8 +51,11 @@ function Dashboard() {
     if (newsArticles === undefined || portfolio === undefined){
         return <h2>Loading</h2>
     }
-    if(currentPortfolio == undefined){
-        return <h2>Still Loading</h2>
+    if(currentPortfolio !== undefined && !updated){
+        let price = currentPortfolio
+        setDisplayPort(price)
+        setUpdate(true)
+        setUpdateLog("")
     }
 
     return (
@@ -58,7 +64,8 @@ function Dashboard() {
                 LeftSection
                 <div>
                     <div>
-                        <h2>${currentPortfolio}</h2>
+                        <h3>{updateLog}</h3>
+                        <h2>${displayPort}</h2>
                     </div>
                     <LineChart portfolio={portfolio}/>
                 </div>
