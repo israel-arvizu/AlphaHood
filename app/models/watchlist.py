@@ -14,3 +14,12 @@ class Watchlist (db.Model):
 
     lists = db.relationship("List", back_populates="watchlists")
     users = db.relationship("User", back_populates="watchlists")
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'userId': self.userId,
+
+        }

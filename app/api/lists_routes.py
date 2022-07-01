@@ -20,13 +20,33 @@ def add_list():
 
     db.session.add(newWatchList)
     db.session.commit()
-    watchListId = Watchlist.query.all()
 
 
 
+    return newWatchList.to_dict()
 
 
-    return "hello"
+@lists_routes.route('/', methods=['post'])
+@login_required
+def load_list():
+    req = request.get_json()
+    print(req)
+    watchlists = Watchlist.query.filter_by(userId=int(req)).all()
+    print(watchlists)
+
+    return {'watchlists': [watchlist.to_dict() for watchlist in watchlists]}
+
+@lists_routes.route('/<int:id>/edit', methods=['post'])
+@login_required
+def update_list(id):
+    req = request.get_json()
+
+    watchlist = Watchlist.query.get(id)
+    watchlist.name = req
+    db.session.commit()
+
+    return watchlist.to_dict()
+
 
 
 
@@ -48,6 +68,19 @@ def add_stock():
 
     return "hello"
 
+@lists_routes.route('/<int:id>/', methods=['post'])
+@login_required
+def delete_list(id):
+
+    req = request.get_json()
+    watchlist = Watchlist.query.filter_by(id=id)
+    watchlist.delete()
+
+    db.session.commit()
+
+
+
+    return jsonify(id)
 
 # api keys ???
 
