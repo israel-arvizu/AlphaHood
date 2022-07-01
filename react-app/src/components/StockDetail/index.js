@@ -21,18 +21,15 @@ function StockDetail() {
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
+        dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
         let currentDay = currentDate.getDay()
         let currentMinute = currentDate.getMinutes()
         if (currentDay > 0 && currentDay < 6) {
-            console.log('passed day check')
             if (currentHour < 16 && currentHour > 9) {
-                console.log('passed hour check 1')
                 setMarketState(true)
-                console.log(marketState, 'market open')
             } else if (currentHour === 9 && currentMinute > 29) {
-                console.log('passed hour check 2')
                 setMarketState(true)
             }
         } else {
@@ -63,11 +60,12 @@ function StockDetail() {
     })
 
     // news
-    useEffect(() => {
-        if (marketState) {
-            dispatch(getNews(tickerUpper))
-        }
-    }, [dispatch])
+    // useEffect(() => {
+    //     if (marketState) {
+
+    //         console.log('GotNews')
+    //     }
+    // }, [dispatch])
 
     // dispatch(getNews(tickerUpper))
 
@@ -76,9 +74,23 @@ function StockDetail() {
 
     if (selectedStock === undefined) return <h2>Loading...</h2>
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+
+
+
+
+    }
+
 
     return (
         <>
+            <form onSubmit={e => handleSubmit(e)}>
+                <input type='text' placeholder='Shares'></input>
+                <button type="submit" >Buy</button>
+            </form>
+
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}

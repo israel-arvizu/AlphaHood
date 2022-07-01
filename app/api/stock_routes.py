@@ -22,7 +22,6 @@ def get_stock(ticker):
 @stock_routes.route('/update/<ticker>', methods=["POST"])
 @login_required
 def update_stock(ticker):
-    print('=======================RUNNING UPDATE=======================')
     tickerUpper = ticker.upper()
     selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
     newStock = yf.Ticker(selectedStock.ticker).info
@@ -48,99 +47,27 @@ def update_stock(ticker):
 
 # buy /create
 
-
-@stock_routes.route('/<int:id>', methods=["POST"])
+@stock_routes.route('/<ticker>/buy', methods=['GET','POST'])
 @login_required
-def buy_shares():
-    req = request.get_json()
-    userId = req['userId']
-    stockId = req['stockId']
-    shares = req['shareCount']
+def buy_stock(ticker, shares):
+    currentStock = yf.Ticker(ticker.upper())
+    price = currentStock.info['currentPrice'] * shares
 
-    user = User.query.get(userId)
-    stock = Stock.query.get(stockId)
+    #get user
 
-# Change user balance
-    user.balance = User.balance - (Stock.price * shares)
-
-# add stock to portfolio
-    def stockCheck(userId, stockId):
-        rowCheck = Portfolio.query.filter(Portfolio.userId == userId).filter(Portfolio.stockId == stockId)
-        if (rowCheck):
-            Portfolio.query.filter(Portfolio.id == rowCheck.id).update({
-                'shares': rowCheck.shares + shares
-            })
-        else:
-            newPortfolio = Portfolio(
-                userId = userId,
-                stockId = stockId,
-                shares = shares,
-                priceBought = stock.price,
-                dateBought = datetime.datetime.now()
-            )
-            db.session.add(newPortfolio)
-            db.session.commit()
-    stockCheck(userId,stockId)
-# put buy order on purchase history
-    newPurchase = Purchase_History(
-        userId = userId,
-        stockId = stockId,
-        priceBought = stock.price,
-        sharesBought = shares,
-        dateBought = datetime.datetime.now()
-    )
-    db.session.add(newPurchase)
-    db.session.commit()
+    #withdraw money from user, add stock to portfolio, add stock to purchaseHistory
+    return None
 
 
-# sell / delete WORK IN PROGRESSSSSSSSSS
-# @stock_routes.route('/sell', methods=['POST'])
-# def sell_shares():
-#     req = request.get_json()
-#     userId = req['userId']
-#     stockId = req['stockId']
-#     soldShares = req['shareCount']
 
-#     user = User.query.get(userId)
-#     stock = Stock.query.get(stockId)
 
-# Change user balance
-    user.balance = User.balance + (Stock.price * soldShares)
 
-# add stock to portfolio
-    def ownedStock(userId, stockId):
-        portfolioCheck = Portfolio.query.filter(Portfolio.userId == userId).filter(Portfolio.stockId == stockId)
-        if (portfolioCheck):
-            if (portfolioCheck.shares - soldShares > 0):
-                Portfolio.query.filter(Portfolio.id == portfolioCheck.id).update({
-                    'soldShares': portfolioCheck.shares - soldShares
-            })
-        else:
-            return ("error")
 
-    ownedStock(userId, stockId)
-# put buy order on purchase history
-    soldHistory = Purchase_History(
-        userId = userId,
-        stockId = stockId,
-        priceBought = stock.price,
-        sharesBought = soldShares,
-        dateBought = datetime.datetime.now()
-    )
-    Purchase_History.query.filter(Purchase_History.userId == userId).update({
-                    'soldShares': rowCheck.shares - soldShares
-            })
 
-# @stock_routes.route('', methods=["DELETE"])
-# @login_required
-# def random():
-#     pass
-# # price/update / put
 
-# @stock_routes.route('', methods=["PUT"])
-# @login_required
-# def random():
-#     pass
+
+
+
 
 
 @stock_routes.route('/loadfeaturelists', methods=["POST"])
@@ -165,10 +92,10 @@ def featurelists():
 
 @stock_routes.route('/getportfolio/<int:id>')
 def portfolio(id):
-    userId = id;
-    stocks = Portfolio.query.filter(Portfolio.userId == userId);
+    userId = id
+    stocks = Portfolio.query.filter(Portfolio.userId == userId)
     stockList = []
-    portfolioValue = 0;
+    portfolioValue = 0
     for stock in stocks:
         newDict = {"id": stock.id, "userId": stock.userId,
         "stockId": stock.stockId,
@@ -181,16 +108,16 @@ def portfolio(id):
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
             currentStock = tick.info
-            portfolioValue += currentStock["currentPrice"];
+            portfolioValue += currentStock["currentPrice"]
 
-    return jsonify(portfolioValue);
+    return jsonify(portfolioValue)
 
 @stock_routes.route('/loadportfolio/<int:id>')
 def portfolioList(id):
-    userId = id;
+    userId = id
     stocks = Portfolio.query.filter(Portfolio.userId == userId)
     listPort = []
-    listTickers = [];
+    listTickers = []
     for stock in stocks:
         newDict = {"id": stock.id, "userId": stock.userId,
         "stockId": stock.stockId,

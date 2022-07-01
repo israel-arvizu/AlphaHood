@@ -11,13 +11,13 @@ import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
-    const userId = useSelector(state=> state.session.user.id)
-    const [watchlistName, setWatchlistName]=useState(false)
+    const userId = useSelector(state => state.session.user.id)
+    const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
     const [displayPort, setDisplayPort] = useState(0)
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
-    const watchlists = useSelector(state=>state.lists)
+    const watchlists = useSelector(state => state.lists)
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
@@ -30,13 +30,13 @@ function Dashboard() {
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
 
-    const deleteAList = async(e)=>{
+    const deleteAList = async (e) => {
         dispatch(deleteList(e.target.id))
         console.log(e.target.id)
         e.preventDefault()
 
     }
-    const createlist = async(e)=>{
+    const createlist = async (e) => {
         e.preventDefault()
         const newlist = {
             name: newListName,
@@ -48,10 +48,10 @@ function Dashboard() {
     }
 
 
-    if (newsArticles === undefined || portfolio === undefined){
+    if (newsArticles === undefined || portfolio === undefined) {
         return <h2>Loading</h2>
     }
-    if(currentPortfolio !== undefined && !updated){
+    if (currentPortfolio !== undefined && !updated) {
         let price = currentPortfolio
         setDisplayPort(price)
         setUpdate(true)
@@ -67,7 +67,7 @@ function Dashboard() {
                         <h3>{updateLog}</h3>
                         <h2>${displayPort}</h2>
                     </div>
-                    <LineChart portfolio={portfolio}/>
+                    <LineChart portfolio={portfolio} />
                 </div>
                 <h2>Buying Power</h2>
                 <h2>Trending Lists</h2>
@@ -101,38 +101,38 @@ function Dashboard() {
             </div>
             <div>
                 WatchList
-                <button onClick={()=>setWatchlistName(true)}>+</button>
+                <button onClick={() => setWatchlistName(true)}>+</button>
 
                 {watchlistName &&
-                <div>
-                    <form
-                    onSubmit={createlist}>
-                        <input name="listName"
-                        type="text"
-                        placeholder='Your list name'
-                        value={newListName}
-                        onChange={(e)=>setNewListName(e.target.value)}></input>
-                        <button type="submit">Add List</button>
+                    <div>
+                        <form
+                            onSubmit={createlist}>
+                            <input name="listName"
+                                type="text"
+                                placeholder='Your list name'
+                                value={newListName}
+                                onChange={(e) => setNewListName(e.target.value)}></input>
+                            <button type="submit">Add List</button>
 
-                    </form>
+                        </form>
 
-                </div>
+                    </div>
 
                 }
 
                 <div>
                     <ul>
                         {!!watchlists.length &&
-                        watchlists.map(watchlist=>(
-                            <li>{watchlist.name}
-                            <EditList id={watchlist.id} />
-                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
-                            </li>
+                            watchlists.map(watchlist => (
+                                <li>{watchlist.name}
+                                    <EditList id={watchlist.id} />
+                                    <button id={watchlist.id} onClick={deleteAList}>Delete</button>
+                                </li>
 
 
 
 
-                    ))}
+                            ))}
                     </ul>
 
 
