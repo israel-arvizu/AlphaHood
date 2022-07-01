@@ -95,8 +95,12 @@ export default function listsReducer(state = [], action) {
         case ADD_STOCK_TO_LIST:
             return {...state, lists: action.payload}
         case EDIT_LIST:
-            console.log(action.list)
-            return {...state, [action.list.id]: action.list}
+
+
+            state.map((list)=>(
+                list.id===action.list.id? list.name = action.list.name: list.name
+            ))
+            return [...state]
         default:
             return state;
     }
