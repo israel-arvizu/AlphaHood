@@ -22,13 +22,10 @@ def get_stock(ticker):
 @stock_routes.route('/update/<ticker>', methods=["POST"])
 @login_required
 def update_stock(ticker):
-    print('I RUN')
+    print('=======================RUNNING UPDATE=======================')
     tickerUpper = ticker.upper()
     selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
     newStock = yf.Ticker(selectedStock.ticker).info
-
-    print(newStock['currentPrice'])
-    print('ABOVE ME')
 
     selectedStock.marketCap = newStock['marketCap']
     selectedStock.dayHigh = newStock['dayHigh']
@@ -94,7 +91,7 @@ def buy_shares():
     )
     db.session.add(newPurchase)
     db.session.commit()
-#
+
 
 # sell / delete WORK IN PROGRESSSSSSSSSS
 # @stock_routes.route('/sell', methods=['POST'])

@@ -14,13 +14,29 @@ export const loadHomeNews = () => async (dispatch) => {
     return response;
 }
 
+export const getNews = ticker => async (dispatch) => {
+    const response = await fetch(`/api/news/${ticker}`)
+    const data = await response.json();
+    console.log(data, '<--_DATA')
+    dispatch(loadNews(data));
+    return response;
+
+
+    // if (response.ok) {
+    //     const data = await response.json()
+    //     console.log(data, '<---DATA')
+    //     dispatch(loadNews(data))
+    //     return response
+    // }
+}
+
 
 //REDUCER
 let initialState = {};
 export default function newsReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_NEWS:
-            return {...state, news : action.payload}
+            return { ...state, news: action.payload }
         default:
             return state;
     }
