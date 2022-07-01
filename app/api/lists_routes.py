@@ -4,7 +4,6 @@ from app.models import User, db, Stock, Watchlist, List
 from flask_login import login_required
 
 
-
 lists_routes = Blueprint('lists', __name__)
 
 @lists_routes.route('/new', methods=['post'])
@@ -17,23 +16,16 @@ def add_list():
         userId= req['userId']
     )
 
-
     db.session.add(newWatchList)
     db.session.commit()
-
-
-
     return newWatchList.to_dict()
 
 
 @lists_routes.route('/', methods=['post'])
 @login_required
-def load_list():
+def load_watchlist():
     req = request.get_json()
-    print(req)
     watchlists = Watchlist.query.filter_by(userId=int(req)).all()
-    print(watchlists)
-
     return {'watchlists': [watchlist.to_dict() for watchlist in watchlists]}
 
 @lists_routes.route('/<int:id>/edit', methods=['post'])
@@ -48,6 +40,18 @@ def update_list(id):
     return watchlist.to_dict()
 
 
+@lists_routes.route('/stocks', methods=['post'])
+@login_required
+def load_list(watchlistId):
+    req = request.get_json()
+    print(req)
+    lists = List.query.filter_by(watchlistId=watchlistId)
+
+    print("................", lists)
+    for list in lists:
+        print(list.to_dict())
+
+    return {'lists':[list.to_dict() for list in lists]}
 
 
 @lists_routes.route('/addstock', methods=['post'])
@@ -57,13 +61,11 @@ def add_stock():
     req = request.get_json()
     addToList= List(
         name=req['stockId'],
-        userId= req['watchlistId']
+        watchlist= req['watchlistId']
     )
-
 
     db.session.add(List)
     db.session.commit()
-
 
 
     return "hello"
@@ -75,10 +77,7 @@ def delete_list(id):
     req = request.get_json()
     watchlist = Watchlist.query.filter_by(id=id)
     watchlist.delete()
-
     db.session.commit()
-
-
 
     return jsonify(id)
 

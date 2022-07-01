@@ -3,6 +3,7 @@ const ADD_LIST = 'list/ADD_LIST'
 const EDIT_LIST = 'list/EDIT_LIST'
 const DELETE_LIST = 'list/DELETE_LIST'
 const ADD_STOCK_TO_LIST = 'list/ADD_STOCK_TO_LIST'
+const LOAD_STOCKS = '/list/LOAD_STOCKS'
 
 
 const loadlists = (lists)=>({
@@ -14,6 +15,7 @@ const addlist=(list)=>({
     type: ADD_LIST,
     list
 })
+
 
 const addstocktolist=(stock)=>({
     type:ADD_STOCK_TO_LIST,
@@ -31,6 +33,7 @@ const deletelist=(id)=>({
 })
 
 
+
 export const loadAllLists =(userId)=>async(dispatch)=>{
     const response = await fetch(`api/lists/`, {
         method: "POST",
@@ -38,6 +41,7 @@ export const loadAllLists =(userId)=>async(dispatch)=>{
         body: JSON.stringify(userId)
     })
     const data = await response.json()
+
     dispatch (loadlists(data))
     return response
 }
@@ -106,8 +110,6 @@ export default function listsReducer(state = [], action) {
     let newState;
     switch (action.type) {
         case LOAD_LISTS:
-
-
             return [...state, ...action.lists.watchlists]
         case ADD_LIST:
 
@@ -116,7 +118,6 @@ export default function listsReducer(state = [], action) {
         case ADD_STOCK_TO_LIST:
             return {...state, lists: action.payload}
         case EDIT_LIST:
-
 
             state.map((list)=>(
                 list.id===action.list.id? list.name = action.list.name: list.name

@@ -9,4 +9,12 @@ class List(db.Model):
     stockId = db.Column(db.Integer, db.ForeignKey("stocks.id"))
     watchlistId = db.Column(db.Integer, db.ForeignKey("watchlists.id"))
 
-    watchlists = db.relationship("Watchlist", back_populates="lists")
+    watchlists = db.relationship("Watchlist",  back_populates="lists")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'stockId': self.stockId,
+            'watchlistId': self.watchlistId,
+
+        }

@@ -7,6 +7,9 @@ import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 import { NavLink } from 'react-router-dom';
+import { loadStocksforList } from '../store/liststock'
+
+
 
 
 function Dashboard() {
@@ -25,6 +28,7 @@ function Dashboard() {
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
     const currentPortfolio = useSelector(state => state.stocks.CurrentPortfolio)
+    const liststocks = useSelector(state=>state.liststock)
 
     useEffect(() => {
         dispatch(loadAllLists(userId))
@@ -138,12 +142,14 @@ function Dashboard() {
                     <ul>
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>(
-                            <li key={watchlist.name}>{watchlist.name}
+                            <li>{watchlist.name}
+                            <button>Load Stocks</button>
+                            <ul>
+
+                            </ul>
                             <EditList id={watchlist.id} />
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
-
-
 
 
                     ))}
