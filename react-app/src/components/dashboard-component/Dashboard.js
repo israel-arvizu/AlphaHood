@@ -97,6 +97,7 @@ function Dashboard() {
                     <LineChart portfolio={portfolioHistory}/>
                 </div>
                 <h2>Buying Power</h2>
+                    <p>{user.balance.toFixed(2)}</p>
                 <h2>Trending Lists</h2>
                 <div>
                     <NavLink to='/trendinglists/top-hot-10'><button>Top Hot 10</button></NavLink>
