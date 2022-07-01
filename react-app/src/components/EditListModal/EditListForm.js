@@ -8,18 +8,14 @@ const EditList = ({ id, closeModal}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const [errorMessages, setErrorMessages] = useState([])
-
-
-
-
-
-const list = useSelector(state=>state.lists.lists.watchlists).filter(watchlist=>watchlist.id==id)
-
-console.log(list[0].name)
-const [name, setName] = useState(list[0].name)
-
-
+  console.log(useSelector(state=>state.lists))
+  const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id==id)
+  console.log(list[0])
   console.log(id)
+  const [name, setName] = useState(list[0].name)
+
+
+
   useEffect(()=>{
     const errors = []
     if (name.length < 1){
@@ -34,12 +30,12 @@ const [name, setName] = useState(list[0].name)
 
     console.log(id)
 
-    ;
+
 
     dispatch(editNewList(id, name))
     //closeModal()
   };
-  console.log(typeof(errorMessages))
+
 
 
   return (

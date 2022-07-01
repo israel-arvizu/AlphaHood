@@ -6,12 +6,12 @@ const ADD_STOCK_TO_LIST = 'list/ADD_STOCK_TO_LIST'
 
 const loadlists = (lists)=>({
     type: LOAD_LISTS,
-    payload: lists
+    lists
 })
 
 const addlist=(list)=>({
     type: ADD_LIST,
-    payload: list
+    list
 })
 
 const addstocktolist=(stock)=>({
@@ -81,13 +81,17 @@ export const addstock = (stock) => async(dispatch)=>{
 }
 
 
-export default function listsReducer(state = {}, action) {
+export default function listsReducer(state = [], action) {
     let newState;
     switch (action.type) {
         case LOAD_LISTS:
-            return {...state, lists : action.payload}
+
+
+            return [...state, ...action.lists.watchlists]
         case ADD_LIST:
-            return {...state, lists: action.payload}
+
+            return [...state, action.list]
+
         case ADD_STOCK_TO_LIST:
             return {...state, lists: action.payload}
         case EDIT_LIST:

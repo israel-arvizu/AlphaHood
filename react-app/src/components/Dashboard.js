@@ -12,19 +12,24 @@ function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state=> state.session.user.id)
-    const watchlists= useSelector(state=>state.lists.lists)
+
     const [watchlistName, setWatchlistName]=useState(false)
     const [newListName, setNewListName] = useState("")
+    const watchlists = useSelector(state=>state.lists)
+    console.log(watchlists)
 
+    useEffect(() => {
 
-
-
-
+        dispatch(loadAllLists(userId))
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(loadHomeNews())
-        dispatch(loadAllLists(userId))
+
     }, [dispatch])
+
+    console.log()
+
 
 
 
@@ -102,8 +107,8 @@ function Dashboard() {
 
                 <div>
                     <ul>
-                        {watchlists &&
-                        watchlists.watchlists.map(watchlist=>(
+                        {!!watchlists.length &&
+                        watchlists.map(watchlist=>(
                             <li>{watchlist.name}
                             <EditList id={watchlist.id} />
                             <button>Delete</button>
