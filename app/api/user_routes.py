@@ -19,3 +19,14 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/balance')
+@login_required
+def user_add_balance(id):
+    req = request.get_json()
+    user = User.query.get(id)
+    user.balance = user.balance + int(req)
+    db.session.commit()
+
+    return user.balance
