@@ -162,7 +162,7 @@ def featurelists():
             tickerList.append(currentStockobj)
             i += 1
         except:
-            tickerList.error.append("Something went wrong!")
+            tickerList.error = "Something went wrong!"
 
     return jsonify(tickerList)
 
