@@ -1,14 +1,12 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { editNewList} from "../../store/list"
 
 
 const EditList = ({ id, closeModal}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
   const [errorMessages, setErrorMessages] = useState([])
-  const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id==id)
+  const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id===id)
   const [name, setName] = useState(list[0].name)
 
 

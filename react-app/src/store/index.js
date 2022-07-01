@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   newsReducer,
   stocks: stocksReducer,
   lists: listsReducer,
-  liststock: listStockReducer,
+  listStockReducer,
 
 });
 

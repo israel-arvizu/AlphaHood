@@ -7,7 +7,7 @@ import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 import { NavLink } from 'react-router-dom';
-import { loadStocksforList } from '../store/liststock'
+import { loadStockList} from '../../store/liststock';
 
 
 
@@ -23,12 +23,13 @@ function Dashboard() {
     const [portfolioGraph, setPortfolioGraph] = useState(false)
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
+    const [enteredWatch, setEnteredWatch] = useState(false)
     const watchlists = useSelector(state=>state.lists)
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
     const currentPortfolio = useSelector(state => state.stocks.CurrentPortfolio)
-    const liststocks = useSelector(state=>state.liststock)
+    const liststocks = useSelector(state=>state.listStockReducer.listStock)
 
     useEffect(() => {
         dispatch(loadAllLists(userId))
@@ -37,11 +38,20 @@ function Dashboard() {
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
 
+    if(watchlists && watchlists.length > 0 && !enteredWatch){
+        let watchListIds = []
+        console.log("entered watchlist")
+        watchlists.map((list) => {
+            watchListIds.push(list.id)
+        })
+        dispatch(loadStockList(watchListIds))
+        setEnteredWatch(true)
+    }
+
     const deleteAList = async(e)=>{
         dispatch(deleteList(e.target.id))
         console.log(e.target.id)
         e.preventDefault()
-
     }
     const createlist = async(e)=>{
         e.preventDefault()
@@ -49,9 +59,7 @@ function Dashboard() {
             name: newListName,
             userId: userId
         }
-
-
-        const data = await dispatch(addNewList(newlist))
+       await dispatch(addNewList(newlist))
     }
 
 
@@ -142,16 +150,18 @@ function Dashboard() {
                     <ul>
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>(
-                            <li>{watchlist.name}
-                            <button>Load Stocks</button>
-                            <ul>
-
-                            </ul>
+                            <li key={watchlist.id}>{watchlist.name}
+                            {liststocks[watchlist.id].map((stock) => {
+                                return (
+                                <div key={stock.ticker}>
+                                    <span>{stock.ticker}</span>
+                                    <span>{stock.currentPrice}</span>
+                                </div>
+                                )
+                            })}
                             <EditList id={watchlist.id} />
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
-
-
                     ))}
                     </ul>
 

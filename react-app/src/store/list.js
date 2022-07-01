@@ -42,7 +42,7 @@ export const loadAllLists =(userId)=>async(dispatch)=>{
     })
     const data = await response.json()
 
-    dispatch (loadlists(data))
+    dispatch(loadlists(data))
     return response
 }
 
@@ -112,13 +112,10 @@ export default function listsReducer(state = [], action) {
         case LOAD_LISTS:
             return [...state, ...action.lists.watchlists]
         case ADD_LIST:
-
             return [...state, action.list]
-
         case ADD_STOCK_TO_LIST:
             return {...state, lists: action.payload}
         case EDIT_LIST:
-
             state.map((list)=>(
                 list.id===action.list.id? list.name = action.list.name: list.name
             ))

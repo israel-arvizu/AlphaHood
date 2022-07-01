@@ -42,16 +42,22 @@ def update_list(id):
 
 @lists_routes.route('/stocks', methods=['post'])
 @login_required
-def load_list(watchlistId):
-    req = request.get_json()
-    print(req)
-    lists = List.query.filter_by(watchlistId=watchlistId)
+def load_list():
+    print('------------------------------------------------')
+    watchListsArr = request.get_json()
+    stockObj = {}
+    for watchList in watchListsArr:
+        indvList = List.query.filter(List.watchlistId == watchList).all()
+        listArry = []
+        for listS in indvList:
+            singleList = listS.to_dict()
+            stock = Stock.query.filter(Stock.id == singleList["stockId"]).one()
+            stockTicker = {"ticker": stock.ticker, "currentPrice": stock.currentPrice}
+            listArry.append(stockTicker)
+        stockObj[watchList] = listArry
 
-    print("................", lists)
-    for list in lists:
-        print(list.to_dict())
+    return jsonify(stockObj)
 
-    return {'lists':[list.to_dict() for list in lists]}
 
 
 @lists_routes.route('/addstock', methods=['post'])
