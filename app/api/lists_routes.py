@@ -20,13 +20,22 @@ def add_list():
 
     db.session.add(newWatchList)
     db.session.commit()
-    watchListId = Watchlist.query.all()
 
 
 
+    return newWatchList.to_dict()
 
 
-    return "hello"
+@lists_routes.route('/', methods=['post'])
+@login_required
+def load_list():
+    req = request.get_json()
+    print(req)
+    watchlists = Watchlist.query.filter_by(userId=int(req)).all()
+    print(watchlists)
+
+    return {'watchlists': [watchlist.to_dict() for watchlist in watchlists]}
+
 
 
 
