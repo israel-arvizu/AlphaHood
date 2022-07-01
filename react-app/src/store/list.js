@@ -124,17 +124,8 @@ export default function listsReducer(state = [], action) {
             return [...state]
 
         case DELETE_LIST:
-            let newState = []
-            console.log(state[0].id)
-            state.forEach(list=>{
-                console.log(list.id, action.id)
-                if(list.id!==action.id){
-                    newState.push(list)
-                }
-    })
-            console.log(newState)
-
-            return newState
+            console.log(typeof(state[0].id))
+            return state.filter(({id})=>id!== Number(action.id))
 
         default:
             return state;
