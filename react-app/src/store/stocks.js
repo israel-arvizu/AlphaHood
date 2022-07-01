@@ -1,5 +1,6 @@
 const LOAD_STOCKS = 'stocks/LOAD_STOCKS'
 const GET_STOCK = 'stocks/GET_STOCK'
+const LOAD_SEARCH_STOCK = 'stocks/LOAD_SEARCH_STOCK'
 
 const loadstocks = (stocks) => ({
     type: LOAD_STOCKS,
@@ -11,6 +12,19 @@ const getStock = (stock) => ({
     payload: stock
 })
 
+const loadSearchStock = (stock) => {
+    return {
+        type: LOAD_SEARCH_STOCK,
+        payload: stock
+    }
+}
+
+export const getOneSearchStock = (ticker) => async (dispatch) => {
+    const res = await fetch(`api/stocks/${ticker}`)
+
+    const stock = await res.json()
+    dispatch(loadSearchStock)
+}
 
 export const loadstocklist = (list) => async (dispatch) => {
     const response = await fetch("/api/stocks/loadfeaturelists",

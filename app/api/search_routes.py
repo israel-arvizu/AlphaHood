@@ -13,6 +13,6 @@ def get_search_stocks():
 
     for idx in range(0, len(stocks)):
         stock_lst.append(
-            {"ticker": stocks[idx]["ticker"], "name": stocks[idx].name}
+            {"ticker": stocks[idx].ticker, "name": stocks[idx].name}
         )
     return {"searched_stocks": stock_lst}

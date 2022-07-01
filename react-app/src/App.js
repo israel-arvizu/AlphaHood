@@ -10,7 +10,9 @@ import Dashboard from './components/Dashboard';
 import User from './components/User';
 import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
+import AuthNav from './components/Navigation/AuthNav';
 import { authenticate } from './store/session';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,25 +33,25 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path='/login' exact={ true }>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path='/sign-up' exact={ true }>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        <ProtectedRoute path='/users' exact={ true } >
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute path='/users/:userId' exact={ true } >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/' exact={ true } >
           <Dashboard />
         </ProtectedRoute>
-        <ProtectedRoute path='/trendinglists/:list' exact={true} >
+        <ProtectedRoute path='/trendinglists/:list' exact={ true } >
           <TrendingLists />
         </ProtectedRoute>
-        <ProtectedRoute path='/stocks/:ticker' exact={true}>
+        <ProtectedRoute path='/stocks/:ticker' exact={ true }>
           <StockDetail />
         </ProtectedRoute>
       </Switch>
