@@ -4,7 +4,7 @@ from app.models import User, db, Stock, Portfolio, Transaction
 import datetime
 import yfinance as yf
 import pandas as pd
-
+from datetime import datetime
 from flask_login import current_user, login_user, logout_user, login_required
 
 stock_routes = Blueprint('stocks', __name__)
@@ -50,13 +50,61 @@ def update_stock(ticker):
 @stock_routes.route('/<ticker>/buy', methods=['GET','POST'])
 @login_required
 def buy_stock(ticker):
-    currentStock = yf.Ticker(ticker.upper())
-    price = currentStock.info['currentPrice']
+    req = request.get_json()
+    currentUserId = req['userId']
+    userBalance = float(req['userBalance'])
+    shareCount = int(req['shareCount'])
+    stockPrice = float(req['stockPrice'])
+    stockId = int(req['stockId'])
+    transactionPrice = stockPrice * shareCount
+    user = User.query.get(currentUserId)
+    user.balance = user.balance - transactionPrice
+    db.session.commit()
+    ownedBool = False
 
-    #get user
-    user = User.query.get(current_user.id)
-    #withdraw money from user, add stock to portfolio, add stock to purchaseHistory
+    #check if user already owns stock
+    allOwned = Portfolio.query.filter_by(userId=(f"{currentUserId}"))
+    for row in allOwned:
+        if(row.stockId == stockId):
+            ownedBool = True
+            row.shares = row.shares + shareCount
+            db.session.commit()
+            return jsonify('Stock Purchased')
+    if(not ownedBool):
+        portfolio = Portfolio(
+            userId=currentUserId,
+            stockId=stockId,
+            shares=shareCount,
+            priceBought=stockPrice,
+            dateBought=datetime.now()
+        )
+        db.session.add(portfolio)
+        db.session.commit()
+        return jsonify('Stock Purchased')
 
+    return jsonify('something went wrong')
+
+@stock_routes.route('/<ticker>/sell', methods=['GET','POST'])
+@login_required
+def sell_stock(ticker):
+    req = request.get_json()
+    currentUserId = req['userId']
+    userBalance = float(req['userBalance'])
+    shareCount = int(req['shareCount'])
+    stockPrice = float(req['stockPrice'])
+    stockId = int(req['stockId'])
+    transactionPrice = stockPrice * shareCount
+    user = User.query.get(currentUserId)
+    user.balance = user.balance + transactionPrice
+    db.session.commit()
+    ownedBool = False
+
+    allOwned = Portfolio.query.filter_by(userId=(f"{currentUserId}"))
+    for row in allOwned:
+        if(row.stockId == stockId):
+            row.shares = row.shares - shareCount
+            db.session.commit()
+            return jsonify('Stock sold')
 
 
 

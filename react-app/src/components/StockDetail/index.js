@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getOneStock, getStocks, updateStock } from '../../store/stocks'
+import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { getNews } from '../../store/news'
 
 function StockDetail() {
@@ -13,10 +13,11 @@ function StockDetail() {
     const selectedStock = stocks[tickerUpper]
     const [marketState, setMarketState] = useState(false)
 
-    const user = useSelector(state => state.session.user)
+    const sessionUser = useSelector(state => state.session.user)
 
     const [buyStock, setBuyStock] = useState('Buy')
-    const [balance, setBalance] = useState(user.balance)
+    const [balance, setBalance] = useState(sessionUser.balance)
+    const [shares, setShares] = useState(0)
 
 
     // let marketOpen = false
@@ -82,95 +83,114 @@ function StockDetail() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let response = await fetch(`/api/stocks/${tickerUpper}/buy`)
-        const transaction = {}
+        const transaction = {
+            userId: sessionUser.id,
+            userBalance: sessionUser.balance,
+            shareCount: shares,
+            stockPrice: selectedStock.currentPrice,
+            stockId: selectedStock.id
+        }
+        await dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+    }
 
+    const sellShares = async (e) => {
+        e.preventDefault()
 
-
-
-
-
+        const transaction = {
+            userId: sessionUser.id,
+            userBalance: sessionUser.balance,
+            shareCount: shares,
+            stockPrice: selectedStock.currentPrice,
+            stockId: selectedStock.id
+        }
+        await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
     }
 
 
     return (
         <>
-            <form onSubmit={ e => handleSubmit(e) }>
-                <input type='text' placeholder='Shares'></input>
+            <form onSubmit={e => handleSubmit(e)}>
+                <input
+                    name='shares'
+                    type='number'
+                    value={shares}
+                    onChange={e => setShares(e.target.value)}
+                ></input>
                 <button type="submit" >Buy</button>
+                <button onClick={e => sellShares(e)}>Sell</button>
             </form>
 
             <p>Market Open:</p>
             <p>
-                { marketState ? 'True' : 'False' }
+                {marketState ? 'True' : 'False'}
             </p>
             <div className='top-details'>
-                <h2>{ selectedStock.name }</h2>
-                <p>{ selectedStock.currentPrice }</p>
+                <h2>{selectedStock.name}</h2>
+                <p>{selectedStock.currentPrice}</p>
                 <p>Change Today</p>
             </div>
             <div className='graph-container'>
-                {/* GRAPH GOES HERE */ }
+                {/* GRAPH GOES HERE */}
             </div>
             <div className='about-container'>
                 <h2>About</h2>
-                <p>{ selectedStock.longBusinessSummary }</p>
+                <p>{selectedStock.longBusinessSummary}</p>
                 <div className='employees-container'>
                     <p>Employees</p>
-                    <p>{ selectedStock.fullTimeEmployees }</p>
+                    <p>{selectedStock.fullTimeEmployees}</p>
                 </div>
                 <div className='headquarters-container'>
                     <p>Headquarters</p>
-                    <p>{ selectedStock.city }, { selectedStock.state }</p>
+                    <p>{selectedStock.city}, {selectedStock.state}</p>
                 </div>
             </div>
             <div className='key-statistics'>
                 <h2>Key Statistics</h2>
                 <div className='marketCap-container'>
                     <p>Market Cap</p>
-                    <p>{ selectedStock.marketCap }</p>
+                    <p>{selectedStock.marketCap}</p>
                 </div>
                 <div className='trailingPE-container'>
                     <p>Trailing Price-Earnings</p>
-                    <p>{ selectedStock.trailingPE }</p>
+                    <p>{selectedStock.trailingPE}</p>
                 </div>
                 <div className='dividendYield-container'>
                     <p>Dividend Yield</p>
-                    <p>{ selectedStock.dividendYield }</p>
+                    <p>{selectedStock.dividendYield}</p>
                 </div>
                 <div className='averageVolume-container'>
                     <p>Average Volume</p>
-                    <p>{ selectedStock.averageVolume }</p>
+                    <p>{selectedStock.averageVolume}</p>
                 </div>
                 <div className='dayHigh-container'>
                     <p>High Today</p>
-                    <p>{ selectedStock.dayHigh }</p>
+                    <p>{selectedStock.dayHigh}</p>
                 </div>
                 <div className='dayLow-container'>
                     <p>Low Today</p>
-                    <p>{ selectedStock.dayLow }</p>
+                    <p>{selectedStock.dayLow}</p>
                 </div>
                 <div className='regularMarketOpen-container'>
                     <p>Regular Market Open</p>
-                    <p>{ selectedStock.regularMarketOpen }</p>
+                    <p>{selectedStock.regularMarketOpen}</p>
                 </div>
                 <div className='volume-container'>
                     <p>Volume</p>
-                    <p>{ selectedStock.volume }</p>
+                    <p>{selectedStock.volume}</p>
                 </div>
                 <div className='fiftyTwoWeekHigh-container'>
                     <p>52 Week High</p>
-                    <p>{ selectedStock.fiftyTwoWeekHigh }</p>
+                    <p>{selectedStock.fiftyTwoWeekHigh}</p>
                 </div>
                 <div className='fiftyTwoWeekLow-container'>
                     <p>52 Week Low</p>
-                    <p>{ selectedStock.fiftyTwoWeekLow }</p>
+                    <p>{selectedStock.fiftyTwoWeekLow}</p>
                 </div>
             </div>
             <div className='related-list-container'>
                 <h2>Related Lists</h2>
-                <button>{ selectedStock.industry }</button>
-                <button>{ selectedStock.state }</button>
+                <button>{selectedStock.industry}</button>
+                <button>{selectedStock.state}</button>
             </div>
             <div className='news-container'>
                 <h2>News</h2>
@@ -184,7 +204,7 @@ function StockDetail() {
             </div>
             <div className='analyst-rating-container'>
                 <h2>Analyst Ratings</h2>
-                <p>{ selectedStock.recommendationKey }</p>
+                <p>{selectedStock.recommendationKey}</p>
             </div>
             <div className='Earnings'>
                 <h2>Earnings</h2>
