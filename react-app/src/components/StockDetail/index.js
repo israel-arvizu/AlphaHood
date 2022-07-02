@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
+import { loadOwnedStocks } from '../../store/ownedStocks'
 import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
 
@@ -15,10 +16,12 @@ function StockDetail() {
     const [marketState, setMarketState] = useState(false)
 
     const sessionUser = useSelector(state => state.session.user)
+    const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
     const [shares, setShares] = useState(0)
+
 
 
     // let marketOpen = false
@@ -26,8 +29,10 @@ function StockDetail() {
 
 
 
+
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
+        dispatch(loadOwnedStocks(sessionUser.id))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -44,12 +49,11 @@ function StockDetail() {
         }
     }, [dispatch])
 
-    console.log(marketState, 'CHECK')
-
 
     useEffect(() => {
         if (marketState) {
-            // dispatch(updateStock(tickerUpper))
+            dispatch(updateStock(tickerUpper))
+            // dispatch(loadOwnedStocks(sessionUser.id))
             let currentDate = new Date()
             let currentHour = currentDate.getHours()
             let currentDay = currentDate.getDay()
@@ -79,7 +83,7 @@ function StockDetail() {
 
 
 
-    if (selectedStock === undefined) return <h2>Loading...</h2>
+    if (selectedStock === undefined || myPortfolio === undefined) return <h2>Loading...</h2>
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -107,6 +111,17 @@ function StockDetail() {
         await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
     }
 
+    const owned = () => {
+        for (let i = 0; i < myPortfolio.length; i++) {
+            if (myPortfolio[i].stockId === selectedStock.id) {
+                if (shares <= myPortfolio[i].shares) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
 
     return (
         <>
@@ -118,8 +133,12 @@ function StockDetail() {
                     value={shares}
                     onChange={e => setShares(e.target.value)}
                 ></input>
-                <button type="submit" >Buy</button>
-                <button onClick={e => sellShares(e)}>Sell</button>
+                <button type="submit" id='buy-button' disabled={
+                    sessionUser.balance <= selectedStock.currentPrice * shares
+                }>Buy</button>
+                <button onClick={e => sellShares(e)} disabled={
+                    owned()
+                }>Sell</button>
             </form>
             <p>Market Open:</p>
             <p>

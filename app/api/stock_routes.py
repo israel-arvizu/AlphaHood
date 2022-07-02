@@ -106,7 +106,19 @@ def sell_stock(ticker):
             db.session.commit()
             return jsonify('Stock sold')
 
-
+@stock_routes.route('/loadOwnedStocks/<int:id>', methods=['GET'])
+@login_required
+def load_owned_stocks(id):
+    userId = id
+    stocks = Portfolio.query.filter(Portfolio.userId == userId)
+    stockList = []
+    for stock in stocks:
+        newDict = {"id": stock.id, "userId": stock.userId,
+        "stockId": stock.stockId,
+        "shares": stock.shares,
+        }
+        stockList.append(newDict)
+    return jsonify(stockList)
 
 
 
