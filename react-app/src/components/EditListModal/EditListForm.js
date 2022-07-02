@@ -5,8 +5,10 @@ import { editNewList} from "../../store/list"
 
 const EditList = ({ id, closeModal}) => {
   const dispatch = useDispatch()
+  console.log(id)
   const [errorMessages, setErrorMessages] = useState([])
   const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id===id)
+  console.log(useSelector(state=>state.lists))
   const [name, setName] = useState(list[0].name)
 
 

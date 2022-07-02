@@ -26,6 +26,8 @@ function Dashboard() {
     const [enteredWatch, setEnteredWatch] = useState(false)
     const watchlists = useSelector(state=>state.lists)
 
+
+
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
     const currentPortfolio = useSelector(state => state.stocks.CurrentPortfolio)
@@ -41,7 +43,9 @@ function Dashboard() {
     if(watchlists && watchlists.length > 0 && !enteredWatch){
         let watchListIds = []
         console.log("entered watchlist")
+        console.log(watchlists)
         watchlists.map((list) => {
+            console.log(list)
             watchListIds.push(list.id)
         })
         dispatch(loadStockList(watchListIds))
@@ -151,6 +155,7 @@ function Dashboard() {
                     <ul>
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>{
+                            console.log(watchlist.id)
                             return(
                             <li key={watchlist.id}>{watchlist.name}
 

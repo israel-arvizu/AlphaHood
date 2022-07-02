@@ -6,35 +6,35 @@ const ADD_STOCK_TO_LIST = 'list/ADD_STOCK_TO_LIST'
 const LOAD_STOCKS = '/list/LOAD_STOCKS'
 
 
-const loadlists = (lists)=>({
+const loadlists = (lists) => ({
     type: LOAD_LISTS,
     lists
 })
 
-const addlist=(list)=>({
+const addlist = (list) => ({
     type: ADD_LIST,
     list
 })
 
 
-const addstocktolist=(stock)=>({
-    type:ADD_STOCK_TO_LIST,
+const addstocktolist = (stock) => ({
+    type: ADD_STOCK_TO_LIST,
     payload: stock
 })
 
-const editlist=(list)=>({
-    type:EDIT_LIST,
+const editlist = (list) => ({
+    type: EDIT_LIST,
     list
 })
 
-const deletelist=(id)=>({
+const deletelist = (id) => ({
     type: DELETE_LIST,
     id
 })
 
 
 
-export const loadAllLists =(userId)=>async(dispatch)=>{
+export const loadAllLists = (userId) => async (dispatch) => {
     const response = await fetch(`api/lists/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -46,13 +46,13 @@ export const loadAllLists =(userId)=>async(dispatch)=>{
     return response
 }
 
-export const addNewList = (list) => async(dispatch)=>{
-    const response=await fetch('/api/lists/new',
-    {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(list)
-    })
+export const addNewList = (list) => async (dispatch) => {
+    const response = await fetch('/api/lists/new',
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(list)
+        })
 
     const data = await response.json()
     dispatch(addlist(data));
@@ -61,14 +61,14 @@ export const addNewList = (list) => async(dispatch)=>{
 
 }
 
-export const deleteList = (id) => async(dispatch)=>{
-    const response=await fetch(`/api/lists/${id}/`,
-    {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body:JSON.stringify("hello")
+export const deleteList = (id) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${id}/`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify("hello")
 
-    })
+        })
 
     dispatch(deletelist(id))
 
@@ -77,13 +77,13 @@ export const deleteList = (id) => async(dispatch)=>{
 }
 
 
-export const editNewList = (id, name) => async(dispatch)=>{
-    const response=await fetch(`/api/lists/${id}/edit`,
-    {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(name)
-    })
+export const editNewList = (id, name) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${id}/edit`,
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(name)
+        })
 
     const data = await response.json()
     console.log("!@#!#", data)
@@ -92,13 +92,13 @@ export const editNewList = (id, name) => async(dispatch)=>{
 
 }
 
-export const addstock = (stock) => async(dispatch)=>{
+export const addstock = (stock) => async (dispatch) => {
     const response = await fetch('api/lists/addstock',
-    {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(stock)
-    })
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(stock)
+        })
     const data = await response.json()
     dispatch(addstocktolist(data));
     return response
@@ -110,20 +110,44 @@ export default function listsReducer(state = [], action) {
     let newState;
     switch (action.type) {
         case LOAD_LISTS:
-            return [...state, ...action.lists.watchlists]
+            console.log(state)
+            console.log(state.length)
+            console.log(action.lists.watchlists)
+            let newState = [...state]
+            if (state.length > 0) {
+                console.log(state.lists)
+                state.forEach(list => {
+                    console.log(list.id)
+                    if (action.lists.watchlists) {
+                        action.lists.watchlists.forEach(watchlist => {
+                            console.log(watchlist.id)
+                            if (list.id != watchlist.id) {
+                                newState = [...state, watchlist]
+
+                            }
+                        })
+                    }
+                })
+            }
+            else if (state.length===0){
+                return [...state, ...action.lists.watchlists]
+            }
+
+            return newState
+
         case ADD_LIST:
             return [...state, action.list]
         case ADD_STOCK_TO_LIST:
-            return {...state, lists: action.payload}
+            return { ...state, lists: action.payload }
         case EDIT_LIST:
-            state.map((list)=>(
-                list.id===action.list.id? list.name = action.list.name: list.name
+            state.map((list) => (
+                list.id === action.list.id ? list.name = action.list.name : list.name
             ))
             return [...state]
 
         case DELETE_LIST:
-            console.log(typeof(state[0].id))
-            return state.filter(({id})=>id!== Number(action.id))
+            console.log(typeof (state[0].id))
+            return state.filter(({ id }) => id !== Number(action.id))
 
         default:
             return state;
