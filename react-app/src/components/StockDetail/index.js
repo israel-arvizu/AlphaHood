@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getOneStock, getStocks, updateStock } from '../../store/stocks'
+import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
 
@@ -14,6 +14,12 @@ function StockDetail() {
     const selectedStock = stocks[tickerUpper]
     const [marketState, setMarketState] = useState(false)
 
+    const sessionUser = useSelector(state => state.session.user)
+
+    const [buyStock, setBuyStock] = useState('Buy')
+    const [balance, setBalance] = useState(sessionUser.balance)
+    const [shares, setShares] = useState(0)
+
 
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
@@ -22,18 +28,15 @@ function StockDetail() {
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
+        // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
         let currentDay = currentDate.getDay()
         let currentMinute = currentDate.getMinutes()
         if (currentDay > 0 && currentDay < 6) {
-            console.log('passed day check')
             if (currentHour < 16 && currentHour > 9) {
-                console.log('passed hour check 1')
                 setMarketState(true)
-                console.log(marketState, 'market open')
             } else if (currentHour === 9 && currentMinute > 29) {
-                console.log('passed hour check 2')
                 setMarketState(true)
             }
         } else {
@@ -46,7 +49,7 @@ function StockDetail() {
 
     useEffect(() => {
         if (marketState) {
-            dispatch(updateStock(tickerUpper))
+            // dispatch(updateStock(tickerUpper))
             let currentDate = new Date()
             let currentHour = currentDate.getHours()
             let currentDay = currentDate.getDay()
@@ -64,11 +67,12 @@ function StockDetail() {
     })
 
     // news
-    useEffect(() => {
-        if (marketState) {
-            dispatch(getNews(tickerUpper))
-        }
-    }, [dispatch])
+    // useEffect(() => {
+    //     if (marketState) {
+
+    //         console.log('GotNews')
+    //     }
+    // }, [dispatch])
 
     // dispatch(getNews(tickerUpper))
 
@@ -77,10 +81,46 @@ function StockDetail() {
 
     if (selectedStock === undefined) return <h2>Loading...</h2>
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const transaction = {
+            userId: sessionUser.id,
+            userBalance: sessionUser.balance,
+            shareCount: shares,
+            stockPrice: selectedStock.currentPrice,
+            stockId: selectedStock.id
+        }
+        await dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+    }
+
+    const sellShares = async (e) => {
+        e.preventDefault()
+
+        const transaction = {
+            userId: sessionUser.id,
+            userBalance: sessionUser.balance,
+            shareCount: shares,
+            stockPrice: selectedStock.currentPrice,
+            stockId: selectedStock.id
+        }
+        await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+    }
+
 
     return (
         <>
             <UserNavBar />
+            <form onSubmit={e => handleSubmit(e)}>
+                <input
+                    name='shares'
+                    type='number'
+                    value={shares}
+                    onChange={e => setShares(e.target.value)}
+                ></input>
+                <button type="submit" >Buy</button>
+                <button onClick={e => sellShares(e)}>Sell</button>
+            </form>
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}
