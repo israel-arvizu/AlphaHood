@@ -35,7 +35,7 @@ const deletelist = (id) => ({
 
 
 export const loadAllLists = (userId) => async (dispatch) => {
-    const response = await fetch(`api/lists/`, {
+    const response = await fetch(`/api/lists/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userId)

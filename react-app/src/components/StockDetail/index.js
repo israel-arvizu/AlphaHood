@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
+import AddToListModal from '../AddToListModal'
+import { loadAllLists } from '../../store/list'
 
 function StockDetail() {
     const dispatch = useDispatch()
@@ -23,6 +25,10 @@ function StockDetail() {
 
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
+
+    useEffect(()=>{
+        dispatch(loadAllLists(sessionUser.id))
+    })
 
 
 
@@ -121,6 +127,7 @@ function StockDetail() {
                 <button type="submit" >Buy</button>
                 <button onClick={e => sellShares(e)}>Sell</button>
             </form>
+            <AddToListModal />
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}
