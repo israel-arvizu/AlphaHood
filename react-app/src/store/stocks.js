@@ -116,7 +116,7 @@ export default function stocksReducer(state = initialState, action) {
             return newState
         // return { ...state, stock: action.payload }
         case BUY_STOCK:
-            return { ...state, portfolio: action.payload }
+            return { ...state }
         default:
             return state;
     }
