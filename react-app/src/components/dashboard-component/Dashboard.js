@@ -15,8 +15,8 @@ import { loadStockList} from '../../store/liststock';
 function Dashboard() {
     const dispatch = useDispatch()
     const newsArticles = useSelector(state => state.newsReducer.news);
-    const userId = useSelector(state=> state.session.user.id)
-    const [watchlistName, setWatchlistName]=useState(false)
+    const userId = useSelector(state => state.session.user.id)
+    const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
     const [displayPort, setDisplayPort] = useState(0)
     const [portfolioHistory, setPortfolioHistory] = useState({})
@@ -57,7 +57,7 @@ function Dashboard() {
         console.log(e.target.id)
         e.preventDefault()
     }
-    const createlist = async(e)=>{
+    const createlist = async (e) => {
         e.preventDefault()
         const newlist = {
             name: newListName,
@@ -132,22 +132,22 @@ function Dashboard() {
             </div>
             <div>
                 WatchList
-                <button onClick={()=>setWatchlistName(true)}>+</button>
+                <button onClick={() => setWatchlistName(true)}>+</button>
 
                 {watchlistName &&
-                <div>
-                    <form
-                    onSubmit={createlist}>
-                        <input name="listName"
-                        type="text"
-                        placeholder='Your list name'
-                        value={newListName}
-                        onChange={(e)=>setNewListName(e.target.value)}></input>
-                        <button type="submit">Add List</button>
+                    <div>
+                        <form
+                            onSubmit={createlist}>
+                            <input name="listName"
+                                type="text"
+                                placeholder='Your list name'
+                                value={newListName}
+                                onChange={(e) => setNewListName(e.target.value)}></input>
+                            <button type="submit">Add List</button>
 
-                    </form>
+                        </form>
 
-                </div>
+                    </div>
 
                 }
 
