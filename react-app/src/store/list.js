@@ -148,7 +148,7 @@ export default function listsReducer(state = [], action) {
             return [...state]
 
         case DELETE_LIST:
-            console.log(typeof (state[0].id))
+
             return state.filter(({ id }) => id !== Number(action.id))
 
         default:
