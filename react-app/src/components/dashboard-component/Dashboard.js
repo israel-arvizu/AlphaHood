@@ -150,9 +150,11 @@ function Dashboard() {
                 <div>
                     <ul>
                         {!!watchlists.length &&
-                        watchlists.map(watchlist=>(
+                        watchlists.map(watchlist=>{
+                            return(
                             <li key={watchlist.id}>{watchlist.name}
-                            {liststocks[watchlist.id].map((stock) => {
+
+                            { !!liststocks && liststocks[watchlist.id]  !==undefined && liststocks[watchlist.id]?.map((stock) => {
                                 return (
                                 <div key={stock.ticker}>
                                     <span>{stock.ticker}</span>
@@ -160,10 +162,11 @@ function Dashboard() {
                                 </div>
                                 )
                             })}
+
                             <EditList id={watchlist.id} />
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
-                    ))}
+                            )})}
                     </ul>
 
 

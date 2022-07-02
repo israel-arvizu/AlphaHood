@@ -31,7 +31,7 @@ class Stock(db.Model):
 
 
 
-    portfolios = db.relationship("Portfolio", back_populates="stocks")
+    portfolios = db.relationship("Portfolio", back_populates="stocks", cascade="all,delete")
     transactions = db.relationship("Transaction", back_populates="stocks")
 
 

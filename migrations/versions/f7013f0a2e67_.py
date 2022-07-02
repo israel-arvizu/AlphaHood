@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<< HEAD:migrations/versions/91dcede2c7a1_.py
-Revision ID: 91dcede2c7a1
+Revision ID: f7013f0a2e67
 Revises: 
-Create Date: 2022-07-01 09:36:22.198469
-=======
-Revision ID: ba14e4502793
-Revises: 
-Create Date: 2022-07-01 09:58:54.825780
->>>>>>> origin/testbranch:migrations/versions/ba14e4502793_.py
+Create Date: 2022-07-01 19:11:22.989943
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<< HEAD:migrations/versions/91dcede2c7a1_.py
-revision = '91dcede2c7a1'
-=======
-revision = 'ba14e4502793'
->>>>>>> origin/testbranch:migrations/versions/ba14e4502793_.py
+revision = 'f7013f0a2e67'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -97,7 +87,7 @@ def upgrade():
     sa.Column('stockId', sa.Integer(), nullable=True),
     sa.Column('watchlistId', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['stockId'], ['stocks.id'], ),
-    sa.ForeignKeyConstraint(['watchlistId'], ['watchlists.id'], ),
+    sa.ForeignKeyConstraint(['watchlistId'], ['watchlists.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

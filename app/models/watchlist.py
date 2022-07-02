@@ -12,8 +12,8 @@ class Watchlist (db.Model):
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
 
 
-    lists = db.relationship("List", back_populates="watchlists")
-    users = db.relationship("User", back_populates="watchlists")
+    lists = db.relationship("List", back_populates="watchlists", cascade="all,delete-orphan")
+    users = db.relationship("User", back_populates="watchlists", cascade="all,delete" )
 
 
     def to_dict(self):
