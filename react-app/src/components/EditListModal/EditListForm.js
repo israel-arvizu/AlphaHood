@@ -1,17 +1,14 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { editNewList} from "../../store/list"
 
 
 const EditList = ({ id, closeModal}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
+
   const [errorMessages, setErrorMessages] = useState([])
-  console.log(useSelector(state=>state.lists))
-  const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id==id)
-  console.log(list[0])
-  console.log(id)
+  const list = useSelector(state=>state.lists).filter(watchlist=>watchlist.id===id)
+
   const [name, setName] = useState(list[0].name)
 
 
@@ -27,11 +24,6 @@ const EditList = ({ id, closeModal}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(id)
-
-
-
     dispatch(editNewList(id, name))
     //closeModal()
   };
@@ -44,7 +36,7 @@ const EditList = ({ id, closeModal}) => {
     <div className="errors">
           <ul>
             {errorMessages.map(error=>(
-              <li>{error}</li>
+              <li key={error}>{error}</li>
             ))}
           </ul>
         </div>

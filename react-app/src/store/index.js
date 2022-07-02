@@ -4,12 +4,15 @@ import session from './session'
 import newsReducer from './news';
 import stocksReducer from './stocks';
 import listsReducer from './list';
+import listStockReducer from './liststock';
+
 
 const rootReducer = combineReducers({
   session,
   newsReducer,
   stocks: stocksReducer,
-  lists: listsReducer
+  lists: listsReducer,
+  listStockReducer,
 
 });
 

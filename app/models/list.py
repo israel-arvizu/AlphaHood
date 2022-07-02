@@ -7,6 +7,14 @@ class List(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     stockId = db.Column(db.Integer, db.ForeignKey("stocks.id"))
-    watchlistId = db.Column(db.Integer, db.ForeignKey("watchlists.id"))
+    watchlistId = db.Column(db.Integer, db.ForeignKey("watchlists.id", ondelete="CASCADE"))
 
-    watchlists = db.relationship("Watchlist", back_populates="lists")
+    watchlists = db.relationship("Watchlist",  back_populates="lists", cascade="all,delete")
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'stockId': self.stockId,
+            'watchlistId': self.watchlistId,
+
+        }

@@ -1,5 +1,3 @@
-import {Line} from "react-chartjs-2"
-import Chart from 'chart.js/auto';
 
 const labels =
     ["09:30", "09:35", "09:40", "09:45", "09:50",
@@ -22,25 +20,6 @@ const labels =
     "03:30", "03:35", "03:40", "03:45",
     "03:50", "03:55", "04:00"]
 
-    const dataZeros = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
-    const dayData1 =  {
-        labels:labels,
-        datasets:[{
-        data: dataZeros,
-        fill: false,
-        backgroundColor:"black",
-        borderColor:"#5AC53B",
-        borderWidth: 2,
-        pointStyle: Line,
-        pointBorderColor:'rgba(0,0,0,0)',
-        pointBackgroundColor:'rbga(0,0,0,0)',
-        pointHoverBackgroundColor:'#5AC53B',
-        pointHoverBorderColor:"#000000",
-        pointHoverBorderWidth: 4,
-        pointHoverRadius: 6,
-    }]}
-
 
 const valuesToArray = (obj) => {
     let graphValues = [];
@@ -54,15 +33,10 @@ const keysToArray = (obj) => {
     let graphKeys = [];
     Object.keys(obj).forEach(key => {
         const dateTime = key.split(' ')
-        if(dateTime[1][4] == 0 || dateTime[1][4] == 5 && dateTime[1].substring(6, 8) == '00')
+        if((dateTime[1][4] == 0 || dateTime[1][4] == 5) && dateTime[1].substring(6, 8) == '00')
             graphKeys.push(dateTime[1].substring(5, 0))
     })
     return graphKeys;
 }
 
-const timeToPst = (timeObj) => {
-
-}
-
-
-export { valuesToArray, keysToArray, labels, dayData1, dataZeros};
+export { valuesToArray, keysToArray, labels};
