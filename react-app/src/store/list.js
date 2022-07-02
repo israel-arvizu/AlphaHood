@@ -113,16 +113,18 @@ export default function listsReducer(state = [], action) {
             console.log(state)
             console.log(state.length)
             console.log(action.lists.watchlists)
-            let newState = [...state]
+            let newState = []
             if (state.length > 0) {
-                console.log(state.lists)
+                console.log(state)
                 state.forEach(list => {
                     console.log(list.id)
                     if (action.lists.watchlists) {
                         action.lists.watchlists.forEach(watchlist => {
-                            console.log(watchlist.id)
-                            if (list.id != watchlist.id) {
-                                newState = [...state, watchlist]
+
+
+                            if (list.id === watchlist.id) {
+                               newState.push(watchlist)
+                               console.log(newState)
 
                             }
                         })
