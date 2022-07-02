@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react"
+import NavBar from "../NavBar"
 import './splashpage.css'
 
 
@@ -6,6 +7,7 @@ function SplashPage(){
 
     return(
         <div>
+            <NavBar />
             <div>
                 <div className="navbar">
                     <nav>
