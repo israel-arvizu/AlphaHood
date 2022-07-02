@@ -12,6 +12,7 @@ import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
 import SplashPage  from './components/splashpage/splashpage';
 import { authenticate } from './store/session';
+import { ModalProvider } from './context/Modal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +31,7 @@ function App() {
   }
 
   return (
+  <ModalProvider>
     <BrowserRouter>
       <Switch>
         <Route path='/' exact={true}>
@@ -58,6 +60,7 @@ function App() {
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
+  </ModalProvider>
   );
 }
 

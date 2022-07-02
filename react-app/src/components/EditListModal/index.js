@@ -8,8 +8,9 @@ function EditListModal({id}) {
   return (
     <>
       <button onClick={() => setShowModal(true) } id="editbuttonlist">Edit</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+      {console.log(showModal)}
+      {showModal &&
+      (<Modal onClose={() => setShowModal(false)}>
           <EditList id={id} closeModal={() => setShowModal(false)}/>
         </Modal>
       )}
