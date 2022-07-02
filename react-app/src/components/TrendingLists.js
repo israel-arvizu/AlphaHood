@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
+import UserNavBar from './UserNavBar'
 
 const topTen = ["AMZN", "PYPL", "NVDA", "SHOP", "RDFN", "APPL", "ERIC", "PANW", "ROKU", "TSLA"]
 const creator = ["GOOGL", "NVDA", "NKE", "MLAI" ]
@@ -68,43 +69,46 @@ function TrendingLists() {
 
     if(!stocks) return <h2>Loading</h2>
     return(
-        <div>
-            <div>
-                <img></img>
-            </div>
-            <div>
+        <>
+            <UserNavBar />
                 <div>
-                    <h1>{title}</h1>
-                    <p>description</p>
                     <div>
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Symbol</th>
-                                <th>Price</th>
-                                <th>Today</th>
-                                <th>Market Cap</th>
-                            </tr>
-                                {stocks.map(stock=>{
-                                    return (
-                                        <tr>
-                                            <td>{stock.name}</td>
-                                            <td>{stock.ticker}</td>
-                                            <td>{stock.price}</td>
-                                            <td>{stock.todayPerformance + "%"}</td>
-                                            <td>{numToString(stock.marketCap)}</td>
-                                        </tr>
-                                    )
-                                })}
-                        </table>
+                        <img></img>
+                    </div>
+                    <div>
+                        <div>
+                            <h1>{title}</h1>
+                            <p>description</p>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Symbol</th>
+                                        <th>Price</th>
+                                        <th>Today</th>
+                                        <th>Market Cap</th>
+                                    </tr>
+                                        {stocks.map(stock=>{
+                                            return (
+                                                <tr>
+                                                    <td>{stock.name}</td>
+                                                    <td>{stock.ticker}</td>
+                                                    <td>{stock.price}</td>
+                                                    <td>{stock.todayPerformance + "%"}</td>
+                                                    <td>{numToString(stock.marketCap)}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h3>WatchList</h3>
+                        </div>
+
                     </div>
                 </div>
-                <div>
-                    <h3>WatchList</h3>
-                </div>
-
-            </div>
-       </div>
+       </>
     )
 
 }

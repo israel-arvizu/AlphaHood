@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { getNews } from '../../store/news'
+import UserNavBar from '../UserNavBar'
 
 function StockDetail() {
     const dispatch = useDispatch()
@@ -109,6 +110,7 @@ function StockDetail() {
 
     return (
         <>
+            <UserNavBar />
             <form onSubmit={e => handleSubmit(e)}>
                 <input
                     name='shares'
@@ -119,7 +121,6 @@ function StockDetail() {
                 <button type="submit" >Buy</button>
                 <button onClick={e => sellShares(e)}>Sell</button>
             </form>
-
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}

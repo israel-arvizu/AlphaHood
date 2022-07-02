@@ -31,12 +31,10 @@ function App() {
 
   return (
     <BrowserRouter>
-
-      <NavBar />
-
-
       <Switch>
-
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -49,7 +47,7 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/trendinglists/:list' exact={true} >
