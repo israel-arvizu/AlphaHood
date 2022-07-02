@@ -157,7 +157,7 @@ function Dashboard() {
                     <ul>
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>{
-                            console.log(watchlist.id)
+
                             return(
                             <li key={watchlist.id}>{watchlist.name}
 
@@ -169,12 +169,12 @@ function Dashboard() {
                                 </div>
                                 )
                             })}
-
-                            <EditList id={watchlist.id} />
+                            <EditListModal id={watchlist.id}/>
                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                             </li>
                             )})}
                     </ul>
+
 
 
                 </div>
