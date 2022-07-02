@@ -8,6 +8,7 @@ import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 import { NavLink } from 'react-router-dom';
 import { loadStockList} from '../../store/liststock';
+import UserNavBar from '../UserNavBar';
 
 
 
@@ -87,6 +88,7 @@ function Dashboard() {
 
     return (
         <>
+            <UserNavBar />
             <div>
                 LeftSection
                 <div>

@@ -12,6 +12,7 @@ import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
 import SplashPage  from './components/splashpage/splashpage';
 import { authenticate } from './store/session';
+import Wallet from './components/UserNavBar/walletModal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,12 +32,10 @@ function App() {
 
   return (
     <BrowserRouter>
-
-      <NavBar />
-
-
       <Switch>
-
+        <Route path='/' exact={true}>
+          <SplashPage />
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
@@ -49,7 +48,7 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <ProtectedRoute path='/dashboard' exact={true} >
           <Dashboard />
         </ProtectedRoute>
         <ProtectedRoute path='/trendinglists/:list' exact={true} >
@@ -57,6 +56,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/stocks/:ticker' exact={true}>
           <StockDetail />
+        </ProtectedRoute>
+        <ProtectedRoute path='/wallet' exact={true}>
+          <Wallet />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

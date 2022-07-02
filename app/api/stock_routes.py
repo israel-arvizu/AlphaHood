@@ -181,7 +181,7 @@ def portfolio(id):
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
             currentStock = tick.info
-            portfolioValue += currentStock["currentPrice"];
+            portfolioValue += currentStock["currentPrice"]; # <--- CURR PRICE X NUMBER OF SHARES
 
     return jsonify(portfolioValue);
 
