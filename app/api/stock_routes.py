@@ -153,11 +153,12 @@ def portfolio(id):
 
     for stock in stockList:
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
+        numOfShares = stock["shares"]
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
             currentStock = tick.info
-            portfolioValue += currentStock["currentPrice"]; # <--- CURR PRICE X NUMBER OF SHARES
-            
+            portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+
     return jsonify(portfolioValue)
 
 @stock_routes.route('/loadportfolio/<int:id>')
