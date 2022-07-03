@@ -3,6 +3,8 @@ const LOAD_PORTFOLIO = 'stocks/LOAD_PORTFOLIO'
 const LOAD_CURR_PORTFOLIO = 'stocks/LOAD_CURR_PORTFOLIO'
 const GET_STOCK = 'stocks/GET_STOCK'
 const BUY_STOCK = 'stocks/BUY_STOCK'
+const STOCK_CHART = 'stocks/STOCK_CHART'
+const LOAD_OWNED = 'stocks/LOAD_OWNED'
 
 const loadstocks = (stocks) => ({
     type: LOAD_STOCKS,
@@ -28,6 +30,22 @@ const buyStock = (transaction) => ({
     type: BUY_STOCK,
     payload: transaction
 })
+
+const loadOwned = (stocks) => ({
+    type: LOAD_OWNED,
+    payload: stocks
+})
+
+const loadChart = (data) => ({
+    type: STOCK_CHART,
+    payload: data
+})
+// export const loadOwnedStocks = (id) => async (dispatch) => {
+//     const response = await fetch(`/api/stocks/loadOwnedStocks/${id}`)
+//     const data = await response.json()
+//     dispatch(loadOwned(data))
+//     return response
+// }
 
 
 export const purchaseStock = (ticker, transaction, type) => async (dispatch) => {
@@ -76,6 +94,15 @@ export const getOneStock = (ticker) => async (dispatch) => {
     }
 }
 
+export const stockChartHistory = (ticker) => async (dispatch) => {
+    const response = await fetch(`/api/stocks/chart/${ticker}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(loadChart(data))
+    }
+}
+
 export const updateStock = (ticker) => async dispatch => {
     const response = await fetch(`/api/stocks/update/${ticker}`,
         {
@@ -106,6 +133,8 @@ export default function stocksReducer(state = initialState, action) {
             return { ...state, stocks: action.payload }
         case LOAD_PORTFOLIO:
             return { ...state, portfolio: action.payload }
+        case LOAD_OWNED:
+            return { ...state, myPortfolio: action.payload }
         case LOAD_CURR_PORTFOLIO:
             newState = { ...state }
             newState["CurrentPortfolio"] = action.payload
@@ -114,7 +143,6 @@ export default function stocksReducer(state = initialState, action) {
             newState = {}
             newState[action.payload.ticker] = action.payload
             return newState
-        // return { ...state, stock: action.payload }
         case BUY_STOCK:
             return { ...state }
         default:

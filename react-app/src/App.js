@@ -11,6 +11,7 @@ import User from './components/User';
 import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
 import SplashPage  from './components/splashpage/splashpage';
+import Wallet from './components/walletComponent';
 import { authenticate } from './store/session';
 import { ModalProvider } from './context/Modal';
 
@@ -43,8 +44,8 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
+        <ProtectedRoute path='/wallet' exact={true}>
+          <Wallet />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

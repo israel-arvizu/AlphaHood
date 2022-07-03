@@ -21,7 +21,7 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/balance')
+@user_routes.route('/<int:id>/balance', methods=['POST'])
 @login_required
 def user_add_balance(id):
     req = request.get_json()
@@ -29,4 +29,4 @@ def user_add_balance(id):
     user.balance = user.balance + int(req)
     db.session.commit()
 
-    return user.balance
+    return user.to_dict()

@@ -9,7 +9,7 @@ import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
 import { NavLink } from 'react-router-dom';
 import { loadStockList} from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
-
+import './dashboard.css';
 
 
 
@@ -90,7 +90,7 @@ function Dashboard() {
     return (
         <>
             <UserNavBar />
-            <div>
+            <div className='outer-container-dash'>
                 LeftSection
                 <div>
                     <div>

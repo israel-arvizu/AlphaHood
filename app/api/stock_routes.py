@@ -106,17 +106,19 @@ def sell_stock(ticker):
             db.session.commit()
             return jsonify('Stock sold')
 
-
-
-
-
-
-
-
-
-
-
-
+@stock_routes.route('/loadOwnedStocks/<int:id>', methods=['GET'])
+@login_required
+def load_owned_stocks(id):
+    userId = id
+    stocks = Portfolio.query.filter(Portfolio.userId == userId)
+    stockList = []
+    for stock in stocks:
+        newDict = {"id": stock.id, "userId": stock.userId,
+        "stockId": stock.stockId,
+        "shares": stock.shares,
+        }
+        stockList.append(newDict)
+    return jsonify(stockList)
 
 @stock_routes.route('/loadfeaturelists', methods=["POST"])
 def featurelists():
@@ -166,6 +168,7 @@ def portfolioList(id):
     userId = id
     stocks = Portfolio.query.filter(Portfolio.userId == userId)
     listPort = []
+    listStock = []
     listTickers = []
     for stock in stocks:
         newDict = {"id": stock.id, "userId": stock.userId,
@@ -178,21 +181,31 @@ def portfolioList(id):
 
     for stock in listPort:
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
+        numOfShares = stock["shares"]
         for stock in stockTicker:
             tick = yf.Ticker(stock.ticker)
             data = yf.download(stock.ticker, group_by="Ticker", period="1d", interval="5m")
             data = data[['Open']]
             data.columns =  [data.columns[0]]
             separated = [data.iloc[:,i] for i in range(len(data.columns))]
-            listTickers.append(list(filter(lambda x: x[0:4] == "2022", str(separated).split("\n"))))
+            row = list(filter(lambda x: x[0:4] == "2022", str(separated).split("\n")))
+            for timeFrames in row:
+                splitList = timeFrames.split("    ")
+                splitList[1] = float(splitList[1]) * numOfShares
+                listStock.append(splitList[0]+"    "+ str(splitList[1]))
+            listTickers.append(listStock)
 
     portDict = {}
-    for stockFrames in listTickers:
-        for timeFrames in stockFrames:
-            splitList = timeFrames.split("    ")
-            if splitList[0] in portDict:
-                portDict[splitList[0]] += float(splitList[1])
-            else:
-                portDict[splitList[0]] = float(splitList[1])
+    for stockFrames in listStock:
+        splitList = stockFrames.split("    ")
+        if splitList[0] in portDict:
+            portDict[splitList[0]] += float(splitList[1])
+        else:
+            portDict[splitList[0]] = float(splitList[1])
 
     return jsonify(portDict)
+
+@stock_routes.route('/chart/<ticker>')
+def loadChart(ticker):
+    print(ticker, '--------------------------')
+    return 'INSIDE BACKEND'
