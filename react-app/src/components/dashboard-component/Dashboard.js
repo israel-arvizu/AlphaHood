@@ -43,9 +43,6 @@ function Dashboard() {
     }, [dispatch])
 
 
-    if(!watchlists){
-        history.push('/dashboard')
-    }
 
     if(watchlists && watchlists.length > 0 && !enteredWatch){
         let watchListIds = []

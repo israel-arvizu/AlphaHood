@@ -45,7 +45,7 @@ const SignUpForm = () => {
   }
 
   if (user) {
-    history.push('/dashboard');
+    history.push('/');
   }
 
   return (

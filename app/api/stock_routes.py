@@ -5,6 +5,7 @@ import datetime
 import yfinance as yf
 import pandas as pd
 from datetime import datetime
+import random
 from flask_login import current_user, login_user, logout_user, login_required
 
 stock_routes = Blueprint('stocks', __name__)
@@ -46,6 +47,25 @@ def update_stock(ticker):
     return jsonify(selectedStock.to_dict())
 
 # buy /create
+
+@stock_routes.route('/trendinglists', methods=["POST"])
+@login_required
+def update_trending(ticker):
+    req=request.get_json()
+    selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
+    stocklist = {}
+    for stock in req:
+        listStock = Stock.query.filter_by(ticker=stock)
+        stockprop = listStock.to_dict()
+        stockArray = []
+        stockobj = {"price": listStock.CurrentPrice, "Fifty Two Week": listStock.fiftyTwoWeekHigh, "Today": random.uniform(-3, 3), "MarketCap": stock.marketCap }
+
+
+
+
+    # print(selectedStock.currentPrice)
+    # print(newStock['currentPrice'])
+    return jsonify(selectedStock.to_dict())
 
 @stock_routes.route('/<ticker>/buy', methods=['GET','POST'])
 @login_required

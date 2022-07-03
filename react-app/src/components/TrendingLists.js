@@ -3,20 +3,16 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 import UserNavBar from './UserNavBar'
+import {tech, auto, creator, topTen, mostpop} from "./trendinglist/trendingliststocks"
 
-const topTen = ["AMZN", "PYPL", "NVDA", "SHOP", "RDFN", "APPL", "ERIC", "PANW", "ROKU", "TSLA"]
-const creator = ["GOOGL", "NVDA", "NKE", "MLAI" ]
-const mostpop = ["APPL", "MSFT", "AMZN", "TSLA", "GOOGL", "GOOG", "NVDA", "BRK.B",
-                "META", "UNH", "JNJ","JPM","V","PG","XOM","HD","CVX","MA","BAC",
-                "ABBV","PFE", "AVGO","COST","DIS","KO"]
-const tech = ["HPE", "MNDT", "ARW", "HPO","INTC","GDDY","BKI","SNX","ON","NATI","SWCH","AZPN","PANW", "PSTG", "DGI"]
-const auto = ["TSLA", "GM","F","TM","KMX","CVNA","RACE","STLA","NIO","HMC"]
+
 
 
 function TrendingLists() {
     let dispatch = useDispatch()
     let topic = []
     let {list} = useParams()
+    console.log(tech)
 
     function numToString(num) {
         var newValue = num;
