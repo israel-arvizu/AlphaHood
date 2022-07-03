@@ -43,7 +43,6 @@ def update_list(id):
 @lists_routes.route('/stocks', methods=['post'])
 @login_required
 def load_list():
-    print('------------------------------------------------')
     watchListsArr = request.get_json()
     stockObj = {}
     for watchList in watchListsArr:

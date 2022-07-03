@@ -108,16 +108,6 @@ def sell_stock(ticker):
 
 
 
-
-
-
-
-
-
-
-
-
-
 @stock_routes.route('/loadfeaturelists', methods=["POST"])
 def featurelists():
     tickerList = []
@@ -191,7 +181,6 @@ def portfolioList(id):
                 splitList = timeFrames.split("    ")
                 splitList[1] = float(splitList[1]) * numOfShares
                 listStock.append(splitList[0]+"    "+ str(splitList[1]))
-            print('LISTSTOCK---------->',listStock)
             listTickers.append(listStock)
 
     portDict = {}
