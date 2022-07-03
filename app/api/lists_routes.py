@@ -88,6 +88,22 @@ def add_stock():
 
     return "hello"
 
+@lists_routes.route('/deletestock', methods=['post'])
+@login_required
+def delete_stock():
+    req=request.get_json()
+    stockid = req['stockId']
+    print(req)
+    for listid in req['arrays']:
+        oldlist = List.query.filter_by(watchlistId=int(listid), stockId=stockid)
+
+        oldlist.delete()
+        db.session.commit()
+
+    return jsonify(req['arrays'])
+
+
+
 @lists_routes.route('/<int:id>/', methods=['post'])
 @login_required
 def delete_list(id):

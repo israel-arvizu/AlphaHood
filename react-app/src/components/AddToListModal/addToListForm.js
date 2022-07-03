@@ -50,7 +50,7 @@ const AddToList = ({ stock, closeModal }) => {
     let checked = document.getElementById(`check-${id}`)
     let submit = document.getElementById(`submitadd`)
     if(checked.checked && listarray.has(id)){
-      disableArray.push(id)
+
 
       deleteArray = deleteArray.filter(item=>{return item!= id})
     }
@@ -58,12 +58,12 @@ const AddToList = ({ stock, closeModal }) => {
       console.log(e.target.checked)
 
      let newarr = disableArray.filter(item=>{return item!= id})
-     setdisableArray(newarr)
-     console.log(disableArray)
+
+
 
 
       deleteArray.push(id)
-      console.log(deleteArray)
+
     }
 
     if (checked.checked && !listarray.has(id)) {
@@ -82,8 +82,7 @@ const AddToList = ({ stock, closeModal }) => {
     }
 
     console.log(deleteArray)
-
-
+    console.log(sendArray)
 
 
 
@@ -98,7 +97,8 @@ const AddToList = ({ stock, closeModal }) => {
     }
     const payload2={
       'arrays': deleteArray,
-      "stockId": stock.id
+      "stockId":stock.id
+
 
     }
     const response = await fetch('/api/lists/addstock',
@@ -106,16 +106,24 @@ const AddToList = ({ stock, closeModal }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-    })
+    }).then(data=>console.log(data)).then(()=>fetch('/api/lists/deletestock',
+    {
+      method:"POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload2)
+    }
+    ))
     const data = await response.json()
 
 
-    const deleteresponse = await fetch('api/list/deletestock',{
-      method:"DELETE",
+    const deleteresponse = await fetch('/api/lists/deletestock',
+    {
+      method:"POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload2)
     }
     )
+    const data2=await deleteresponse.json()
 
   }
 
@@ -136,9 +144,7 @@ const AddToList = ({ stock, closeModal }) => {
 
                 if (list.ticker === stock.ticker) {
                   listarray.add(watchlist.id)
-                if(!disableArray.includes(watchlist.id))
-                disableArray.push(watchlist.id)
-
+                  document.getElementById(`check-${watchlist.id}`).checked=true
 
                 }
               })}
