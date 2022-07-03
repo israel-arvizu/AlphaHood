@@ -207,5 +207,22 @@ def portfolioList(id):
 
 @stock_routes.route('/chart/<ticker>')
 def loadChart(ticker):
-    print(ticker, '--------------------------')
-    return 'INSIDE BACKEND'
+    stockTimes = []
+    listStock = []
+    tick = yf.Ticker(ticker)
+    data = tick.history(period="1mo", interval='1d');
+    data = data[['Open']]
+    data.columns =  [data.columns[0]]
+    separated = [data.iloc[:,i] for i in range(len(data.columns))]
+    row = list(filter(lambda x: x[0:4] == "2022", str(separated).split("\n")))
+    for timeFrames in row:
+        splitList = timeFrames.split("    ")
+        listStock.append(splitList[0]+"    "+ str(splitList[1]))
+    stockDict = {}
+    for times in listStock:
+        splitList = times.split("    ")
+        if splitList[0] in stockDict:
+            stockDict[splitList[0]] += float(splitList[1])
+        else:
+            stockDict[splitList[0]] = float(splitList[1])
+    return jsonify(stockDict)
