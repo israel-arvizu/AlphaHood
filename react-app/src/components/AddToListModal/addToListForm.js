@@ -11,6 +11,9 @@ const AddToList = ({ stock, closeModal }) => {
   const [errorMessages, setErrorMessages] = useState([])
   const listarray = new Set()
   let [sendArray, setSendArray] = useState([])
+  let [deleteArray,setDeleteArray] = useState([])
+  let [disableArray, setdisableArray] = useState([])
+  let [disableArraylength, setDisableArraylength]=useState(disableArray.length)
   const [enteredWatch, setEnteredWatch] = useState(false)
   const watchlists = useSelector(state => state.lists)
   const liststocks = useSelector(state => state.listStockReducer.listStock)
@@ -36,8 +39,32 @@ const AddToList = ({ stock, closeModal }) => {
     setEnteredWatch(true)
   }
 
-  const checkLists = (id) => {
+  useEffect(()=>{
+    console.log(disableArray.length)
+    setDisableArraylength(disableArray.length)
+    console.log(disableArray.length)
+  }, [disableArray])
+
+  const checkLists = async (e, id) => {
+
     let checked = document.getElementById(`check-${id}`)
+    let submit = document.getElementById(`submitadd`)
+    if(checked.checked && listarray.has(id)){
+      disableArray.push(id)
+
+      deleteArray = deleteArray.filter(item=>{return item!= id})
+    }
+    if (!checked.checked && listarray.has(id)){
+      console.log(e.target.checked)
+
+     let newarr = disableArray.filter(item=>{return item!= id})
+     setdisableArray(newarr)
+     console.log(disableArray)
+
+
+      deleteArray.push(id)
+      console.log(deleteArray)
+    }
 
     if (checked.checked && !listarray.has(id)) {
       console.log(listarray)
@@ -50,6 +77,14 @@ const AddToList = ({ stock, closeModal }) => {
       console.log(sendArray)
 
     }
+    else if (listarray.has(id) && !checked.checked){
+      deleteArray.push(id)
+    }
+
+    console.log(deleteArray)
+
+
+
 
 
   }
@@ -61,6 +96,11 @@ const AddToList = ({ stock, closeModal }) => {
       "stockId": stock.id
 
     }
+    const payload2={
+      'arrays': deleteArray,
+      "stockId": stock.id
+
+    }
     const response = await fetch('/api/lists/addstock',
     {
         method: "POST",
@@ -68,6 +108,14 @@ const AddToList = ({ stock, closeModal }) => {
         body: JSON.stringify(payload)
     })
     const data = await response.json()
+
+
+    const deleteresponse = await fetch('api/list/deletestock',{
+      method:"DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload2)
+    }
+    )
 
   }
 
@@ -83,26 +131,28 @@ const AddToList = ({ stock, closeModal }) => {
 
 
               <label>{watchlist.name}</label>
-              <input type="checkbox" id={`check-${watchlist.id}`} onClick={() => checkLists(watchlist.id)} />
+              <input type="checkbox" id={`check-${watchlist.id}`} onChange={(e) => checkLists(e, watchlist.id)} />
               {!!liststocks && document.getElementById(`check-${watchlist.id}`) && liststocks[watchlist.id].forEach(list => {
 
                 if (list.ticker === stock.ticker) {
                   listarray.add(watchlist.id)
+                if(!disableArray.includes(watchlist.id))
+                disableArray.push(watchlist.id)
 
-                  document.getElementById(`check-${watchlist.id}`).checked = true
+
                 }
               })}
 
 
 
-              <button onClick>Add to this list</button>
+
             </div>
 
 
 
 
           ))}
-          <button type="submit">Update lists</button>
+          <button id="submitadd" type="submit" >Update lists</button>
         </form>
 
 
