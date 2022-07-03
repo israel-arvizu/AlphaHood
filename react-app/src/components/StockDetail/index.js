@@ -5,8 +5,13 @@ import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/
 import { loadOwnedStocks } from '../../store/ownedStocks'
 import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
+
+import AddToListModal from '../AddToListModal'
+import { loadAllLists } from '../../store/list'
+
 import StockLineChart from '../Linechart-Component/StocksLineChart'
 import { stockChartHistory } from '../../store/stocks'
+
 
 function StockDetail() {
     const dispatch = useDispatch()
@@ -25,6 +30,12 @@ function StockDetail() {
     const [shares, setShares] = useState(0)
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
+
+
+    useEffect(()=>{
+        dispatch(loadAllLists(sessionUser.id))
+    })
+
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
@@ -137,6 +148,7 @@ function StockDetail() {
                     owned()
                 }>Sell</button>
             </form>
+            <AddToListModal stock={selectedStock} />
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}
