@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './loginform.css'
 
 const LoginForm = () => {
+  let history = useHistory()
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +29,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    history.push('/dashboard');
   }
 
   return (

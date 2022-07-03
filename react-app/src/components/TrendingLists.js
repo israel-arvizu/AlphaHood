@@ -36,6 +36,7 @@ function TrendingLists() {
     }
 
     const stocks = useSelector(state => state.stocks.stocks)
+    const liststocks =useSelector(state=> state.listReducer)
 
     switch (list){
         case "top-hot-10":

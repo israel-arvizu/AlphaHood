@@ -6,7 +6,7 @@ import LineChart from '../../components/Linechart-Component/Linechart';
 import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { loadStockList} from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
 import './dashboard.css';
@@ -15,6 +15,7 @@ import './dashboard.css';
 
 function Dashboard() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
@@ -40,6 +41,11 @@ function Dashboard() {
         dispatch(loadPortfolio(user.id))
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
+
+
+    if(!watchlists){
+        history.push('/dashboard')
+    }
 
     if(watchlists && watchlists.length > 0 && !enteredWatch){
         let watchListIds = []
@@ -86,7 +92,7 @@ function Dashboard() {
         setPortfolioHistory(portfolioHist)
         setPortfolioGraph(true)
     }
-
+if(!watchlists) return <h2>loading</h2>
     return (
         <>
             <UserNavBar />
@@ -155,6 +161,7 @@ function Dashboard() {
                         {!!watchlists.length &&
                         watchlists.map(watchlist=>{
 
+
                             return(
                             <li key={watchlist.id}>{watchlist.name}
 
@@ -180,5 +187,8 @@ function Dashboard() {
         </>
     )
 }
+
+
+
 
 export default Dashboard
