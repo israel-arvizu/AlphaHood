@@ -65,13 +65,25 @@ def load_list():
 def add_stock():
 
     req = request.get_json()
-    addToList= List(
-        name=req['stockId'],
-        watchlist= req['watchlistId']
-    )
+    print("23423423423423424323442", req)
+    for lists in req['arrays']:
+        print(lists)
 
-    db.session.add(List)
-    db.session.commit()
+        newlist = List(
+            stockId=req['stockId'],
+            watchlistId=lists
+        )
+        db.session.add(newlist)
+        db.session.commit()
+
+
+   ## addToList= List(
+   ##     name=req['lists'],
+   ##     watchlist= req['watchlistId']
+   ## )
+#
+    #db.session.add(List)
+    #db.session.commit()
 
 
     return "hello"

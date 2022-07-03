@@ -110,22 +110,14 @@ export default function listsReducer(state = [], action) {
     let newState;
     switch (action.type) {
         case LOAD_LISTS:
-            console.log(state)
-            console.log(state.length)
-            console.log(action.lists.watchlists)
             let newState = []
             if (state.length > 0) {
                 console.log(state)
                 state.forEach(list => {
-                    console.log(list.id)
                     if (action.lists.watchlists) {
                         action.lists.watchlists.forEach(watchlist => {
-
-
                             if (list.id === watchlist.id) {
                                newState.push(watchlist)
-                               console.log(newState)
-
                             }
                         })
                     }
@@ -134,7 +126,6 @@ export default function listsReducer(state = [], action) {
             else if (state.length===0){
                 return [...state, ...action.lists.watchlists]
             }
-
             return newState
 
         case ADD_LIST:
@@ -146,11 +137,8 @@ export default function listsReducer(state = [], action) {
                 list.id === action.list.id ? list.name = action.list.name : list.name
             ))
             return [...state]
-
         case DELETE_LIST:
-
             return state.filter(({ id }) => id !== Number(action.id))
-
         default:
             return state;
     }

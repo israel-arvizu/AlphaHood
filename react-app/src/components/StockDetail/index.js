@@ -127,7 +127,7 @@ function StockDetail() {
                 <button type="submit" >Buy</button>
                 <button onClick={e => sellShares(e)}>Sell</button>
             </form>
-            <AddToListModal />
+            <AddToListModal stock={selectedStock} />
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}

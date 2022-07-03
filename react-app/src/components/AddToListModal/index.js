@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import AddToList from './addToListForm'
 
-function AddToListModal() {
+function AddToListModal({stock}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ function AddToListModal() {
       {console.log(showModal)}
       {showModal &&
       (<Modal onClose={() => setShowModal(false)}>
-          <AddToList closeModal={() => setShowModal(false)}/>
+          <AddToList stock={stock} closeModal={() => setShowModal(false)}/>
         </Modal>
       )}
     </>
