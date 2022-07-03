@@ -6,33 +6,42 @@ import { loadOwnedStocks } from '../../store/ownedStocks'
 // import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
 
+import AddToListModal from '../AddToListModal'
+import { loadAllLists } from '../../store/list'
+
+import StockLineChart from '../Linechart-Component/StocksLineChart'
+import { stockChartHistory } from '../../store/stocks'
+
+
 function StockDetail() {
     const dispatch = useDispatch()
     const ticker = useParams().ticker //could change ticker in obj
     const tickerUpper = ticker.toUpperCase()
     const stocks = useSelector(state => state.stocks)
-    const newsArticles = useSelector(state => state.newsReducer.news);
     const selectedStock = stocks[tickerUpper]
     const [marketState, setMarketState] = useState(false)
 
+    const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
+    const chartData = useSelector(state => state.stocks.chartHistory)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
     const [shares, setShares] = useState(0)
-
-
-
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
 
 
+    useEffect(()=>{
+        dispatch(loadAllLists(sessionUser.id))
+    })
 
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
         dispatch(loadOwnedStocks(sessionUser.id))
+        dispatch(stockChartHistory(tickerUpper))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -84,6 +93,9 @@ function StockDetail() {
 
 
     if (selectedStock === undefined || myPortfolio === undefined) return <h2>Loading...</h2>
+    if(chartData === undefined){
+        return <h2>Loading Graph...</h2>
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -140,6 +152,7 @@ function StockDetail() {
                     owned()
                 }>Sell</button>
             </form>
+            <AddToListModal stock={selectedStock} />
             <p>Market Open:</p>
             <p>
                 {marketState ? 'True' : 'False'}
@@ -150,7 +163,7 @@ function StockDetail() {
                 <p>Change Today</p>
             </div>
             <div className='graph-container'>
-                {/* GRAPH GOES HERE */}
+                <StockLineChart stockHistory={chartData}/>
             </div>
             <div className='about-container'>
                 <h2>About</h2>

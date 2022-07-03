@@ -43,10 +43,7 @@ function Dashboard() {
 
     if(watchlists && watchlists.length > 0 && !enteredWatch){
         let watchListIds = []
-        console.log("entered watchlist")
-        console.log(watchlists)
         watchlists.map((list) => {
-            console.log(list)
             watchListIds.push(list.id)
         })
         dispatch(loadStockList(watchListIds))

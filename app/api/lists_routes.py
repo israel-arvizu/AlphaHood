@@ -64,16 +64,44 @@ def load_list():
 def add_stock():
 
     req = request.get_json()
-    addToList= List(
-        name=req['stockId'],
-        watchlist= req['watchlistId']
-    )
+    print("23423423423423424323442", req)
+    for lists in req['arrays']:
+        print(lists)
 
-    db.session.add(List)
-    db.session.commit()
+        newlist = List(
+            stockId=req['stockId'],
+            watchlistId=lists
+        )
+        db.session.add(newlist)
+        db.session.commit()
+
+
+   ## addToList= List(
+   ##     name=req['lists'],
+   ##     watchlist= req['watchlistId']
+   ## )
+#
+    #db.session.add(List)
+    #db.session.commit()
 
 
     return "hello"
+
+@lists_routes.route('/deletestock', methods=['post'])
+@login_required
+def delete_stock():
+    req=request.get_json()
+    stockid = req['stockId']
+    print(req)
+    for listid in req['arrays']:
+        oldlist = List.query.filter_by(watchlistId=int(listid), stockId=stockid)
+
+        oldlist.delete()
+        db.session.commit()
+
+    return jsonify(req['arrays'])
+
+
 
 @lists_routes.route('/<int:id>/', methods=['post'])
 @login_required

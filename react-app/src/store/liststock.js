@@ -1,4 +1,4 @@
-const LOAD_STOCKS = '/liststock/LOAD_STOCKS'
+const LOAD_STOCKS = 'liststock/LOAD_STOCKS'
 
 
 const loadstocks = (list)=>({
@@ -8,7 +8,7 @@ const loadstocks = (list)=>({
 
 
 export const loadStockList = (watchlistIds) => async(dispatch)=>{
-    const response = await fetch(`api/lists/stocks`,
+    const response = await fetch(`/api/lists/stocks`,
     {
         method: "POST",
         headers: { "Content-Type": "application/json" },
