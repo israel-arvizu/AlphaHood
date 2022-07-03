@@ -5,34 +5,31 @@ import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/
 import { loadOwnedStocks } from '../../store/ownedStocks'
 import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
+import StockLineChart from '../Linechart-Component/StocksLineChart'
+import { stockChartHistory } from '../../store/stocks'
 
 function StockDetail() {
     const dispatch = useDispatch()
     const ticker = useParams().ticker //could change ticker in obj
     const tickerUpper = ticker.toUpperCase()
     const stocks = useSelector(state => state.stocks)
-    const newsArticles = useSelector(state => state.newsReducer.news);
     const selectedStock = stocks[tickerUpper]
     const [marketState, setMarketState] = useState(false)
 
+    const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
     const [shares, setShares] = useState(0)
-
-
-
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
-
-
-
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
         dispatch(loadOwnedStocks(sessionUser.id))
+        dispatch(stockChartHistory(tickerUpper))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -150,7 +147,7 @@ function StockDetail() {
                 <p>Change Today</p>
             </div>
             <div className='graph-container'>
-                {/* GRAPH GOES HERE */}
+                <StockLineChart />
             </div>
             <div className='about-container'>
                 <h2>About</h2>
