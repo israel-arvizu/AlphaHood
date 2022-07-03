@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Tesla, Inc.",
+        "ticker": "TSLA"
+    },
+    {
+        "name": "Apple Inc.",
+        "ticker": "AAPL"
+    },
+    {
+        "name": "Ecolab Inc.",
+        "ticker": "ECL"
+    },
+    {
+        "name": "Edison International",
+        "ticker": "EIX"
+    },
+    {
+        "name": "Edwards Lifesciences Corporation",
+        "ticker": "EW"
+    }
+]

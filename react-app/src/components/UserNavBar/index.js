@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import SearchBar from '../searchbar'
 
 const UserNavBar = () => {
 
@@ -21,6 +22,9 @@ const UserNavBar = () => {
           <NavLink to='/dashboard' exact={true} activeClassName='active'>
             Profile
           </NavLink>
+        </div>
+        <div className='searchbar-container'>
+          <SearchBar />
         </div>
         <div>
           <LogoutButton />

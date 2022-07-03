@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { loadOwnedStocks } from '../../store/ownedStocks'
-import { getNews } from '../../store/news'
+// import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
 
 function StockDetail() {
