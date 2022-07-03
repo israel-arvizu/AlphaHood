@@ -34,7 +34,7 @@ function SearchBar() {
                 <div className='dataResult'>
                     {filteredData.slice(0, 15).map(value => {
                         return (
-                            <a className='dataItem' href={`/stocks/${value.ticker}`}>
+                            <a key={value.ticker} className='dataItem' href={`/stocks/${value.ticker}`}>
                                 <p>{value.ticker}  {value.name}</p>
                             </a>
                         )

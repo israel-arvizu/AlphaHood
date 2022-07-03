@@ -1,0 +1,39 @@
+body {
+    display: grid;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.key-statistics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.key-container p {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.about-container {
+    display: grid;
+}
+
+.about-inner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.about-inner>div {
+    padding-right: 3rem;
+}
+
+.item-title {
+    font-weight: bolder;
+    font-size: medium;
+}
+
+.item-info {
+    font-weight: lighter;
+    font-size: small;
+}
