@@ -134,9 +134,8 @@ def featurelists():
             performancePercentage = round(performancePercentage, 2)
             currentStockobj = {"name": currentStockInfo['shortName'], "ticker": stock, "price": currentStockInfo['currentPrice'],"todayPerformance": performancePercentage, "marketCap": currentStockInfo['marketCap']}
             tickerList.append(currentStockobj)
-            i += 1
         except:
-            tickerList.error = "Something went wrong!"
+            continue
 
     return jsonify(tickerList)
 

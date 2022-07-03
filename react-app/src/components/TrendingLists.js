@@ -3,17 +3,14 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 import UserNavBar from './UserNavBar'
-
-const topTen = ["AMZN", "PYPL", "NVDA", "SHOP", "RDFN", "APPL", "ERIC", "PANW", "ROKU", "TSLA"]
-const creator = ["GOOGL", "NVDA", "NKE", "MLAI" ]
-const mostpop = ["APPL", "MSFT", "AMZN", "TSLA", "GOOGL", "GOOG", "NVDA", "BRK.B",
-                "META", "UNH", "JNJ","JPM","V","PG","XOM","HD","CVX","MA","BAC",
-                "ABBV","PFE", "AVGO","COST","DIS","KO"]
-const tech = ["HPE", "MNDT", "ARW", "HPO","INTC","GDDY","BKI","SNX","ON","NATI","SWCH","AZPN","PANW", "PSTG", "DGI"]
-const auto = ["TSLA", "GM","F","TM","KMX","CVNA","RACE","STLA","NIO","HMC"]
+import { topTen, creator, mostpop, tech, auto, topTenDefault,
+    creatorDefault, mostPopDefault, techDefault, autoDefault } from './TrendingList/TrendingListData'
 
 
 function TrendingLists() {
+    const [stockDetails, setStockDetails] = useState([])
+    const [updated, setUpdated] = useState(false)
+    const [initialRender, setInitialRender] = useState(false)
     let dispatch = useDispatch()
     let topic = []
     let {list} = useParams()
@@ -67,7 +64,35 @@ function TrendingLists() {
         dispatch(loadstocklist(topic))
     }, [dispatch])
 
-    if(!stocks) return <h2>Loading</h2>
+    if(!stocks && !initialRender) {
+        switch (list){
+            case "top-hot-10":
+                topic = topTenDefault
+                break
+            case "creators-choice":
+                topic = creatorDefault
+                break
+            case "25-most-popular":
+                topic = mostPopDefault
+                break
+            case "technology":
+                topic = techDefault
+                break
+            case "automotive":
+                topic = autoDefault
+                break
+            default:
+                topic = []
+        }
+
+        setStockDetails(topic)
+        setInitialRender(true)
+    }
+
+    if(stocks !== undefined && !updated){
+        setStockDetails(stocks)
+        setUpdated(true)
+    }
     return(
         <>
             <UserNavBar />
@@ -88,7 +113,7 @@ function TrendingLists() {
                                         <th>Today</th>
                                         <th>Market Cap</th>
                                     </tr>
-                                        {stocks.map(stock=>{
+                                        {stockDetails.map(stock=>{
                                             return (
                                                 <tr>
                                                     <td>{stock.name}</td>
