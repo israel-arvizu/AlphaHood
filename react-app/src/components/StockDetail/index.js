@@ -19,6 +19,7 @@ function StockDetail() {
     const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
+    const chartData = useSelector(state => state.stocks.chartHistory)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
@@ -81,6 +82,9 @@ function StockDetail() {
 
 
     if (selectedStock === undefined || myPortfolio === undefined) return <h2>Loading...</h2>
+    if(chartData === undefined){
+        return <h2>Loading Graph...</h2>
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -147,7 +151,7 @@ function StockDetail() {
                 <p>Change Today</p>
             </div>
             <div className='graph-container'>
-                <StockLineChart />
+                <StockLineChart stockHistory={chartData}/>
             </div>
             <div className='about-container'>
                 <h2>About</h2>

@@ -2,16 +2,27 @@ import React, { useEffect, useState } from 'react'
 import {Line} from "react-chartjs-2"
 import Chart from 'chart.js/auto';
 import { useDispatch, useSelector } from 'react-redux';
+import {valuesToArray, keysToArray, soloKeyToArray} from './LinechartData'
 
 function StockLineChart({stockHistory}){
+    console.log(stockHistory)
+    const [update, setUpdate] = useState(false);
+    const [portData, setPortData] = useState(valuesToArray(stockHistory))
+    const [portLabels, setPortLabels] = useState(soloKeyToArray(stockHistory))
+
+    if(!update){
+        setPortData(valuesToArray(stockHistory))
+        setPortLabels(soloKeyToArray(stockHistory))
+        setUpdate(true)
+    }
 
     return (
         <div className='linegraph'>
             <Line
             data={{
-                labels: [0, 1, 2, 3, 4, 5],
+                labels: portLabels,
                 datasets:[{
-                data: [0, 1, 2, 3, 4, 5],
+                data: portData,
                 fill: false,
                 backgroundColor:"black",
                 borderColor:"#5AC53B",
