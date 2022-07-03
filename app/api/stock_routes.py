@@ -204,3 +204,8 @@ def portfolioList(id):
             portDict[splitList[0]] = float(splitList[1])
 
     return jsonify(portDict)
+
+@stock_routes.route('/chart/<ticker>')
+def loadChart(ticker):
+    print(ticker, '--------------------------')
+    return 'INSIDE BACKEND'
