@@ -1,24 +1,27 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const ADD_BALANCE = 'session/ADD_BALANCE'
+const RESET_USER = 'session/RESET_USER'
 
-const addBalance= (balance) => ({
-  type: ADD_BALANCE
-
+const resetUser= (user) => ({
+  type: RESET_USER,
+  user
 })
 
 export const add_to_balance = (id, balance) => async (dispatch) => {
-  const response = await fetch(`/api/${id}/balance/`, {
+  const response = await fetch(`/api/users/${id}/balance`, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(balance)
   });
-  const data = response.json()
 
-  dispatch(addBalance(data));
+  if(response.ok){
+    const data = await response.json()
+    dispatch(resetUser(data))
+    return null;
+  }
   }
 
 const setUser = (user) => ({
@@ -122,6 +125,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
+    case RESET_USER:
+      return { user: action.user}
     case REMOVE_USER:
       return { user: null }
     default:
