@@ -217,12 +217,10 @@ function Dashboard() {
                                             <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                                         </li>
                                     )
-                                })}
+                                        }})}
 
-                                <EditListModal id={watchlist.id}/>
-                                <button id={watchlist.id} onClick={deleteAList}>Delete</button>
-                                </li>
-)}})}
+
+
 
                         </ul>
                     </div>
@@ -230,34 +228,7 @@ function Dashboard() {
 
                 </div>
 
-                <div>
-                    <ul>
-                        {!!watchlists.length &&
-                            watchlists.map(watchlist => {
 
-
-                                return (
-                                    <li key={watchlist.id}>{watchlist.name}
-
-                                        {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
-                                            return (
-                                                <div key={stock.ticker}>
-                                                    <span>{stock.ticker}</span>
-                                                    <span>{stock.currentPrice}</span>
-                                                </div>
-                                            )
-                                        })}
-                                        <EditListModal id={watchlist.id} />
-                                        <button id={watchlist.id} onClick={deleteAList}>Delete</button>
-                                    </li>
-                                )
-                            })}
-                    </ul>
-
-
-
-
-                </div>
             </div>
         </>
     )
