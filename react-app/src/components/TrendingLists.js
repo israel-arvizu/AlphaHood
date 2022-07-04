@@ -3,8 +3,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 import UserNavBar from './UserNavBar'
+
+
 import { topTen, creator, mostpop, tech, auto, topTenDefault,
     creatorDefault, mostPopDefault, techDefault, autoDefault } from './TrendingList/TrendingListData'
+
 
 
 function TrendingLists() {
@@ -14,6 +17,7 @@ function TrendingLists() {
     let dispatch = useDispatch()
     let topic = []
     let {list} = useParams()
+    console.log(tech)
 
     function numToString(num) {
         var newValue = num;
@@ -33,6 +37,7 @@ function TrendingLists() {
     }
 
     const stocks = useSelector(state => state.stocks.stocks)
+    const liststocks =useSelector(state=> state.listReducer)
 
     switch (list){
         case "top-hot-10":

@@ -6,7 +6,7 @@ import LineChart from '../../components/Linechart-Component/Linechart';
 import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
 import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { loadStockList} from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
 import './dashboard.css';
@@ -15,6 +15,7 @@ import './dashboard.css';
 
 function Dashboard() {
     const dispatch = useDispatch()
+    const history = useHistory()
     const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
@@ -40,6 +41,8 @@ function Dashboard() {
         dispatch(loadPortfolio(user.id))
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
+
+
 
     if(watchlists && watchlists.length > 0 && !enteredWatch){
         let watchListIds = []
@@ -86,7 +89,7 @@ function Dashboard() {
         setPortfolioHistory(portfolioHist)
         setPortfolioGraph(true)
     }
-
+if(!watchlists) return <h2>loading</h2>
     return (
         <>
             <UserNavBar />
@@ -203,10 +206,43 @@ function Dashboard() {
                                 )})}
                         </ul>
                     </div>
+
+
+                }
+
+                <div>
+                    <ul>
+                        {!!watchlists.length &&
+                        watchlists.map(watchlist=>{
+
+
+                            return(
+                            <li key={watchlist.id}>{watchlist.name}
+
+                            { !!liststocks && liststocks[watchlist.id]  !==undefined && liststocks[watchlist.id]?.map((stock) => {
+                                return (
+                                <div key={stock.ticker}>
+                                    <span>{stock.ticker}</span>
+                                    <span>{stock.currentPrice}</span>
+                                </div>
+                                )
+                            })}
+                            <EditListModal id={watchlist.id}/>
+                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
+                            </li>
+                            )})}
+                    </ul>
+
+
+
+
                 </div>
             </div>
         </>
     )
 }
+
+
+
 
 export default Dashboard

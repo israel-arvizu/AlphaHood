@@ -4,6 +4,7 @@ from app.models import User, db, Stock, Watchlist, List
 from flask_login import login_required
 
 
+
 lists_routes = Blueprint('lists', __name__)
 
 @lists_routes.route('/new', methods=['post'])
