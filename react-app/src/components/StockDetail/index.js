@@ -116,7 +116,7 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        await dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         history.push('/dashboard')
     }
 
@@ -130,7 +130,7 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
         history.push('/dashboard')
     }
 
