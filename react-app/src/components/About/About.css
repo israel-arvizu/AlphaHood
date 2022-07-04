@@ -5,7 +5,7 @@
     flex-direction: column;
     height: 105vh;
     width: 105vw;
-    background-image: url("/home/augustinoe/appacademy/Module-6-Resources/python_Group_Project/AlphaHood/react-app/src/images/AlphahoodBG.png");
+    background-image: url("../../images/AlphahoodBG.png");
     background-color: transparent;
     background-position: center;
 background-repeat: no-repeat;
