@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
 import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/stocks'
 import { loadOwnedStocks } from '../../store/ownedStocks'
 // import { getNews } from '../../store/news'
@@ -15,6 +15,7 @@ import './StockDetail.css'
 
 
 function StockDetail() {
+    const history = useHistory()
     const dispatch = useDispatch()
     const ticker = useParams().ticker //could change ticker in obj
     const tickerUpper = ticker.toUpperCase()
@@ -34,15 +35,12 @@ function StockDetail() {
     // let currentDate = new Date('June 30, 2022 13:20:00')
 
 
-    useEffect(() => {
-        dispatch(loadAllLists(sessionUser.id))
-    }, [])
-
 
     useEffect(() => {
         dispatch(getOneStock(tickerUpper))
         dispatch(loadOwnedStocks(sessionUser.id))
         dispatch(stockChartHistory(tickerUpper))
+        dispatch(loadAllLists(sessionUser.id))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -94,6 +92,11 @@ function StockDetail() {
 
 
     if (selectedStock === undefined || myPortfolio === undefined) return <h2>Loading...</h2>
+
+    // if (selectedStock === undefined) {
+    //     history.push('/')
+    // }
+
     if (chartData === undefined) {
         return <h2>Loading Graph...</h2>
     }
