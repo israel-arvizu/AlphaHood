@@ -32,7 +32,9 @@ const LoginForm = () => {
 
   if (user) {
     loadAllLists(user.id)
+
     // return <div><Loading /></div>
+
     history.push('/dashboard');
   }
 
