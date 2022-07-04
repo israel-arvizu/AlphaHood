@@ -136,29 +136,18 @@ function StockDetail() {
     }
 
 
+
+    const changeToday = () => {
+        let change = (((selectedStock.currentPrice - selectedStock.regularMarketOpen) / selectedStock.regularMarketOpen) * 100).toFixed(2)
+        let changeNum = selectedStock.currentPrice - selectedStock.regularMarketOpen
+        return [change, changeNum]
+    }
+    let number = changeToday()[0]
+    let priceDif = changeToday()[1]
     return (
         <>
             <UserNavBar />
             <div className='parent-container'>
-
-                <div className='right-container'>
-                    <div className='buy-sell-container'>
-                        <form onSubmit={e => handleSubmit(e)}>
-                            <input
-                                name='shares'
-                                type='number'
-                                value={shares}
-                                onChange={e => setShares(e.target.value)}
-                            ></input>
-                            <button type="submit" id='buy-button' disabled={
-                                sessionUser.balance <= selectedStock.currentPrice * shares
-                            }>Buy</button>
-                            <button onClick={e => sellShares(e)} disabled={
-                                owned()
-                            }>Sell</button>
-                        </form>
-                    </div>
-                </div>
                 <div className='left-container'>
 
                     <AddToListModal stock={selectedStock} />
@@ -169,7 +158,9 @@ function StockDetail() {
                     <div className='top-details'>
                         <h2>{selectedStock.name}</h2>
                         <p>{selectedStock.currentPrice}</p>
-                        <p>Change Today</p>
+                        <p className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
+                            number > 0 ? <p>+${priceDif.toFixed(2)} (+{number}%)</p> : <p>${priceDif.toFixed(2)} ({number}%)</p>
+                        }</p>
                     </div>
                     <div className='graph-container'>
                         <StockLineChart stockHistory={chartData} />
@@ -198,7 +189,7 @@ function StockDetail() {
                         </div>
                         <div className='trailingPE-container key-container'>
                             <p className='item-title'>Trailing P/E</p>
-                            <p className='item-info'>{selectedStock.trailingPE}</p>
+                            <p className='item-info'>{selectedStock.trailingPE.toFixed(2)}</p>
                         </div>
                         <div className='dividendYield-container key-container'>
                             <p className='item-title'>Dividend Yield</p>
@@ -217,7 +208,7 @@ function StockDetail() {
                             <p className='item-info'>{selectedStock.dayLow}</p>
                         </div>
                         <div className='regularMarketOpen-container key-container'>
-                            <p className='item-title'>Regular Market Open</p>
+                            <p className='item-title'>Open Price</p>
                             <p className='item-info'>{selectedStock.regularMarketOpen}</p>
                         </div>
                         <div className='volume-container key-container'>
@@ -257,9 +248,33 @@ function StockDetail() {
                 <p>PUT EARNINGS HERE</p>
             </div> */}
                 </div>
+                <div className='right-container'>
+                    <div className='buy-sell-container'>
+                        <h2>Trade {selectedStock.ticker}</h2>
+                        <hr></hr>
+                        <form onSubmit={e => handleSubmit(e)}>
+                            <input
+                                name='shares'
+                                type='number'
+                                value={shares}
+                                onChange={e => setShares(e.target.value)}
+                            ></input>
+                            <div className='buy-sell-btns'>
+                                <button type="submit" id='buy-button' disabled={
+                                    sessionUser.balance <= selectedStock.currentPrice * shares
+                                }>Buy</button>
+                                <button onClick={e => sellShares(e)} disabled={
+                                    owned()
+                                }>Sell</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </>
     )
 }
+
+
 
 export default StockDetail

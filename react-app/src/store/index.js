@@ -8,13 +8,15 @@ import listStockReducer from './liststock';
 import owndedStocksReducer from './ownedStocks'
 
 
+
 const rootReducer = combineReducers({
   session,
   newsReducer,
   stocks: stocksReducer,
   lists: listsReducer,
   listStockReducer,
-  ownedStocks: owndedStocksReducer
+  ownedStocks: owndedStocksReducer,
+
 
 });
 
