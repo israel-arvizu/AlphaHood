@@ -36,7 +36,7 @@ function StockDetail() {
 
     useEffect(() => {
         dispatch(loadAllLists(sessionUser.id))
-    })
+    }, [])
 
 
     useEffect(() => {

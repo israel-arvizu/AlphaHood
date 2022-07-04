@@ -27,6 +27,9 @@ function Dashboard() {
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
     const watchlists = useSelector(state=>state.lists)
+    const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+    console.log(portfoliolist)
+
 
 
 
@@ -186,8 +189,14 @@ if(!watchlists) return <h2>loading</h2>
                     }
                     <div>
                         <ul>
+                            <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
+                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                                <div>{stock.ticker}</div>
+                            ))}
                             {!!watchlists.length &&
+
                             watchlists.map(watchlist=>{
+                                if(watchlist.name!=="Portfolio"){
 
                                 return(
                                 <li key={watchlist.id}>{watchlist.name}
@@ -203,12 +212,12 @@ if(!watchlists) return <h2>loading</h2>
                                 <EditListModal id={watchlist.id}/>
                                 <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                                 </li>
-                                )})}
+)}})}
                         </ul>
                     </div>
 
 
-                }
+                </div>
 
                 <div>
                     <ul>
