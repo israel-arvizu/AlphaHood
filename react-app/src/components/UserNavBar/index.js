@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import SearchBar from '../searchbar'
 import UserAccountNav from './accountNav';
 import './UserNavBar.css'
 
 const UserNavBar = () => {
+
+  const history = useHistory()
 
   const [num, setNum] = useState(0);
   const dropdown = useRef(null);
@@ -45,7 +47,8 @@ const UserNavBar = () => {
     }, [ref])
   }
 
-  RemoveOutside(dropdown)
+  RemoveOutside(dropdown);
+
   return (
     <nav>
       <div className='outer-container'>
@@ -60,16 +63,24 @@ const UserNavBar = () => {
             <SearchBar />
           </div>
           <div className='right-nav-container'>
-            <div>
-              <NavLink to='/wallet' exact={ true } activeClassName='active'>
-                Wallet
-              </NavLink>
+            <div className='account-link' onClick={ () => history.push("/about") }>
+              About
             </div>
-            <div className='account-word' onClick={ () => showDropdown() } ref={ account }>
-              Account
-            </div>
-            <div className='account-dropdown hidden' ref={ dropdown }>
-              <UserAccountNav />
+            <NavLink to='/wallet' className="account-word">
+              Wallet
+            </NavLink>
+            <div className='account'>
+              <div
+                className='account-word'
+                onClick={ () => showDropdown() }
+                ref={ account }
+              >
+                Account
+              </div>
+              <div className='account-dropdown hidden' ref={ dropdown }>
+                <UserAccountNav />
+
+              </div>
             </div>
           </div>
         </div>

@@ -10,19 +10,20 @@ import Dashboard from './components/dashboard-component/Dashboard';
 import User from './components/User';
 import TrendingLists from './components/TrendingLists'
 import StockDetail from './components/StockDetail'
-import SplashPage  from './components/splashpage/splashpage';
+import SplashPage from './components/splashpage/splashpage';
 import Wallet from './components/walletComponent';
 import { authenticate } from './store/session';
 import { ModalProvider } from './context/Modal';
-import {loadAllLists} from './store/list';
-import {loadStockList} from './store/liststock'
+import { loadAllLists } from './store/list';
+import { loadStockList } from './store/liststock'
+import About from './components/About';
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const watchlists = useSelector(state=>state.lists)
+  const watchlists = useSelector(state => state.lists)
   const [enteredWatch, setEnteredWatch] = useState(false)
 
 
@@ -41,36 +42,39 @@ function App() {
   }
 
   return (
-  <ModalProvider>
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact={true}>
-          <SplashPage />
-        </Route>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/wallet' exact={true}>
-          <Wallet />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/dashboard' exact={true} >
-          <Dashboard />
-        </ProtectedRoute>
-        <ProtectedRoute path='/trendinglists/:list' exact={true} >
-          <TrendingLists />
-        </ProtectedRoute>
-        <ProtectedRoute path='/stocks/:ticker' exact={true}>
-          <StockDetail />
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
-  </ModalProvider>
+    <ModalProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path='/' exact={ true }>
+            <SplashPage />
+          </Route>
+          <Route path='/login' exact={ true }>
+            <LoginForm />
+          </Route>
+          <Route path='/sign-up' exact={ true }>
+            <SignUpForm />
+          </Route>
+          <Route path="/about" exact={ true }>
+            <About />
+          </Route>
+          <ProtectedRoute path='/wallet' exact={ true }>
+            <Wallet />
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={ true } >
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path='/dashboard' exact={ true } >
+            <Dashboard />
+          </ProtectedRoute>
+          <ProtectedRoute path='/trendinglists/:list' exact={ true } >
+            <TrendingLists />
+          </ProtectedRoute>
+          <ProtectedRoute path='/stocks/:ticker' exact={ true }>
+            <StockDetail />
+          </ProtectedRoute>
+        </Switch>
+      </BrowserRouter>
+    </ModalProvider>
   );
 }
 

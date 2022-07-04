@@ -1,0 +1,95 @@
+.about-main {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("/home/augustinoe/appacademy/Module-6-Resources/python_Group_Project/AlphaHood/react-app/src/images/AlphahoodBG.png");
+    background-color: transparent;
+    background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+  }
+
+  .about-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: rgb(3,200,5);
+
+  }
+
+  .about-lower {
+    display: flex;
+    width: 50vw;
+    justify-content: space-between;
+  }
+
+  .about-left {
+    font-size: 24px;
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.233);
+    margin-right: 45px;
+    margin-top: 150px;
+  }
+
+  .about-right {
+    border: 0.5px solid grey;
+    height: 40vh;
+    width: 300px;
+    background-color: rgba(30, 33, 36, 0.342);
+    border-radius: 6px;
+    overflow-y: auto;
+    overflow-x: none;
+    word-break: break-all;
+    position: -webkit-sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+  }
+
+  .linkedin {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .linkedin-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .about-name {
+    margin-bottom: 20px;
+  }
+
+  .about-me {
+    display: flex;
+    gap: 50px;
+  }
+
+  .about-bio {
+    margin-bottom: 50px;
+  }
+
+  .about-fav-stock {
+    margin-bottom: 50px;
+  }
+
+  .name-links {
+    width: calc(100% - 40px);
+    padding: 20px 20px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .name-links:hover {
+    background-color: rgb(48, 54, 58);
+  }
