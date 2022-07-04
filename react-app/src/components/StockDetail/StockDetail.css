@@ -4,6 +4,32 @@ body {
     padding-right: 1rem;
 }
 
+.parent-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.buy-sell-container {
+    position: fixed;
+}
+
+.right-container {
+    /* background-color: pink; */
+    display: flex;
+    padding: 5rem;
+}
+
+.buy-sell-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-container {
+    /* background-color: red; */
+    padding: 5rem;
+}
+
+
 .key-statistics {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -36,4 +62,12 @@ body {
 .item-info {
     font-weight: lighter;
     font-size: small;
+}
+
+.positiveNum {
+    color: green;
+}
+
+.negativeNum {
+    color: red;
 }
