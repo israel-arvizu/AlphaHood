@@ -1,15 +1,10 @@
 from app.models import db, Watchlist
 
 def seed_watchlists():
-    first = Watchlist(
-        name="My First List", userId=1
+    third = Watchlist(
+        name="Portfolio", userId=1
     )
-    second = Watchlist(
-        name="Electronics", userId=1
-    )
-
-    db.session.add(first)
-    db.session.add(second)
+    db.session.add(third)
 
     db.session.commit()
 

@@ -26,9 +26,10 @@ function Dashboard() {
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
-    const watchlists = useSelector(state => state.lists)
 
-
+    const watchlists = useSelector(state=>state.lists)
+    const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+    console.log(portfoliolist)
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
@@ -101,7 +102,7 @@ function Dashboard() {
                             <p id='portfolio-value-cont'>${ displayPort }</p>
                         </div>
                         <div id='chart-container-main'>
-                            <LineChart portfolio={ portfolioHistory } />
+                            <LineChart portfolio={portfolioHistory} />
                         </div>
                         <p id='period-dash-graph'>24h</p>
                         <hr className='line-break-dashboard'></hr>
@@ -186,59 +187,42 @@ function Dashboard() {
                     }
                     <div>
                         <ul>
-                            { !!watchlists.length &&
-                                watchlists.map(watchlist => {
+                            <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
+                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                                <div>{stock.ticker}</div>
+                            ))}
+                            {!!watchlists.length &&
+
+
+                            watchlists.map(watchlist=>{
+                                if(watchlist.name!=="Portfolio"){
+
 
                                     return (
-                                        <li key={ watchlist.id }>{ watchlist.name }
+                                        <li key={watchlist.id}>{watchlist.name}
 
-                                            { !!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
+                                            {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
                                                 return (
-                                                    <div key={ stock.ticker }>
-                                                        <span>{ stock.ticker }</span>
-                                                        <span>{ stock.currentPrice }</span>
+                                                    <div key={stock.ticker}>
+                                                        <span>{stock.ticker}</span>
+                                                        <span>{stock.currentPrice}</span>
                                                     </div>
                                                 )
-                                            }) }
-                                            <EditListModal id={ watchlist.id } />
-                                            <button id={ watchlist.id } onClick={ deleteAList }>Delete</button>
+                                            })}
+                                            <EditListModal id={watchlist.id} />
+                                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
                                         </li>
                                     )
-                                }) }
+                                        }})}
+
+
+
+
                         </ul>
                     </div>
-
-
-                }
                 </div>
-                <div>
-                    <ul>
-                        { !!watchlists.length &&
-                            watchlists.map(watchlist => {
 
 
-                                return (
-                                    <li key={ watchlist.id }>{ watchlist.name }
-
-                                        { !!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
-                                            return (
-                                                <div key={ stock.ticker }>
-                                                    <span>{ stock.ticker }</span>
-                                                    <span>{ stock.currentPrice }</span>
-                                                </div>
-                                            )
-                                        }) }
-                                        <EditListModal id={ watchlist.id } />
-                                        <button id={ watchlist.id } onClick={ deleteAList }>Delete</button>
-                                    </li>
-                                )
-                            }) }
-                    </ul>
-
-
-
-
-                </div>
             </div>
         </>
     )

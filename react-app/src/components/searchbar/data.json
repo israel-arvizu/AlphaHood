@@ -1,5 +1,661 @@
 [
     {
+        "name": "The AES Corporation",
+        "ticker": "AES"
+    },
+    {
+        "name": "A. O. Smith Corporation",
+        "ticker": "AOS"
+    },
+    {
+        "name": "Abbott Laboratories",
+        "ticker": "ABT"
+    },
+    {
+        "name": "AbbVie Inc.",
+        "ticker": "ABBV"
+    },
+    {
+        "name": "Abiomed, Inc.",
+        "ticker": "ABMD"
+    },
+    {
+        "name": "Activision Blizzard, Inc.",
+        "ticker": "ATVI"
+    },
+    {
+        "name": "Archer-Daniels-Midland Company",
+        "ticker": "ADM"
+    },
+    {
+        "name": "Adobe Inc.",
+        "ticker": "ADBE"
+    },
+    {
+        "name": "Automatic Data Processing, Inc.",
+        "ticker": "ADP"
+    },
+    {
+        "name": "Aflac Incorporated",
+        "ticker": "AFL"
+    },
+    {
+        "name": "Agilent Technologies, Inc.",
+        "ticker": "A"
+    },
+    {
+        "name": "Air Products and Chemicals, Inc.",
+        "ticker": "APD"
+    },
+    {
+        "name": "Akamai Technologies, Inc.",
+        "ticker": "AKAM"
+    },
+    {
+        "name": "Alaska Air Group, Inc.",
+        "ticker": "ALK"
+    },
+    {
+        "name": "Albemarle Corporation",
+        "ticker": "ALB"
+    },
+    {
+        "name": "Alexandria Real Estate Equities, Inc.",
+        "ticker": "ARE"
+    },
+    {
+        "name": "Align Technology, Inc.",
+        "ticker": "ALGN"
+    },
+    {
+        "name": "Allegion plc",
+        "ticker": "ALLE"
+    },
+    {
+        "name": "Alliant Energy Corporation",
+        "ticker": "LNT"
+    },
+    {
+        "name": "The Allstate Corporation",
+        "ticker": "ALL"
+    },
+    {
+        "name": "Alphabet Inc.",
+        "ticker": "GOOGL"
+    },
+    {
+        "name": "Alphabet Inc.",
+        "ticker": "GOOG"
+    },
+    {
+        "name": "Altria Group, Inc.",
+        "ticker": "MO"
+    },
+    {
+        "name": "Amazon.com, Inc.",
+        "ticker": "AMZN"
+    },
+    {
+        "name": "Amcor plc",
+        "ticker": "AMCR"
+    },
+    {
+        "name": "Advanced Micro Devices, Inc.",
+        "ticker": "AMD"
+    },
+    {
+        "name": "Ameren Corporation",
+        "ticker": "AEE"
+    },
+    {
+        "name": "American Airlines Group Inc.",
+        "ticker": "AAL"
+    },
+    {
+        "name": "American Electric Power Company, Inc.",
+        "ticker": "AEP"
+    },
+    {
+        "name": "American Express Company",
+        "ticker": "AXP"
+    },
+    {
+        "name": "American International Group, Inc.",
+        "ticker": "AIG"
+    },
+    {
+        "name": "American Tower Corporation",
+        "ticker": "AMT"
+    },
+    {
+        "name": "American Water Works Company, Inc.",
+        "ticker": "AWK"
+    },
+    {
+        "name": "Ameriprise Financial, Inc.",
+        "ticker": "AMP"
+    },
+    {
+        "name": "AmerisourceBergen Corporation",
+        "ticker": "ABC"
+    },
+    {
+        "name": "AMETEK, Inc.",
+        "ticker": "AME"
+    },
+    {
+        "name": "Amgen Inc.",
+        "ticker": "AMGN"
+    },
+    {
+        "name": "Amphenol Corporation",
+        "ticker": "APH"
+    },
+    {
+        "name": "Analog Devices, Inc.",
+        "ticker": "ADI"
+    },
+    {
+        "name": "ANSYS, Inc.",
+        "ticker": "ANSS"
+    },
+    {
+        "name": "Anthem, Inc.",
+        "ticker": "ANTM"
+    },
+    {
+        "name": "Aon plc",
+        "ticker": "AON"
+    },
+    {
+        "name": "APA Corporation",
+        "ticker": "APA"
+    },
+    {
+        "name": "Apple Inc.",
+        "ticker": "AAPL"
+    },
+    {
+        "name": "Applied Materials, Inc.",
+        "ticker": "AMAT"
+    },
+    {
+        "name": "Aptiv PLC",
+        "ticker": "APTV"
+    },
+    {
+        "name": "Arista Networks, Inc.",
+        "ticker": "ANET"
+    },
+    {
+        "name": "Arthur J. Gallagher & Co.",
+        "ticker": "AJG"
+    },
+    {
+        "name": "Assurant, Inc.",
+        "ticker": "AIZ"
+    },
+    {
+        "name": "AT&T Inc.",
+        "ticker": "T"
+    },
+    {
+        "name": "Atmos Energy Corporation",
+        "ticker": "ATO"
+    },
+    {
+        "name": "Autodesk, Inc.",
+        "ticker": "ADSK"
+    },
+    {
+        "name": "AutoZone, Inc.",
+        "ticker": "AZO"
+    },
+    {
+        "name": "AvalonBay Communities, Inc.",
+        "ticker": "AVB"
+    },
+    {
+        "name": "Avery Dennison Corporation",
+        "ticker": "AVY"
+    },
+    {
+        "name": "Baker Hughes Company",
+        "ticker": "BKR"
+    },
+    {
+        "name": "Ball Corporation",
+        "ticker": "BALL"
+    },
+    {
+        "name": "Bank of America Corporation",
+        "ticker": "BAC"
+    },
+    {
+        "name": "Bath & Body Works, Inc.",
+        "ticker": "BBWI"
+    },
+    {
+        "name": "Baxter International Inc.",
+        "ticker": "BAX"
+    },
+    {
+        "name": "Becton, Dickinson and Company",
+        "ticker": "BDX"
+    },
+    {
+        "name": "W. R. Berkley Corporation",
+        "ticker": "WRB"
+    },
+    {
+        "name": "Berkshire Hathaway Inc.",
+        "ticker": "BRK-B"
+    },
+    {
+        "name": "Best Buy Co., Inc.",
+        "ticker": "BBY"
+    },
+    {
+        "name": "Bio-Rad Laboratories, Inc.",
+        "ticker": "BIO"
+    },
+    {
+        "name": "Bio-Techne Corporation",
+        "ticker": "TECH"
+    },
+    {
+        "name": "Biogen Inc.",
+        "ticker": "BIIB"
+    },
+    {
+        "name": "BlackRock, Inc.",
+        "ticker": "BLK"
+    },
+    {
+        "name": "The Bank of New York Mellon Corporation",
+        "ticker": "BK"
+    },
+    {
+        "name": "The Boeing Company",
+        "ticker": "BA"
+    },
+    {
+        "name": "Booking Holdings Inc.",
+        "ticker": "BKNG"
+    },
+    {
+        "name": "BorgWarner Inc.",
+        "ticker": "BWA"
+    },
+    {
+        "name": "Boston Properties, Inc.",
+        "ticker": "BXP"
+    },
+    {
+        "name": "Boston Scientific Corporation",
+        "ticker": "BSX"
+    },
+    {
+        "name": "Bristol-Myers Squibb Company",
+        "ticker": "BMY"
+    },
+    {
+        "name": "Broadcom Inc.",
+        "ticker": "AVGO"
+    },
+    {
+        "name": "Broadridge Financial Solutions, Inc.",
+        "ticker": "BR"
+    },
+    {
+        "name": "Brown & Brown, Inc.",
+        "ticker": "BRO"
+    },
+    {
+        "name": "None",
+        "ticker": "BF.B"
+    },
+    {
+        "name": "C.H. Robinson Worldwide, Inc.",
+        "ticker": "CHRW"
+    },
+    {
+        "name": "Cadence Design Systems, Inc.",
+        "ticker": "CDNS"
+    },
+    {
+        "name": "Caesars Entertainment, Inc.",
+        "ticker": "CZR"
+    },
+    {
+        "name": "Camden Property Trust",
+        "ticker": "CPT"
+    },
+    {
+        "name": "Campbell Soup Company",
+        "ticker": "CPB"
+    },
+    {
+        "name": "Capital One Financial Corporation",
+        "ticker": "COF"
+    },
+    {
+        "name": "Cardinal Health, Inc.",
+        "ticker": "CAH"
+    },
+    {
+        "name": "CarMax, Inc.",
+        "ticker": "KMX"
+    },
+    {
+        "name": "Carnival Corporation & plc",
+        "ticker": "CCL"
+    },
+    {
+        "name": "Carrier Global Corporation",
+        "ticker": "CARR"
+    },
+    {
+        "name": "Catalent, Inc.",
+        "ticker": "CTLT"
+    },
+    {
+        "name": "Caterpillar Inc.",
+        "ticker": "CAT"
+    },
+    {
+        "name": "Cboe Global Markets, Inc.",
+        "ticker": "CBOE"
+    },
+    {
+        "name": "CBRE Group, Inc.",
+        "ticker": "CBRE"
+    },
+    {
+        "name": "CDW Corporation",
+        "ticker": "CDW"
+    },
+    {
+        "name": "Celanese Corporation",
+        "ticker": "CE"
+    },
+    {
+        "name": "Centene Corporation",
+        "ticker": "CNC"
+    },
+    {
+        "name": "CenterPoint Energy, Inc.",
+        "ticker": "CNP"
+    },
+    {
+        "name": "Ceridian HCM Holding Inc.",
+        "ticker": "CDAY"
+    },
+    {
+        "name": "CF Industries Holdings, Inc.",
+        "ticker": "CF"
+    },
+    {
+        "name": "Charles River Laboratories International, Inc.",
+        "ticker": "CRL"
+    },
+    {
+        "name": "The Charles Schwab Corporation",
+        "ticker": "SCHW"
+    },
+    {
+        "name": "Charter Communications, Inc.",
+        "ticker": "CHTR"
+    },
+    {
+        "name": "Chevron Corporation",
+        "ticker": "CVX"
+    },
+    {
+        "name": "Chipotle Mexican Grill, Inc.",
+        "ticker": "CMG"
+    },
+    {
+        "name": "Chubb Limited",
+        "ticker": "CB"
+    },
+    {
+        "name": "Church & Dwight Co., Inc.",
+        "ticker": "CHD"
+    },
+    {
+        "name": "Cigna Corporation",
+        "ticker": "CI"
+    },
+    {
+        "name": "Cincinnati Financial Corporation",
+        "ticker": "CINF"
+    },
+    {
+        "name": "Cintas Corporation",
+        "ticker": "CTAS"
+    },
+    {
+        "name": "Cisco Systems, Inc.",
+        "ticker": "CSCO"
+    },
+    {
+        "name": "Citigroup Inc.",
+        "ticker": "C"
+    },
+    {
+        "name": "Citizens Financial Group, Inc.",
+        "ticker": "CFG"
+    },
+    {
+        "name": "Citrix Systems, Inc.",
+        "ticker": "CTXS"
+    },
+    {
+        "name": "The Clorox Company",
+        "ticker": "CLX"
+    },
+    {
+        "name": "CME Group Inc.",
+        "ticker": "CME"
+    },
+    {
+        "name": "CMS Energy Corporation",
+        "ticker": "CMS"
+    },
+    {
+        "name": "The Coca-Cola Company",
+        "ticker": "KO"
+    },
+    {
+        "name": "Cognizant Technology Solutions Corporation",
+        "ticker": "CTSH"
+    },
+    {
+        "name": "Colgate-Palmolive Company",
+        "ticker": "CL"
+    },
+    {
+        "name": "Comcast Corporation",
+        "ticker": "CMCSA"
+    },
+    {
+        "name": "Comerica Incorporated",
+        "ticker": "CMA"
+    },
+    {
+        "name": "Conagra Brands, Inc.",
+        "ticker": "CAG"
+    },
+    {
+        "name": "ConocoPhillips",
+        "ticker": "COP"
+    },
+    {
+        "name": "Consolidated Edison, Inc.",
+        "ticker": "ED"
+    },
+    {
+        "name": "Constellation Brands, Inc.",
+        "ticker": "STZ"
+    },
+    {
+        "name": "Constellation Energy Corporation",
+        "ticker": "CEG"
+    },
+    {
+        "name": "The Cooper Companies, Inc.",
+        "ticker": "COO"
+    },
+    {
+        "name": "Copart, Inc.",
+        "ticker": "CPRT"
+    },
+    {
+        "name": "Corning Incorporated",
+        "ticker": "GLW"
+    },
+    {
+        "name": "Corteva, Inc.",
+        "ticker": "CTVA"
+    },
+    {
+        "name": "Costco Wholesale Corporation",
+        "ticker": "COST"
+    },
+    {
+        "name": "Coterra Energy Inc.",
+        "ticker": "CTRA"
+    },
+    {
+        "name": "Crown Castle International Corp.",
+        "ticker": "CCI"
+    },
+    {
+        "name": "CSX Corporation",
+        "ticker": "CSX"
+    },
+    {
+        "name": "Cummins Inc.",
+        "ticker": "CMI"
+    },
+    {
+        "name": "CVS Health Corporation",
+        "ticker": "CVS"
+    },
+    {
+        "name": "D.R. Horton, Inc.",
+        "ticker": "DHI"
+    },
+    {
+        "name": "Danaher Corporation",
+        "ticker": "DHR"
+    },
+    {
+        "name": "Darden Restaurants, Inc.",
+        "ticker": "DRI"
+    },
+    {
+        "name": "DaVita Inc.",
+        "ticker": "DVA"
+    },
+    {
+        "name": "Deere & Company",
+        "ticker": "DE"
+    },
+    {
+        "name": "Delta Air Lines, Inc.",
+        "ticker": "DAL"
+    },
+    {
+        "name": "DENTSPLY SIRONA Inc.",
+        "ticker": "XRAY"
+    },
+    {
+        "name": "Devon Energy Corporation",
+        "ticker": "DVN"
+    },
+    {
+        "name": "DexCom, Inc.",
+        "ticker": "DXCM"
+    },
+    {
+        "name": "Diamondback Energy, Inc.",
+        "ticker": "FANG"
+    },
+    {
+        "name": "Digital Realty Trust, Inc.",
+        "ticker": "DLR"
+    },
+    {
+        "name": "Discover Financial Services",
+        "ticker": "DFS"
+    },
+    {
+        "name": "DISH Network Corporation",
+        "ticker": "DISH"
+    },
+    {
+        "name": "The Walt Disney Company",
+        "ticker": "DIS"
+    },
+    {
+        "name": "Dollar General Corporation",
+        "ticker": "DG"
+    },
+    {
+        "name": "Dollar Tree, Inc.",
+        "ticker": "DLTR"
+    },
+    {
+        "name": "Dominion Energy, Inc.",
+        "ticker": "D"
+    },
+    {
+        "name": "Domino's Pizza, Inc.",
+        "ticker": "DPZ"
+    },
+    {
+        "name": "Dover Corporation",
+        "ticker": "DOV"
+    },
+    {
+        "name": "Dow Inc.",
+        "ticker": "DOW"
+    },
+    {
+        "name": "DTE Energy Company",
+        "ticker": "DTE"
+    },
+    {
+        "name": "Duke Energy Corporation",
+        "ticker": "DUK"
+    },
+    {
+        "name": "Duke Realty Corporation",
+        "ticker": "DRE"
+    },
+    {
+        "name": "DuPont de Nemours, Inc.",
+        "ticker": "DD"
+    },
+    {
+        "name": "DXC Technology Company",
+        "ticker": "DXC"
+    },
+    {
+        "name": "Eastman Chemical Company",
+        "ticker": "EMN"
+    },
+    {
+        "name": "Eaton Corporation plc",
+        "ticker": "ETN"
+    },
+    {
+        "name": "eBay Inc.",
+        "ticker": "EBAY"
+    },
+    {
         "name": "Ecolab Inc.",
         "ticker": "ECL"
     },
@@ -776,10 +1432,6 @@
         "ticker": "PKG"
     },
     {
-        "name": "Paramount Global",
-        "ticker": "PARA"
-    },
-    {
         "name": "Parker-Hannifin Corporation",
         "ticker": "PH"
     },
@@ -1148,10 +1800,6 @@
         "ticker": "TFC"
     },
     {
-        "name": "Twitter, Inc.",
-        "ticker": "TWTR"
-    },
-    {
         "name": "Tyler Technologies, Inc.",
         "ticker": "TYL"
     },
@@ -1342,9 +1990,5 @@
     {
         "name": "Zoetis Inc.",
         "ticker": "ZTS"
-    },
-    {
-        "name": "Apple Inc.",
-        "ticker": "AAPL"
     }
 ]

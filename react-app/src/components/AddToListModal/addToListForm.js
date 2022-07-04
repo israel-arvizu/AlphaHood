@@ -15,7 +15,7 @@ const AddToList = ({ stock, closeModal }) => {
   let [disableArray, setdisableArray] = useState([])
   let [disableArraylength, setDisableArraylength]=useState(disableArray.length)
   const [enteredWatch, setEnteredWatch] = useState(false)
-  const watchlists = useSelector(state => state.lists)
+  const watchlists = useSelector(state => state.lists).filter(watchlist=>watchlist.name!=="Portfolio")
   const liststocks = useSelector(state => state.listStockReducer.listStock)
 
 
@@ -128,6 +128,8 @@ const AddToList = ({ stock, closeModal }) => {
 
           {watchlists.map(watchlist => (
 
+
+
             <div>
 
 
@@ -150,7 +152,7 @@ const AddToList = ({ stock, closeModal }) => {
 
 
 
-          ))}
+            ))}
           <button id="submitadd" type="submit" >Update lists</button>
         </form>
 
