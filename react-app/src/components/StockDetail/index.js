@@ -10,7 +10,7 @@ import AddToListModal from '../AddToListModal'
 import { loadAllLists } from '../../store/list'
 
 import StockLineChart from '../Linechart-Component/StocksLineChart'
-import { stockChartHistory } from '../../store/stocks'
+import { stockChartHistory } from '../../store/liststock';
 import './StockDetail.css'
 
 
@@ -31,7 +31,7 @@ function StockDetail() {
     const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
-    const chartData = useSelector(state => state.stocks.chartHistory)
+    const chartData = useSelector(state => state.listStockReducer.chartHistory)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
@@ -66,7 +66,7 @@ function StockDetail() {
     useEffect(() => {
         if (marketState) {
             dispatch(updateStock(tickerUpper))
-            // dispatch(loadOwnedStocks(sessionUser.id))
+            dispatch(loadOwnedStocks(sessionUser.id))
             let currentDate = new Date()
             let currentHour = currentDate.getHours()
             let currentDay = currentDate.getDay()
