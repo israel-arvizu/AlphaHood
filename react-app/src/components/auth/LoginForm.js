@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
+import { loadAllLists } from '../../store/list';
+import Loading from '../loading';
 import './loginform.css'
 
 const LoginForm = () => {
@@ -29,7 +31,9 @@ const LoginForm = () => {
   };
 
   if (user) {
-    history.push('/');
+    loadAllLists(user.id)
+    return <div><Loading /></div>
+    history.push('/dashboard');
   }
 
   return (
@@ -41,7 +45,7 @@ const LoginForm = () => {
      <div className = 'form-component'>
        <form onSubmit={onLogin}>
          <div>
-           <header className="leftSideForm">
+           <header className="">
              <div className="topleft">
                <div className="leftlogo">
 
@@ -54,7 +58,7 @@ const LoginForm = () => {
                  <span className="loginparagraph">We'll need your name, email address, and a unique password. You'll use this login to access Alphahood next time.</span>
                </div>
                <div>
-                 <img class="leftimage" role="presentation"></img>
+
                </div>
                <div></div>
              </div>

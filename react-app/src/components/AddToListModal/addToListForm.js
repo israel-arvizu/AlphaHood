@@ -115,15 +115,8 @@ const AddToList = ({ stock, closeModal }) => {
     ))
     const data = await response.json()
 
+    closeModal()
 
-    const deleteresponse = await fetch('/api/lists/deletestock',
-    {
-      method:"POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload2)
-    }
-    )
-    const data2=await deleteresponse.json()
 
   }
 

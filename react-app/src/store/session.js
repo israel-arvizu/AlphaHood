@@ -1,4 +1,5 @@
 // constants
+import { loadAllLists } from "./list";
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const RESET_USER = 'session/RESET_USER'
@@ -47,7 +48,8 @@ export const authenticate = () => async (dispatch) => {
       return;
     }
 
-    dispatch(setUser(data));
+
+    dispatch(setUser(data))
   }
 }
 
