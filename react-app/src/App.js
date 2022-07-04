@@ -41,7 +41,9 @@ function App() {
   }
 
   return (
+
   <ModalProvider>
+
     <BrowserRouter>
       <Switch>
         <Route path='/' exact={true}>

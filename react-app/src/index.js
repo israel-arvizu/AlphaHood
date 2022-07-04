@@ -4,12 +4,14 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import SplashPage from './components/splashpage/splashpage';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+
         <App />
       </Provider>
   </React.StrictMode>,

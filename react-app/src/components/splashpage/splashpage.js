@@ -5,93 +5,39 @@ import './splashpage.css'
 
 function SplashPage(){
 
-    return(
-        <div>
-            <NavBar />
-            <div>
-                <div className="navbar">
-                    <nav>
-                        <div>
-
-                        </div>
-                        <div>
-                            <ul>
-                                <li>
-                                    <div>
-                                        <a><span>GitHub</span></a>
-                                    </div>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <div>
-                        </div>
-                    </nav>
-
-
-                </div>
-                <div className="firsts">
-                    <div className="firsts-leftsidewhole">
-                        <div className="leftsideinsidebox">
-
-                        </div>
-
-                    </div>
-                    <div className = "firsts-rightsidewhole">
-                        <div className="firsts-rightsideinsidebox">
-                            <div className = "titlebox">
-                                <div className ="title">Investing is simple here</div>
-                                <div className = "getstartedbuttoncontainer">
-                                    <a href="/sign-up" type="anchor" >
-                                        <span className="getstartedbutton">
-                                            <span className="getstartedtext">Get Started</span>
-
-                                        </span>
-
-                                    </a>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-
-                </div>
-                <div>
-
-                </div>
-
-
-
-                <footer>
-
-                </footer>
+    return (
+        <>
+        <header className="splash-header">
+          <div class="splash-container">
+            <div class="logo">
+              <img id="splashLogo" src='./logo.png' alt='a' />
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-    )
+            <nav>
+              <ul>
+                <li>
+                  <a href='/about' exact={true} className='about-us'>
+                    About Us
+                  </a>
+                </li>
+                  <button className="demo" type="submit">
+                    Demo
+                  </button>
+                <li>
+                <a href='/login' exact={true} className='login'>
+                    Login
+                    </a>
+                </li>
+                <li>
+                <a href='/sign-up' exact={true} className='sign-up'>
+                    Sign Up
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+      </>
+      )
 
 
 

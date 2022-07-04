@@ -65,3 +65,7 @@
     height: 20px;
 
 }
+
+.checkboxwatch input[style]{
+    display: inline important;
+}
