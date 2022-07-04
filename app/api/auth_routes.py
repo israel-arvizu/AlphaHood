@@ -74,12 +74,22 @@ def sign_up():
             )
         db.session.add(user)
         db.session.commit()
+        watchlistPort = Watchlist(
+            name="Portfolio",
+            userId=user.id
+        )
+        db.session.add(watchlistPort)
+        db.session.commit()
+
         watchlist = Watchlist(
             name="My First List",
             userId=user.id
         )
         db.session.add(watchlist)
         db.session.commit()
+
+
+
 
         liststock = List(
             stockId=22,

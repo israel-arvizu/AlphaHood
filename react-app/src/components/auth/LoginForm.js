@@ -32,7 +32,9 @@ const LoginForm = () => {
 
   if (user) {
     loadAllLists(user.id)
+
     // return <div><Loading /></div>
+
     history.push('/dashboard');
   }
 
@@ -43,7 +45,9 @@ const LoginForm = () => {
       </div>
 
       <div className='form-component'>
+
         <form onSubmit={ onLogin }>
+
           <div>
             <header className="">
               <div className="topleft">
@@ -67,9 +71,11 @@ const LoginForm = () => {
               </div>
             </header>
             <div>
-              { errors.map((error, ind) => (
-                <div key={ ind }>{ error }</div>
-              )) }
+
+              {errors.map((error, ind) => (
+                <div key={ind}>{error}</div>
+              ))}
+
             </div>
             <div>
               <label htmlFor='email' className='email-label'>Email</label>
@@ -78,8 +84,10 @@ const LoginForm = () => {
                 name='email'
                 type='text'
                 // placeholder='Email'
+
                 value={ email }
                 onChange={ updateEmail }
+
               />
             </div>
             <div>
@@ -89,8 +97,10 @@ const LoginForm = () => {
                 name='password'
                 type='password'
                 // placeholder='Password'
-                value={ password }
-                onChange={ updatePassword }
+
+                value={password}
+                onChange={updatePassword}
+
               />
               <button type='submit' className='submit-button' >Login</button>
             </div>
