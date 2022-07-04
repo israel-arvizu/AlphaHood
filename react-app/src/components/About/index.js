@@ -95,7 +95,7 @@ const About = () => {
                         Brian Kim
                     </div>
                     { user?.id ? (
-                        <NavLink className="aboutlink" to="/">
+                        <NavLink className="aboutlink" to="/dashboard">
                             Return Home
                         </NavLink>
                     ) : (

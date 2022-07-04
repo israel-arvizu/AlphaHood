@@ -4,6 +4,7 @@ import LogoutButton from '../auth/LogoutButton';
 import SearchBar from '../searchbar'
 import UserAccountNav from './accountNav';
 import './UserNavBar.css'
+import HomeLogo from '../../images/HomeLogo.png'
 
 const UserNavBar = () => {
 
@@ -55,8 +56,8 @@ const UserNavBar = () => {
 
         <div className='usernav-container'>
           <div>
-            <NavLink to='/dashboard' exact={ true } activeClassName='active'>
-              Home
+            <NavLink to='/dashboard' exact={ true } className="home-logo">
+              <img src={ HomeLogo } className="home-logo"></img>
             </NavLink>
           </div>
           <div className='searchbar-container'>
@@ -66,7 +67,7 @@ const UserNavBar = () => {
             <div className='account-link' onClick={ () => history.push("/about") }>
               About
             </div>
-            <NavLink to='/wallet' className="account-word">
+            <NavLink to='/wallet' className="account-word wallet-link">
               Wallet
             </NavLink>
             <div className='account'>

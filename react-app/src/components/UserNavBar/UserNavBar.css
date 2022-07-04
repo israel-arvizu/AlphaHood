@@ -26,6 +26,16 @@
     display: none;
 }
 
+.wallet-link {
+    text-decoration: none;
+    color: white;
+}
+
+.home-logo {
+    max-height: 140px;
+    max-width: 140px;
+}
+
 .account-dropdown {
     position: absolute;
     background-color: rgb(30, 33, 36);
@@ -36,7 +46,7 @@
     font-size: 14px;
     right: 0;
     text-align: left;
-    margin-right: 50px;
+
     margin-top: 10px;
     z-index: 5;
 }
@@ -52,10 +62,12 @@
     text-decoration-color:blue !important;
     text-decoration-thickness: 2px !important;
     user-select: none;
+    text-decoration: none;
 }
 
 .account-word:hover {
     color: rgb(255, 80, 0) !important;
+    cursor: pointer;
   }
 
 .account-links {
