@@ -192,7 +192,7 @@ function Dashboard() {
                     <div>
                         <ul>
                             <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
-                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                            {!!watchlists.length && !!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
                                 <div>{stock.ticker}</div>
                             ))}
                             {!!watchlists.length &&

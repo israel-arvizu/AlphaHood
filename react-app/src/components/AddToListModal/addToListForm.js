@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewList } from "../../store/list"
 import { loadStockList } from "../../store/liststock";
-import './addtolist.css'
+import './addButton.css'
 
 
 const AddToList = ({ stock, closeModal }) => {
@@ -19,8 +19,7 @@ const AddToList = ({ stock, closeModal }) => {
   const liststocks = useSelector(state => state.listStockReducer.listStock)
 
 
-  console.log(liststocks)
-  console.log(stock.ticker)
+
 
 
 
@@ -55,35 +54,25 @@ const AddToList = ({ stock, closeModal }) => {
       deleteArray = deleteArray.filter(item=>{return item!= id})
     }
     if (!checked.checked && listarray.has(id)){
-      console.log(e.target.checked)
-
      let newarr = disableArray.filter(item=>{return item!= id})
-
-
-
 
       deleteArray.push(id)
 
     }
 
     if (checked.checked && !listarray.has(id)) {
-      console.log(listarray)
 
       sendArray.push(id)
-      console.log(sendArray)
+
     }
     else if (!checked.checked) {
       sendArray = sendArray.filter(item => { return item != id })
-      console.log(sendArray)
+
 
     }
     else if (listarray.has(id) && !checked.checked){
       deleteArray.push(id)
     }
-
-    console.log(deleteArray)
-    console.log(sendArray)
-
 
 
   }
@@ -121,8 +110,9 @@ const AddToList = ({ stock, closeModal }) => {
   }
 
   return (
-    <div>
-      <div className="watchlistform">
+    <div classname="addtowatchliststock">
+      <div className="addtolisttitle">Add to Your List</div>
+      <div className="addtowatchlist">
         <form
           onSubmit={watchlistsubmit}>
 
@@ -134,7 +124,7 @@ const AddToList = ({ stock, closeModal }) => {
 
 
               <label>{watchlist.name}</label>
-              <input type="checkbox" id={`check-${watchlist.id}`} onChange={(e) => checkLists(e, watchlist.id)} />
+              <input type="checkbox" id={`check-${watchlist.id}`} className="checkboxwatch" onChange={(e) => checkLists(e, watchlist.id)} />
               {!!liststocks && document.getElementById(`check-${watchlist.id}`) && liststocks[watchlist.id].forEach(list => {
 
                 if (list.ticker === stock.ticker) {
@@ -143,6 +133,7 @@ const AddToList = ({ stock, closeModal }) => {
 
                 }
               })}
+
 
 
 
