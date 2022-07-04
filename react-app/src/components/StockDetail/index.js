@@ -112,11 +112,12 @@ function StockDetail() {
         const transaction = {
             userId: sessionUser.id,
             userBalance: sessionUser.balance,
-            shareCount: shares,
+            shareCount: Math.abs(shares),
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
         await dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+        history.push('/dashboard')
     }
 
     const sellShares = async (e) => {
@@ -130,6 +131,7 @@ function StockDetail() {
             stockId: selectedStock.id
         }
         await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+        history.push('/dashboard')
     }
 
     const owned = () => {
@@ -161,7 +163,6 @@ function StockDetail() {
             <UserNavBar />
             <div className='parent-container'>
                 <div className='left-container'>
-                    <AddToListModal stock={selectedStock} />
                     <div className='top-details'>
                         <h2>{selectedStock.name}</h2>
                         <p className='price-container'>${selectedStock.currentPrice}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
@@ -259,27 +260,34 @@ function StockDetail() {
             </div> */}
                 </div>
                 <div className='right-container'>
+                    <div className='right-inner-container'>
+                        <div className='buy-sell-container'>
+                            <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
+                            <hr></hr>
+                            <form onSubmit={e => handleSubmit(e)}>
+                                <input
+                                    name='shares'
+                                    type='number'
+                                    // value={shares}
+                                    onKeyDown={(e) => {
+                                        if (e.target.value < 0) { e.target.value = e.target.value * -1 }
+                                    }}
+                                    onChange={e => setShares(e.target.value)}
+                                ></input>
+                                <div className='buy-sell-btns'>
+                                    <button id='buy-btn' type="submit" disabled={
+                                        sessionUser.balance <= selectedStock.currentPrice * shares
+                                    }>Buy</button>
+                                    <button id='sell-btn' onClick={e => sellShares(e)} disabled={
+                                        owned()
+                                    }>Sell</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div className='testBtn'>
+                        <AddToListModal stock={selectedStock} />
 
-                    <div className='buy-sell-container'>
-                        <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
-                        <hr></hr>
-                        <form onSubmit={e => handleSubmit(e)}>
-                            <input
-                                name='shares'
-                                type='number'
-                                // value={shares}
-                                onChange={e => setShares(e.target.value)}
-                            ></input>
-                            <div className='buy-sell-btns'>
-                                <button id='buy-btn' type="submit" disabled={
-                                    sessionUser.balance <= selectedStock.currentPrice * shares
-                                }>Buy</button>
-                                <button id='sell-btn' onClick={e => sellShares(e)} disabled={
-                                    owned()
-                                }>Sell</button>
-
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

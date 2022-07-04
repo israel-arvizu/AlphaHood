@@ -81,11 +81,11 @@ body {
 }
 
 .positiveNum {
-    color: green;
+    color: rgb(3, 200, 5);
 }
 
 .negativeNum {
-    color: red;
+    color: rgb(255, 80, 0);
 }
 
 .after-hours {
@@ -182,4 +182,22 @@ input::-webkit-inner-spin-button {
     color: #fff;
     background-color: rgb(255, 80, 0);
     border-color: rgb(255, 80, 0);
+}
+
+.testBtn {
+    position: fixed;
+    /* padding-top: 18.5rem; */
+    margin-top: 18.5rem;
+    display: flex;
+    padding-left: 3rem;
+    /* z-index: -1; */
+}
+
+
+
+.right-inner-container {
+    padding-top: 17.5rem;
+    position: fixed;
+    display: flex;
+    flex-direction: column-reverse;
 }
