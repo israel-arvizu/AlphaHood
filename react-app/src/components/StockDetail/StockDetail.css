@@ -11,6 +11,21 @@ body {
 
 .buy-sell-container {
     position: fixed;
+    background-color: rgb(30, 33, 36);
+    border-radius: 10px;
+    border-color: rgb(176, 176, 176);
+    border-width: 0.1rem;
+    border-style: solid;
+    width: 10rem;
+    height: 10rem;
+    padding: 3rem;
+    display: block;
+
+}
+
+#trade-tag {
+    display: flex;
+    justify-content: center;
 }
 
 .right-container {
@@ -21,7 +36,8 @@ body {
 
 .buy-sell-btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    padding-top: .5rem;
 }
 
 .left-container {
@@ -70,4 +86,100 @@ body {
 
 .negativeNum {
     color: red;
+}
+
+.after-hours {
+    color: lightgray;
+    font-size: x-small;
+    font-style: italic;
+    padding-left: .3rem;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input {
+    padding: 6px 12px;
+    background: rgb(31, 32, 35);
+    border: 1px solid rgb(60, 63, 68);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgb(247, 248, 248);
+    height: 20px;
+    appearance: none;
+    transition: border 0.15s ease 0s;
+}
+
+input::placeholder {
+    display: none;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: rgb(3, 200, 5);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+#buy-btn {
+    cursor: pointer;
+    outline: 0;
+    display: inline-block;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: rgb(3, 200, 5);
+    border-color: rgb(3, 200, 5);
+}
+
+#buy-btn:disabled {
+    display: none;
+}
+
+#buy-btn:hover {
+    color: #fff;
+    background-color: rgb(3, 200, 5);
+    border-color: rgb(3, 200, 5);
+}
+
+#sell-btn {
+    cursor: pointer;
+    outline: 0;
+    display: inline-block;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    color: rgb(255, 80, 0);
+    border-color: rgb(255, 80, 0);
+}
+
+#sell-btn:disabled {
+    display: none;
+}
+
+#sell-btn:hover {
+    color: #fff;
+    background-color: rgb(255, 80, 0);
+    border-color: rgb(255, 80, 0);
 }

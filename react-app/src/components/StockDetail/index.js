@@ -22,6 +22,11 @@ function StockDetail() {
     const stocks = useSelector(state => state.stocks)
     const selectedStock = stocks[tickerUpper]
     const [marketState, setMarketState] = useState(false)
+    const formatter = new Intl.NumberFormat('en')
+    const letterFormatter = new Intl.NumberFormat('en-US', {
+        notation: "compact",
+        maximumFractionDigits: 1
+    })
 
     const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
@@ -147,20 +152,19 @@ function StockDetail() {
     }
     let number = changeToday()[0]
     let priceDif = changeToday()[1]
+
+
+
+
     return (
         <>
             <UserNavBar />
             <div className='parent-container'>
                 <div className='left-container'>
-
                     <AddToListModal stock={selectedStock} />
-                    <p>Market Open:</p>
-                    <p>
-                        {marketState ? 'True' : 'False'}
-                    </p>
                     <div className='top-details'>
                         <h2>{selectedStock.name}</h2>
-                        <p>{selectedStock.currentPrice}</p>
+                        <p className='price-container'>${selectedStock.currentPrice}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
                         <p className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
                             number > 0 ? <p>+${priceDif.toFixed(2)} (+{number}%)</p> : <p>${priceDif.toFixed(2)} ({number}%)</p>
                         }</p>
@@ -175,7 +179,7 @@ function StockDetail() {
                         <div className='about-inner'>
                             <div className='employees-container'>
                                 <p className='item-title'>Employees</p>
-                                <p className='item-info'>{selectedStock.fullTimeEmployees}</p>
+                                <p className='item-info'>{formatter.format(selectedStock.fullTimeEmployees)}</p>
                             </div>
                             <div className='headquarters-container'>
                                 <p className='item-title'>Headquarters</p>
@@ -188,7 +192,9 @@ function StockDetail() {
                     <div className='key-statistics'>
                         <div className='marketCap-container key-container'>
                             <p className='item-title'>Market Cap</p>
-                            <p className='item-info'>{selectedStock.marketCap}</p>
+                            <p className='item-info'>{
+                                letterFormatter.format(selectedStock.marketCap)}</p>
+                            {/* selectedStock.marketCap */}
                         </div>
                         <div className='trailingPE-container key-container'>
                             <p className='item-title'>Trailing P/E</p>
@@ -200,38 +206,38 @@ function StockDetail() {
                         </div>
                         <div className='averageVolume-container key-container'>
                             <p className='item-title'>Average Volume</p>
-                            <p className='item-info'>{selectedStock.averageVolume}</p>
+                            <p className='item-info'>{letterFormatter.format(selectedStock.averageVolume)}</p>
                         </div>
                         <div className='dayHigh-container key-container'>
                             <p className='item-title'>High Today</p>
-                            <p className='item-info'>{selectedStock.dayHigh}</p>
+                            <p className='item-info'>${selectedStock.dayHigh}</p>
                         </div>
                         <div className='dayLow-container key-container'>
                             <p className='item-title'>Low Today</p>
-                            <p className='item-info'>{selectedStock.dayLow}</p>
+                            <p className='item-info'>${selectedStock.dayLow}</p>
                         </div>
                         <div className='regularMarketOpen-container key-container'>
                             <p className='item-title'>Open Price</p>
-                            <p className='item-info'>{selectedStock.regularMarketOpen}</p>
+                            <p className='item-info'>${selectedStock.regularMarketOpen}</p>
                         </div>
                         <div className='volume-container key-container'>
                             <p className='item-title'>Volume</p>
-                            <p className='item-info'>{selectedStock.volume}</p>
+                            <p className='item-info'>{letterFormatter.format(selectedStock.volume)}</p>
                         </div>
                         <div className='fiftyTwoWeekHigh-container key-container'>
                             <p className='item-title'>52 Week High</p>
-                            <p className='item-info'>{selectedStock.fiftyTwoWeekHigh}</p>
+                            <p className='item-info'>${selectedStock.fiftyTwoWeekHigh}</p>
                         </div>
                         <div className='fiftyTwoWeekLow-container key-container'>
                             <p className='item-title'>52 Week Low</p>
-                            <p className='item-info'>{selectedStock.fiftyTwoWeekLow}</p>
+                            <p className='item-info'>${selectedStock.fiftyTwoWeekLow}</p>
                         </div>
                     </div>
-                    <div className='related-list-container'>
+                    {/* <div className='related-list-container'>
                         <h2>Related Lists</h2>
                         <button>{selectedStock.industry}</button>
                         <button>{selectedStock.state}</button>
-                    </div>
+                    </div> */}
                     {/* <div className='news-container'>
                 <h2>News</h2>
                 {
@@ -242,8 +248,9 @@ function StockDetail() {
                         <p> Sorry Couldn't Load News...</p>
                 }
             </div> */}
+                    <h2>Analyst Ratings</h2>
+                    <hr></hr>
                     <div className='analyst-rating-container'>
-                        <h2>Analyst Ratings</h2>
                         <p>{selectedStock.recommendationKey}</p>
                     </div>
                     {/* <div className='Earnings'>
@@ -252,23 +259,25 @@ function StockDetail() {
             </div> */}
                 </div>
                 <div className='right-container'>
+
                     <div className='buy-sell-container'>
-                        <h2>Trade {selectedStock.ticker}</h2>
+                        <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
                         <hr></hr>
                         <form onSubmit={e => handleSubmit(e)}>
                             <input
                                 name='shares'
                                 type='number'
-                                value={shares}
+                                // value={shares}
                                 onChange={e => setShares(e.target.value)}
                             ></input>
                             <div className='buy-sell-btns'>
-                                <button type="submit" id='buy-button' disabled={
+                                <button id='buy-btn' type="submit" disabled={
                                     sessionUser.balance <= selectedStock.currentPrice * shares
                                 }>Buy</button>
-                                <button onClick={e => sellShares(e)} disabled={
+                                <button id='sell-btn' onClick={e => sellShares(e)} disabled={
                                     owned()
                                 }>Sell</button>
+
                             </div>
                         </form>
                     </div>
