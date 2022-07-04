@@ -187,3 +187,19 @@ body{
   background-color: #0080ff;
   z-index: 1010101010
 }
+
+.logout-btn {
+  border: none;
+  background: none;
+  height: 40px;
+  width: 40px;
+  font-weight: bold;
+  color: white;
+
+}
+
+.logout-btn:hover {
+  color: rgb(255,80,0);
+  cursor: pointer;
+
+}

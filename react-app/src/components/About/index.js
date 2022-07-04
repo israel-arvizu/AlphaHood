@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+import LinkedInLogo from '../../images/LI-Logo.png'
+import GitHubLogo from '../../images/GitHub_Logo_White.png'
 import "./About.css";
 
 
@@ -47,6 +50,7 @@ const About = () => {
     }
 
     return (
+
         <div className="about-main">
             <div className="about-title">About Alphahood Developers</div>
             <div className="about-lower">
@@ -66,16 +70,16 @@ const About = () => {
                                 <a href={ linkedIn } target="_blank" className="linkedin">
                                     <img
                                         className="linkedin-img"
-                                        src=""
+                                        src={ LinkedInLogo }
                                     />
-                                    LinkedIn
+
                                 </a>
                                 <a className="linkedin" href={ gitHub } target="_blank">
                                     <img
                                         className="linkedin-img"
-                                        src=""
+                                        src={ GitHubLogo }
                                     />
-                                    Github
+
                                 </a>
                             </div>
                         </>
@@ -106,6 +110,7 @@ const About = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 

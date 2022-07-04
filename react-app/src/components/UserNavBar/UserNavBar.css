@@ -44,14 +44,14 @@
     border: 0.5px solid grey;
     border-radius: 4px;
     font-size: 14px;
-    right: 0;
+    right: 0px;
     text-align: left;
 
-    margin-top: 10px;
+    margin-top: 20px;
     z-index: 5;
 }
 
-.account-dropdown
+
 
 
 .account-word {
@@ -86,4 +86,26 @@
 
 .dropdown-values {
     font-weight: bold;
+}
+
+.account-name {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: .5px rgb(138, 138, 138) solid;
+    font-size: 20px;
+
+}
+
+#account-user-name {
+display: flex;
+justify-content: center;
+margin-top: 10px;
+font-size: 200px;
+}
+
+.account-value {
+    display: flex;
+    justify-content: center;
 }

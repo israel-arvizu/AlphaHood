@@ -3,13 +3,17 @@
     align-items: center;
     margin-top: 50px;
     flex-direction: column;
-    height: 105vh;
+    height: 100vh;
     width: 105vw;
     background-image: url("../../images/AlphahoodBG.png");
     background-color: transparent;
     background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+
   }
 
   .about-title {
@@ -58,23 +62,36 @@ background-size: cover;
   }
 
   .linkedin-img {
-    width: 50px;
-    height: 50px;
+ max-height: 120px;
+ max-width: 120px;
     border-radius: 4px;
     object-fit: cover;
+    display: flex;
+    justify-content: center;
+  }
+
+  .linkedin-img:hover {
+   border: .5px rgb(255, 255, 255) solid;
   }
 
   .about-name {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
   }
 
   .about-me {
     display: flex;
-    gap: 50px;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
   }
 
   .about-bio {
     margin-bottom: 50px;
+    display: flex;
+
   }
 
   .about-fav-stock {
@@ -92,4 +109,24 @@ background-size: cover;
 
   .name-links:hover {
     background-color: rgb(48, 54, 58);
+  }
+
+
+  .about-left-lower {
+    display: flex;
+    flex-direction: column;
+
+
+  }
+
+  .aboutlink {
+    margin-top: 20px;
+    text-decoration: none;
+    color: white;
+
+  }
+
+
+  .aboutlink:hover{
+    color: red;
   }
