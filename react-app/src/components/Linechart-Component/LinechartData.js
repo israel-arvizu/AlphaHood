@@ -29,6 +29,14 @@ const valuesToArray = (obj) => {
     return graphValues
 }
 
+const soloKeyToArray = (obj) => {
+    let graphValues = [];
+    Object.keys(obj).forEach(val => {
+        graphValues.push(val)
+    })
+    return graphValues
+}
+
 const keysToArray = (obj) => {
     let graphKeys = [];
     Object.keys(obj).forEach(key => {
@@ -39,4 +47,4 @@ const keysToArray = (obj) => {
     return graphKeys;
 }
 
-export { valuesToArray, keysToArray, labels};
+export { valuesToArray, keysToArray, labels, soloKeyToArray};

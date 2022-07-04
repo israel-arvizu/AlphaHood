@@ -41,12 +41,14 @@ function LineChart({portfolio}){
                 },
                 gridlines:{
                     display: false
-                }}
-            ,
+                }},
+                options: {
+                    maintainAspectRatio: false,
+                },
                 scales:{
                     y: {
                         ticks:{
-                            display:true
+                            display:false
 
                         },
                         grid:{
@@ -58,7 +60,7 @@ function LineChart({portfolio}){
                     },
                     x:{
                         ticks:{
-                            display:true
+                            display:false
                         },
                         grid:{
                             display: false,
