@@ -4,7 +4,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../store/session';
 import { loadAllLists } from '../store/list';
 import { loadStockList } from '../store/liststock';
-import { loadPortfolio, loadCurrentPortfolio } from '../store/stocks';
+import { loadCurrentPortfolio, loadPortfolio } from '../store/portfolio';
 
 
 

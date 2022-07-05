@@ -6,6 +6,7 @@ import stocksReducer from './stocks';
 import listsReducer from './list';
 import listStockReducer from './liststock';
 import owndedStocksReducer from './ownedStocks'
+import portfolioReducer from './portfolio';
 
 
 
@@ -16,7 +17,7 @@ const rootReducer = combineReducers({
   lists: listsReducer,
   listStockReducer,
   ownedStocks: owndedStocksReducer,
-
+  portfolio: portfolioReducer,
 
 });
 
