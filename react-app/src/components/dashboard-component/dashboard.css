@@ -1,24 +1,23 @@
-
-.main-container-dash{
+.main-container-dash {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.outer-left-container{
+.outer-left-container {
     display: flex;
     flex-direction: column;
     width: 690px;
     max-width: 690px;
 }
 
-.outer-right-container{
+.outer-right-container {
     display: flex;
     flex-direction: column;
 }
 
 
-#portfolio-value-cont{
+#portfolio-value-cont {
     height: 40px;
     margin-top: 5px;
     margin-bottom: 0px;
@@ -26,20 +25,20 @@
     font-size: 30px
 }
 
-#period-dash-graph{
+#period-dash-graph {
     margin-bottom: 0px;
     margin-top: 0px;
     color: #5AC53B;
     font-weight: 600;
 }
 
-.line-break-dashboard{
+.line-break-dashboard {
     border: 0;
-    border-top: 1px solid rgb(48,54,58);
+    border-top: 1px solid rgb(48, 54, 58);
     width: 690px;
 }
 
-.portfolio-buying-container{
+.portfolio-buying-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -47,21 +46,21 @@
     margin-top: 15px;
 }
 
-#buying-power-header{
+#buying-power-header {
     font-weight: 600;
 }
 
-#trending-list-header{
+#trending-list-header {
     font-weight: 500;
     font-size: 25px;
     margin-bottom: 15px;
 }
 
-.trending-list-button{
+.trending-list-button {
     width: fit-content;
     background-color: black;
     color: white;
-    border: 1px solid rgb(48,54,58);
+    border: 1px solid rgb(48, 54, 58);
     padding-left: 8px;
     padding-right: 8px;
     border-radius: 25px;
@@ -74,24 +73,24 @@
     margin: 5px;
 }
 
-.trending-list-image-btn{
+.trending-list-image-btn {
     max-width: 2rem;
     border-radius: 50px;
 }
 
-.trending-list-text-btn{
+.trending-list-text-btn {
     font-size: 14px;
     padding-left: 5px;
     text-decoration: none;
 }
 
-.trending-list-button-container{
+.trending-list-button-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.outer-right-container{
+.outer-right-container {
     border: 1px solid #40494E;
     width: 276px;
     min-height: 789px;
@@ -101,12 +100,12 @@
     border-radius: 5px;
 }
 
-.list-stocks-content{
+.list-stocks-content {
     list-style: none;
     padding-left: 0px;
 }
 
-#create-list-header-text{
+#create-list-header-text {
     display: flex;
     padding-left: 24px;
     padding-right: 24px;
@@ -115,7 +114,7 @@
 }
 
 
-#create-list-content{
+#create-list-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -126,7 +125,7 @@
     height: 46px;
 }
 
-#create-list-add-btn{
+#create-list-add-btn {
     height: 43px;
     background-color: transparent;
     border: none;
@@ -135,11 +134,11 @@
     margin-right: 1rem;
 }
 
-#create-list-add-btn:hover{
+#create-list-add-btn:hover {
     cursor: pointer;
 }
 
-.watchlist-form-container{
+.watchlist-form-container {
     width: 276px;
     height: 92px;
     display: flex;
@@ -149,7 +148,7 @@
     margin-top: 1rem;
 }
 
-.watchlist-button-container{
+.watchlist-button-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -158,7 +157,7 @@
     padding-top: 1rem;
 }
 
-#watchlist-input-form{
+#watchlist-input-form {
     width: 160px;
     height: 34px;
     background-color: #30363A;
@@ -168,14 +167,14 @@
     color: white;
 }
 
-.watchlist-button-form{
+.watchlist-button-form {
     width: 96px;
     height: 36px;
     border-radius: 25px;
     border: 1px solid #5AC53B;
 }
 
-.watchlist-button-form.create-buttn{
+.watchlist-button-form.create-buttn {
     background-color: #5AC53B;
     white-space: nowrap;
     font-weight: 600;
@@ -183,7 +182,7 @@
     margin-left: 1rem;
 }
 
-.watchlist-button-form.cancel-buttn{
+.watchlist-button-form.cancel-buttn {
     background-color: transparent;
     white-space: nowrap;
     font-weight: 600;
@@ -192,37 +191,37 @@
     border: 1px solid #5AC53B;
 }
 
-.watchlist-button-form:hover{
+.watchlist-button-form:hover {
     cursor: pointer;
 
 }
 
-.watchlist-dash-title{
+.watchlist-dash-title {
     font-weight: 600;
     margin-bottom: 1rem;
     font-size: 15px;
 }
 
-.watchlist-headers-container{
+.watchlist-headers-container {
     width: 266px;
     border-bottom: 1px solid #40494E;
     padding-left: 10px;
 }
 
-.watchlist-dash-port-name{
+.watchlist-dash-port-name {
     font-weight: 600;
     margin-bottom: 1rem;
     font-size: 15px;
 }
 
-.watchlist-headers-container-extra{
+.watchlist-headers-container-extra {
     width: 266px;
     border-bottom: 1px solid #40494E;
     border-top: 1px solid #40494E;
     padding-left: 10px;
 }
 
-.stock-list-link-container{
+.stock-list-link-container {
     text-decoration: none;
     padding-left: 24px;
     padding-right: 24px;
@@ -230,28 +229,28 @@
     height: 60px;
 }
 
-.stock-list-link-container:hover{
+.stock-list-link-container:hover {
     background-color: #40494E;
 }
 
-.watchlist-stocks-linkable{
+.watchlist-stocks-linkable {
     text-decoration: none !important;
 }
 
-.stock-inside-content{
+.stock-inside-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.stock-title-header{
+.stock-title-header {
     font-weight: 600;
     font-size: 15px;
     color: white;
 
 }
 
-.stock-title-price-cont{
+.stock-title-price-cont {
     display: flex;
     color: white;
     font-size: small;
@@ -259,7 +258,7 @@
     justify-content: center;
 }
 
-.stock-list-link-container-portfolio{
+.stock-list-link-container-portfolio {
     text-decoration: none;
     padding-left: 24px;
     padding-right: 24px;
@@ -267,7 +266,7 @@
     height: 45px;
 }
 
-.watchlist-buttons-container-list{
+.watchlist-buttons-container-list {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -275,44 +274,44 @@
     margin-bottom: 1rem;
 }
 
-.watchlist-buttons-indivial-btn{
+.watchlist-buttons-indivial-btn {
     width: 96px;
     height: 36px;
     border-radius: 25px;
     font-weight: 600;
 }
 
-.watchlist-buttons-indivial-btn:hover{
-   cursor: pointer;
+.watchlist-buttons-indivial-btn:hover {
+    cursor: pointer;
 }
 
-.watchlist-buttons-indivial-btn.delete-btn-list{
+.watchlist-buttons-indivial-btn.delete-btn-list {
     background-color: #FF5000;
     border: 1px solid #FF5000;
     color: #1E2124
 }
 
-.watchlist-buttons-indivial-btn.edit-btn-list{
+.watchlist-buttons-indivial-btn.edit-btn-list {
     background-color: transparent;
     border: 1px solid #FF5000;
     color: #FF5000
 }
 
-#modal-content{
+#modal-content {
     background-color: #40494E;
     height: 150px;
     width: 250px;
     border-radius: 15px;
 }
 
-.modal-edit-list-content{
+.modal-edit-list-content {
     display: flex;
     flex-direction: column;
     padding-left: 1rem;
 
 }
 
-#editinput-modal{
+#editinput-modal {
     width: 125px;
     background-color: #30363A;
     border: 1px solid transparent;
@@ -322,15 +321,15 @@
     height: 20px;
 }
 
-#editlist-modal-header{
+#editlist-modal-header {
     margin-bottom: 1rem;
 }
 
-.submitedit-btn-container{
+.submitedit-btn-container {
     padding-left: 1rem;
 }
 
-.submiteditbutton-modal{
+.submiteditbutton-modal {
     width: 96px;
     height: 36px;
     border-radius: 25px;
@@ -340,26 +339,27 @@
     color: #1E2124
 }
 
-.submiteditbutton-modal:hover{
+.submiteditbutton-modal:hover {
     cursor: pointer;
 }
 
-table{
+table {
     border-collapse: collapse;
     width: 100%;
- }
+}
 
-  th, td {
+th,
+td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-  }
+}
 
-  .trendingtable{
+.trendingtable {
     width: 50%
-  }
+}
 
-.tablecontainer{
+.tablecontainer {
     display: flex;
     width: 80%;
 
@@ -367,11 +367,11 @@ table{
 
 }
 
-.tlist{
-    color:grey
+.tlist {
+    color: grey
 }
 
-.loading-dash-container{
+.loading-dash-container {
     width: 100%;
     display: flex;
     padding-top: 55px;
@@ -382,7 +382,7 @@ table{
     background-color: black;
 }
 
-.loading-dash-image{
+.loading-dash-image {
     border: 5px solid white;
     border-radius: 10px;
     width: 1280px;
@@ -394,7 +394,7 @@ table{
     align-items: center;
 }
 
-.loading-dash-text{
+.loading-dash-text {
     font-size: 50px;
     font-weight: 500;
     color: black;
@@ -402,7 +402,7 @@ table{
     margin-top: 5px;
 }
 
-.loading-dash-text-container{
+.loading-dash-text-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -410,14 +410,14 @@ table{
     margin-bottom: 27rem;
 }
 
-.loading-dash-message{
+.loading-dash-message {
     color: black;
     font-style: italic;
     margin: 0px;
     font-size: 15px;
 }
 
-.loading-dash-message-container{
+.loading-dash-message-container {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -425,12 +425,12 @@ table{
     align-items: center;
 }
 
-.home-logo-alpha-loading{
+.home-logo-alpha-loading {
     width: 30%;
     color: black;
 }
 
-#dashboard-port-update-text{
+#dashboard-port-update-text {
     margin: 0px;
     margin-bottom: 10px;
     font-size: 15px;
@@ -440,4 +440,16 @@ table{
     width: fit-content;
     background-color: transparent;
     color: #FF5000;
+}
+
+
+.stock-inside-content:hover {
+    /* background-color: rgb(3, 200, 5); */
+    color: rgb(42, 42, 42);
+    opacity: 0.7;
+}
+
+
+.stock-inside-content-container {
+    background-color: red;
 }

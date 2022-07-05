@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadAllLists } from "../../store/list"
 import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
-import {Redirect, useHistory} from "react-router-dom"
-import {demo_user_login} from "../../store/session.js"
+import { Redirect, useHistory } from "react-router-dom"
+import { demo_user_login } from "../../store/session.js"
 import logo from './logo.png'
 import './splashpage.css'
 import robinhood from './robinhood.png'
@@ -15,14 +15,14 @@ function SplashPage() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
 
-  useEffect(()=>{
-    if(user){
-    dispatch(loadAllLists(user.id))
+  useEffect(() => {
+    if (user) {
+      dispatch(loadAllLists(user.id))
     }
   }, [])
 
 
-  const getdemo = () =>{
+  const getdemo = () => {
     dispatch(demo_user_login())
     history.push('/dashboard')
   }
@@ -41,34 +41,34 @@ function SplashPage() {
             <nav className="splashbuttons">
               <ul className="splash-nav-buttons">
                 <li>
-                  <a href='/about' exact={true} className='about-us'>
+                  <a href='/about' className='about-us'>
                     About Us
                   </a>
                 </li>
                 <button className="demo-btn" onClick={getdemo}>
                   Demo
                 </button>
-                  {!user &&
-                    <li>
-                      <a href='/login' exact={true} className='login'>
-                        Login
-                      </a>
-                    </li>
-                  }
-                  {!user &&
+                {!user &&
                   <li>
-                    <a href='/sign-up' exact={true} className='sign-up'>
+                    <a href='/login' className='login'>
+                      Login
+                    </a>
+                  </li>
+                }
+                {!user &&
+                  <li>
+                    <a href='/sign-up' className='sign-up'>
                       Sign Up
                     </a>
                   </li>
-                  }
-                  {user &&
+                }
+                {user &&
                   <li>
-                    <a href='/dashboard' exact={true} className='home-button-splash'>
+                    <a href='/dashboard' className='home-button-splash'>
                       Home
                     </a>
                   </li>
-                  }
+                }
               </ul>
             </nav>
           </div>

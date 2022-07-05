@@ -19,7 +19,7 @@ function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
     const newsArticles = useSelector(state => state.newsReducer.news);
-    const userlog = useSelector(state=>state.session.user)
+    const userlog = useSelector(state => state.session.user)
     // const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
@@ -30,18 +30,19 @@ function Dashboard() {
         "2022-07-01 09:35:00-04:00": 0,
         "2022-07-01 09:40:00-04:00": 0,
         "2022-07-01 09:45:00-04:00": 0,
-        "2022-07-01 09:50:00-04:00": 0})
+        "2022-07-01 09:50:00-04:00": 0
+    })
     const [portfolioGraph, setPortfolioGraph] = useState(false)
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
 
 
-    const watchlists = useSelector(state=>state.lists)
-    const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+    const watchlists = useSelector(state => state.lists)
+    const portfoliolist = watchlists.filter(watchlist => watchlist.name == "Portfolio")
 
 
-    if (!userlog){
+    if (!userlog) {
         history.push('/')
     }
 
@@ -92,7 +93,7 @@ function Dashboard() {
             <div className='loading-dash-container'>
                 <div className='loading-dash-image'>
                     <div className='loading-dash-text-container'>
-                        <img src={ alphahoodblack } className="home-logo-alpha-loading"></img>
+                        <img src={alphahoodblack} className="home-logo-alpha-loading"></img>
                         <p className='loading-dash-text'>Loading all this Greatness </p>
                         <p className='loading-dash-text'>Please Wait...</p>
                         <div className='loading-dash-message-container'>
@@ -113,7 +114,7 @@ function Dashboard() {
         price = price.toFixed(2)
         setDisplayPort(price)
         setUpdate(true)
-        if(currentPortfolio.errors.length > 0)
+        if (currentPortfolio.errors.length > 0)
             setUpdateLog("Errors in the API, Amount may be incorrect, please refresh to retry")
         else
             setUpdateLog("")
@@ -121,7 +122,7 @@ function Dashboard() {
 
     if (portfolio !== undefined && !portfolioGraph) {
         let portfolioHist = portfolio
-        setPortfolioHistory({...portfolioHist})
+        setPortfolioHistory({ ...portfolioHist })
         setPortfolioGraph(true)
     }
     if (!watchlists) return <h2>loading</h2>
@@ -137,7 +138,7 @@ function Dashboard() {
                             <p id='portfolio-value-cont'>${displayPort}</p>
                         </div>
                         <div id='chart-container-main'>
-                            <LineChart portfolio={ portfolioHistory } />
+                            <LineChart portfolio={portfolioHistory} />
                         </div>
                         <p id='period-dash-graph'>24h</p>
                         <hr className='line-break-dashboard'></hr>
@@ -212,9 +213,9 @@ function Dashboard() {
                             <div className='watchlist-headers-container'>
                                 <li className='watchlist-dash-port-name'>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
                             </div>
-                            {!!watchlists.length && !!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                            {!!watchlists.length && !!liststocks && liststocks[portfoliolist[0].id].map(stock => (
                                 <div className='stock-list-link-container-portfolio'>
-                                    <a style={{textDecoration: 'none'}} href={`/stocks/${stock.ticker.toUpperCase()}`}>
+                                    <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
                                         <div className='stock-inside-content' key={stock.ticker}>
                                             <p className='stock-title-header'>{stock.ticker}</p>
                                             <p className='stock-title-price-cont'>${stock.currentPrice}</p>
@@ -223,50 +224,51 @@ function Dashboard() {
                                 </div>
                             ))}
                             {!!watchlists.length &&
-                            watchlists.map(watchlist=>{
-                                if(watchlist.name!=="Portfolio"){
-                                    return (
-                                        <li key={watchlist.id}>
-                                            <div className='watchlist-headers-container-extra'>
-                                                <p className='watchlist-dash-title'>{watchlist.name}</p>
-                                            </div>
-                                            {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
-                                                return (
-                                                    <div className='stock-list-link-container'>
-                                                        <a style={{textDecoration: 'none'}} href={`/stocks/${stock.ticker.toUpperCase()}`}>
-                                                            <div className='stock-inside-content' key={stock.ticker}>
-                                                                <p className='stock-title-header'>{stock.ticker}</p>
-                                                                <p className='stock-title-price-cont'>${stock.currentPrice}</p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                )
-                                            })}
+                                watchlists.map((watchlist, idx) => {
+                                    if (watchlist.name !== "Portfolio") {
+                                        return (
+                                            <li key={idx}>
+                                                <div className='watchlist-headers-container-extra'>
+                                                    <p className='watchlist-dash-title'>{watchlist.name}</p>
+                                                </div>
+                                                {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
+                                                    return (
+                                                        <div className='stock-list-link-container'>
+                                                            <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
+                                                                <div className='stock-inside-content' key={stock.ticker}>
+                                                                    <p className='stock-title-header'>{stock.ticker}</p>
+                                                                    <p className='stock-title-price-cont'>${stock.currentPrice}</p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    )
+                                                })}
                                                 <div className='watchlist-buttons-container-list'>
                                                     <EditListModal id={watchlist.id} />
                                                     <button className='watchlist-buttons-indivial-btn delete-btn-list' id={watchlist.id} onClick={deleteAList}>Delete List</button>
                                                 </div>
-                                        </li>
-                                    )
-                                }})}
+                                            </li>
+                                        )
+                                    }
+                                })}
                         </ul>
                     </div>
                     <div>
                         <div id='create-list-content'>
                             <p id='create-list-header-text'>Create a List</p>
-                            <button id='create-list-add-btn' onClick={ () => setWatchlistName(true) }>+</button>
+                            <button id='create-list-add-btn' onClick={() => setWatchlistName(true)}>+</button>
                         </div>
-                        { watchlistName &&
+                        {watchlistName &&
                             <div>
                                 <form className='watchlist-form-container'
-                                    onSubmit={ createlist }>
+                                    onSubmit={createlist}>
                                     <input
                                         id='watchlist-input-form'
                                         name="listName"
                                         type="text"
                                         placeholder='List Name'
-                                        value={ newListName }
-                                        onChange={ (e) => setNewListName(e.target.value) }></input>
+                                        value={newListName}
+                                        onChange={(e) => setNewListName(e.target.value)}></input>
                                     <div className='watchlist-button-container'>
                                         <button className='watchlist-button-form cancel-buttn' onClick={() => setWatchlistName(false)}>Cancel</button>
                                         <button className='watchlist-button-form create-buttn' type="submit">Create List</button>
@@ -278,7 +280,7 @@ function Dashboard() {
                 </div>
 
 
-            </div>
+            </div >
 
         </>
     )
