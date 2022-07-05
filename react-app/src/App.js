@@ -42,6 +42,7 @@ function App() {
   }
 
   return (
+
     <ModalProvider>
       <BrowserRouter>
         <Switch>
@@ -75,6 +76,7 @@ function App() {
         </Switch>
       </BrowserRouter>
     </ModalProvider>
+
   );
 }
 
