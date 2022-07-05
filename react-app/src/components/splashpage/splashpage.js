@@ -1,15 +1,25 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, } from "react"
+import {useSelector, useDispatch} from 'react-redux'
+import { loadAllLists } from "../../store/list"
+import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
+import
 import './splashpage.css'
 
 
 function SplashPage(){
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.session.user)
+
+
+
+
 
     return (
         <>
         <header className="splash-header">
-          <div class="splash-container">
-            <div class="logo">
+          <div className="splash-container">
+            <div className="logo">
               <img id="splashLogo" src='./logo.png' alt='a' />
             </div>
             <nav>
@@ -28,9 +38,13 @@ function SplashPage(){
                     </a>
                 </li>
                 <li>
-                <a href='/sign-up' exact={true} className='sign-up'>
+                {!user && <a href='/sign-up' exact={true} className='sign-up'>
                     Sign Up
                   </a>
+    }
+    {user && <a href='/dashboard' exact={true} className='sign-up'>
+        Home
+                  </a>}
                 </li>
               </ul>
             </nav>
