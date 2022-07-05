@@ -95,7 +95,7 @@ const AddToList = ({ stock, closeModal }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
-    }).then(data=>console.log(data)).then(()=>fetch('/api/lists/deletestock',
+    }).then().then(()=>fetch('/api/lists/deletestock',
     {
       method:"POST",
       headers: { "Content-Type": "application/json" },
@@ -110,7 +110,7 @@ const AddToList = ({ stock, closeModal }) => {
   }
 
   return (
-    <div classname="addtowatchliststock">
+    <div>
       <div className="addtolisttitle">Add to Your List</div>
       <div className="addtowatchlist">
         <form className="updatelists"
@@ -120,7 +120,7 @@ const AddToList = ({ stock, closeModal }) => {
 
 
 
-            <div className="listofwatchlists">
+            <div className="listofwatchlists" key={watchlist.name}>
 
 
               <label className="watchlistnames">{watchlist.name}</label>
