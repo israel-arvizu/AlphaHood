@@ -9,6 +9,7 @@ import { loadCurrentPortfolio, loadPortfolio } from '../../store/portfolio';
 import { NavLink, useHistory } from 'react-router-dom';
 import { loadStockList } from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
+import alphahoodblack from '../../images/alphahoodblack.png'
 import './dashboard.css';
 
 
@@ -86,7 +87,20 @@ function Dashboard() {
 
 
     if (portfolio === undefined) {
-        return <h2>Loading portfolio</h2>
+        return (
+            <div className='loading-dash-container'>
+                <div className='loading-dash-image'>
+                    <div className='loading-dash-text-container'>
+                        <img src={ alphahoodblack } className="home-logo-alpha-loading"></img>
+                        <p className='loading-dash-text'>Loading all this Greatness </p>
+                        <p className='loading-dash-text'>Please Wait...</p>
+                        <div className='loading-dash-message-container'>
+                            <p className='loading-dash-message'>If it takes longer than 30 seconds please refresh</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     // if(newsArticles === undefined){

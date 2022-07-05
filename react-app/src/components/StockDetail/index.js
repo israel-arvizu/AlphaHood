@@ -5,6 +5,7 @@ import { getOneStock, getStocks, updateStock, purchaseStock } from '../../store/
 import { loadOwnedStocks } from '../../store/ownedStocks'
 // import { getNews } from '../../store/news'
 import UserNavBar from '../UserNavBar'
+import alphahoodblack from '../../images/alphahoodblack.png'
 
 import AddToListModal from '../AddToListModal'
 import { loadAllLists } from '../../store/list'
@@ -106,7 +107,20 @@ function StockDetail() {
     // }
 
     if (chartData === undefined) {
-        return <h2>Loading Graph...</h2>
+        return (
+            <div className='loading-dash-container'>
+                <div className='loading-dash-image'>
+                    <div className='loading-dash-text-container'>
+                        <img src={ alphahoodblack } className="home-logo-alpha-loading"></img>
+                        <p className='loading-dash-text'>Loading the Latest </p>
+                        <p className='loading-dash-text'>Please Wait...</p>
+                        <div className='loading-dash-message-container'>
+                            <p className='loading-dash-message'>If it takes longer than 30 seconds please refresh</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     const handleSubmit = async (e) => {
@@ -254,46 +268,44 @@ function StockDetail() {
                             </div>
                         </div> */}
                     </div>
-                    <div className='right-container'>
-                        <div className='right-inner-container'>
-                            <div className='buy-sell-container'>
-                                <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
-                                <hr></hr>
-                                <form onSubmit={e => handleSubmit(e)}>
-                                    <input
-                                        className='buy-sell-input'
-                                        name='shares'
-                                        type='number'
-                                        // value={shares}
-                                        onKeyDown={(e) => {
-                                            if (e.target.value < 0) { e.target.value = e.target.value * -1 }
-                                        }}
-                                        onChange={e => setShares(e.target.value)}
-                                    ></input>
-                                    <div className='buy-sell-btns'>
-                                        <button id='buy-btn' type="submit" disabled={
-                                            sessionUser.balance <= selectedStock.currentPrice * shares
-                                        }>Buy</button>
-                                        <button id='sell-btn' onClick={e => sellShares(e)} disabled={
-                                            owned()
-                                        }>Sell</button>
-                                    </div>
-                                </form>
-                                {boughtShares &&
-                                    <div>
-                                        <a>Succesfully Bought {shares} shares</a>
-                                    </div>
-                                }
-                                {soldShares &&
-                                    <div>
-                                        <a>Succesfully Sold {shares} shares</a>
-                                    </div>
-                                }
+                </div>
+                <div className='right-inner-container'>
+                    <div className='buy-sell-container'>
+                        <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
+                        <form onSubmit={e => handleSubmit(e)}>
+                            <input
+                                className='buy-sell-input'
+                                name='shares'
+                                type='number'
+                                // value={shares}
+                                onKeyDown={(e) => {
+                                    if (e.target.value < 0) { e.target.value = e.target.value * -1 }
+                                }}
+                                onChange={e => setShares(e.target.value)}
+                            ></input>
+                            <div className='buy-sell-btns'>
+                                <button id='buy-btn' type="submit" disabled={
+                                    sessionUser.balance <= selectedStock.currentPrice * shares
+                                }>Buy</button>
+                                <button id='sell-btn' onClick={e => sellShares(e)} disabled={
+                                    owned()
+                                }>Sell</button>
                             </div>
-                        </div>
-                        <div className='testBtn'>
-                            <AddToListModal stock={selectedStock} />
-                        </div>
+                        </form>
+                        {boughtShares &&
+                            <div>
+                                <a>Succesfully Bought {shares} shares</a>
+                            </div>
+                        }
+                        {soldShares &&
+                            <div className='sold-shares-content'>
+                                <p>Succesfully Sold {shares} shares</p>
+                                <p>It may take a few seconds to show on your available balance</p>
+                            </div>
+                        }
+                    </div>
+                    <div className='testBtn'>
+                        <AddToListModal stock={selectedStock} />
                     </div>
                 </div>
             </div>
