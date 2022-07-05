@@ -36,6 +36,10 @@ const SignUpForm = () => {
       if(email === "") {
         newErrors.push('Email is a mandatory Field')
       }
+
+      if (password.length < 5){
+        newErrors.push("password must be greater than 5 characters")
+      }
       if (password !== repeatPassword) {
         newErrors.push("Password should match")
       }
