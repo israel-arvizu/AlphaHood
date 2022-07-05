@@ -172,7 +172,7 @@ function Dashboard() {
                         <div id='create-list-content'>
                             <p id='create-list-header-text'>Lists</p>
                         </div>
-                        <ul>
+                        <ul className='list-stocks-content'>
                             <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
                             {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
                                 <div>{stock.ticker}</div>

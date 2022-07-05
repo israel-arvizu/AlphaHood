@@ -99,6 +99,10 @@
     border-radius: 5px;
 }
 
+.list-stocks-content{
+    list-style: none;
+}
+
 #create-list-header-text{
     display: flex;
     padding-left: 24px;
