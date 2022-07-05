@@ -86,7 +86,7 @@ export const editNewList = (id, name) => async (dispatch) => {
         })
 
     const data = await response.json()
-    console.log("!@#!#", data)
+
     dispatch(editlist(data));
     return response
 
@@ -112,7 +112,7 @@ export default function listsReducer(state = [], action) {
         case LOAD_LISTS:
             let newState = []
             if (state.length > 0) {
-                console.log(state)
+
                 state.forEach(list => {
                     if (action.lists.watchlists) {
                         action.lists.watchlists.forEach(watchlist => {

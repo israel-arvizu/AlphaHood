@@ -135,3 +135,31 @@
 #create-list-add-btn:hover{
     cursor: pointer;
 }
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .trendingtable{
+    width: 50%
+  }
+
+.tablecontainer{
+    display: flex;
+    width: 80%;
+
+    flex-direction: column;
+
+}
+
+.tlist{
+    color:grey
+}

@@ -37,8 +37,7 @@ function Dashboard() {
 
     const watchlists = useSelector(state=>state.lists)
     const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
-    console.log(portfoliolist)
-    console.log(userlog)
+
 
     if (!userlog){
         history.push('/')
@@ -72,7 +71,7 @@ function Dashboard() {
 
     const deleteAList = async (e) => {
         dispatch(deleteList(e.target.id))
-        console.log(e.target.id)
+
         e.preventDefault()
     }
     const createlist = async (e) => {

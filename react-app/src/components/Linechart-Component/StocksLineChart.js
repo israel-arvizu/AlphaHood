@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { valuesToArray, keysToArray, soloKeyToArray } from './LinechartData'
 
 function StockLineChart({ stockHistory }) {
-    console.log(stockHistory)
+
     const [update, setUpdate] = useState(false);
     const [portData, setPortData] = useState(valuesToArray(stockHistory))
     const [portLabels, setPortLabels] = useState(soloKeyToArray(stockHistory))
