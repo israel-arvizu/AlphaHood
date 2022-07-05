@@ -10,7 +10,7 @@ import AddToListModal from '../AddToListModal'
 import { loadAllLists } from '../../store/list'
 
 import StockLineChart from '../Linechart-Component/StocksLineChart'
-import { stockChartHistory } from '../../store/stocks'
+import { stockChartHistory } from '../../store/liststock';
 import './StockDetail.css'
 
 
@@ -31,7 +31,7 @@ function StockDetail() {
     const newsArticles = useSelector(state => state.newsReducer.news);
     const sessionUser = useSelector(state => state.session.user)
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
-    const chartData = useSelector(state => state.stocks.chartHistory)
+    const chartData = useSelector(state => state.listStockReducer.chartHistory)
 
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
@@ -66,7 +66,7 @@ function StockDetail() {
     useEffect(() => {
         if (marketState) {
             dispatch(updateStock(tickerUpper))
-            // dispatch(loadOwnedStocks(sessionUser.id))
+            dispatch(loadOwnedStocks(sessionUser.id))
             let currentDate = new Date()
             let currentHour = currentDate.getHours()
             let currentDay = currentDate.getDay()
@@ -116,7 +116,7 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        await dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         history.push('/dashboard')
     }
 
@@ -130,7 +130,7 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        await dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
         history.push('/dashboard')
     }
 
@@ -161,133 +161,126 @@ function StockDetail() {
     return (
         <>
             <UserNavBar />
-            <div className='parent-container'>
-                <div className='left-container'>
-                    <div className='top-details'>
-                        <h2>{selectedStock.name}</h2>
-                        <p className='price-container'>${selectedStock.currentPrice}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
-                        <p className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
-                            number > 0 ? <p>+${priceDif.toFixed(2)} (+{number}%)</p> : <p>${priceDif.toFixed(2)} ({number}%)</p>
-                        }</p>
-                    </div>
-                    <div className='graph-container'>
-                        <StockLineChart stockHistory={chartData} />
-                    </div>
-                    <h2>About</h2>
-                    <hr></hr>
-                    <div className='about-container'>
-                        <p id='long-summary'>{selectedStock.longBusinessSummary}</p>
-                        <div className='about-inner'>
-                            <div className='employees-container'>
-                                <p className='item-title'>Employees</p>
-                                <p className='item-info'>{formatter.format(selectedStock.fullTimeEmployees)}</p>
-                            </div>
-                            <div className='headquarters-container'>
-                                <p className='item-title'>Headquarters</p>
-                                <p className='item-info'>{selectedStock.city}, {selectedStock.state}</p>
-                            </div>
+            <div className='stock-detail-container'>
+                <div className='parent-container'>
+                    <div className='left-container'>
+                        <div className='top-details'>
+                            <h2>{selectedStock.name}</h2>
+                            <p className='price-container'>${selectedStock.currentPrice}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
+                            <p className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
+                                number > 0 ? <p>+${priceDif.toFixed(2)} (+{number}%)</p> : <p>${priceDif.toFixed(2)} ({number}%)</p>
+                            }</p>
                         </div>
-                    </div>
-                    <h2 id='key-banner'>Key Statistics</h2>
-                    <hr></hr>
-                    <div className='key-statistics'>
-                        <div className='marketCap-container key-container'>
-                            <p className='item-title'>Market Cap</p>
-                            <p className='item-info'>{
-                                letterFormatter.format(selectedStock.marketCap)}</p>
-                            {/* selectedStock.marketCap */}
+                        <div className='graph-container'>
+                            <StockLineChart stockHistory={chartData} />
                         </div>
-                        <div className='trailingPE-container key-container'>
-                            <p className='item-title'>Trailing P/E</p>
-                            <p className='item-info'>{selectedStock.trailingPE.toFixed(2)}</p>
-                        </div>
-                        <div className='dividendYield-container key-container'>
-                            <p className='item-title'>Dividend Yield</p>
-                            <p className='item-info'>{selectedStock.dividendYield || '—'}</p>
-                        </div>
-                        <div className='averageVolume-container key-container'>
-                            <p className='item-title'>Average Volume</p>
-                            <p className='item-info'>{letterFormatter.format(selectedStock.averageVolume)}</p>
-                        </div>
-                        <div className='dayHigh-container key-container'>
-                            <p className='item-title'>High Today</p>
-                            <p className='item-info'>${selectedStock.dayHigh}</p>
-                        </div>
-                        <div className='dayLow-container key-container'>
-                            <p className='item-title'>Low Today</p>
-                            <p className='item-info'>${selectedStock.dayLow}</p>
-                        </div>
-                        <div className='regularMarketOpen-container key-container'>
-                            <p className='item-title'>Open Price</p>
-                            <p className='item-info'>${selectedStock.regularMarketOpen}</p>
-                        </div>
-                        <div className='volume-container key-container'>
-                            <p className='item-title'>Volume</p>
-                            <p className='item-info'>{letterFormatter.format(selectedStock.volume)}</p>
-                        </div>
-                        <div className='fiftyTwoWeekHigh-container key-container'>
-                            <p className='item-title'>52 Week High</p>
-                            <p className='item-info'>${selectedStock.fiftyTwoWeekHigh}</p>
-                        </div>
-                        <div className='fiftyTwoWeekLow-container key-container'>
-                            <p className='item-title'>52 Week Low</p>
-                            <p className='item-info'>${selectedStock.fiftyTwoWeekLow}</p>
-                        </div>
-                    </div>
-                    {/* <div className='related-list-container'>
-                        <h2>Related Lists</h2>
-                        <button>{selectedStock.industry}</button>
-                        <button>{selectedStock.state}</button>
-                    </div> */}
-                    {/* <div className='news-container'>
-                <h2>News</h2>
-                {
-                    newsArticles ?
-                        <p>{
-                            newsArticles.title
-                        }</p> :
-                        <p> Sorry Couldn't Load News...</p>
-                }
-            </div> */}
-                    <h2>Analyst Ratings</h2>
-                    <hr></hr>
-                    <div className='analyst-rating-container'>
-                        <p>{selectedStock.recommendationKey}</p>
-                    </div>
-                    {/* <div className='Earnings'>
-                <h2>Earnings</h2>
-                <p>PUT EARNINGS HERE</p>
-            </div> */}
-                </div>
-                <div className='right-container'>
-                    <div className='right-inner-container'>
-                        <div className='buy-sell-container'>
-                            <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
-                            <hr></hr>
-                            <form onSubmit={e => handleSubmit(e)}>
-                                <input
-                                    name='shares'
-                                    type='number'
-                                    // value={shares}
-                                    onKeyDown={(e) => {
-                                        if (e.target.value < 0) { e.target.value = e.target.value * -1 }
-                                    }}
-                                    onChange={e => setShares(e.target.value)}
-                                ></input>
-                                <div className='buy-sell-btns'>
-                                    <button id='buy-btn' type="submit" disabled={
-                                        sessionUser.balance <= selectedStock.currentPrice * shares
-                                    }>Buy</button>
-                                    <button id='sell-btn' onClick={e => sellShares(e)} disabled={
-                                        owned()
-                                    }>Sell</button>
+                        <h2>About</h2>
+                        <hr></hr>
+                        <div className='about-container'>
+                            <p id='long-summary'>{selectedStock.longBusinessSummary}</p>
+                            <div className='about-inner'>
+                                <div className='employees-container'>
+                                    <p className='item-title'>Employees</p>
+                                    <p className='item-info'>{formatter.format(selectedStock.fullTimeEmployees)}</p>
                                 </div>
-                            </form>
+                                <div className='headquarters-container'>
+                                    <p className='item-title'>Headquarters</p>
+                                    <p className='item-info'>{selectedStock.city}, {selectedStock.state}</p>
+                                </div>
+                            </div>
                         </div>
+                        <h2 id='key-banner'>Key Statistics</h2>
+                        <hr></hr>
+                        <div className='key-statistics'>
+                            <div className='marketCap-container key-container'>
+                                <p className='item-title'>Market Cap</p>
+                                <p className='item-info'>{
+                                    letterFormatter.format(selectedStock.marketCap)}</p>
+                                {/* selectedStock.marketCap */}
+                            </div>
+                            <div className='trailingPE-container key-container'>
+                                <p className='item-title'>Trailing P/E</p>
+                                <p className='item-info'>{selectedStock.trailingPE.toFixed(2)}</p>
+                            </div>
+                            <div className='dividendYield-container key-container'>
+                                <p className='item-title'>Dividend Yield</p>
+                                <p className='item-info'>{selectedStock.dividendYield || '—'}</p>
+                            </div>
+                            <div className='averageVolume-container key-container'>
+                                <p className='item-title'>Average Volume</p>
+                                <p className='item-info'>{letterFormatter.format(selectedStock.averageVolume)}</p>
+                            </div>
+                            <div className='dayHigh-container key-container'>
+                                <p className='item-title'>High Today</p>
+                                <p className='item-info'>${selectedStock.dayHigh}</p>
+                            </div>
+                            <div className='dayLow-container key-container'>
+                                <p className='item-title'>Low Today</p>
+                                <p className='item-info'>${selectedStock.dayLow}</p>
+                            </div>
+                            <div className='regularMarketOpen-container key-container'>
+                                <p className='item-title'>Open Price</p>
+                                <p className='item-info'>${selectedStock.regularMarketOpen}</p>
+                            </div>
+                            <div className='volume-container key-container'>
+                                <p className='item-title'>Volume</p>
+                                <p className='item-info'>{letterFormatter.format(selectedStock.volume)}</p>
+                            </div>
+                            <div className='fiftyTwoWeekHigh-container key-container'>
+                                <p className='item-title'>52 Week High</p>
+                                <p className='item-info'>${selectedStock.fiftyTwoWeekHigh}</p>
+                            </div>
+                            <div className='fiftyTwoWeekLow-container key-container'>
+                                <p className='item-title'>52 Week Low</p>
+                                <p className='item-info'>${selectedStock.fiftyTwoWeekLow}</p>
+                            </div>
+                        </div>
+                        {/* <h2>Analyst Ratings</h2>
+                        <hr></hr> */}
+                        {/* <div className='analyst-rating-container'>
+                            <div className='reco-circle'>
+                                <div className='circle-inner-contain'>
+                                    <p id='inside-circle'>{Math.round((Math.random() * (100 - 51) + 51))}%</p>
+                                    <span id='inside-circle-2'>OF RATINGS SUGGEST</span>
+                                </div>
+                            </div>
+                            <div className={selectedStock.recommendationKey.includes('buy') ? 'recommend-buy' : selectedStock.recommendationKey.includes('sell') ? 'recommend-sell' : 'recommend-hold'}>
+                                <p>{Math.round((Math.random() * (100 - 51) + 51))}% OF RATINGS SUGGEST {
+                                    selectedStock.recommendationKey.includes('strong' && 'buy') ? "buy" : selectedStock.recommendationKey.includes('strong' && 'sell') ? "sell" : "hold"
+                                }ing {selectedStock.ticker}</p>
+                            </div>
+                        </div> */}
                     </div>
-                    <div className='testBtn'>
-                        <AddToListModal stock={selectedStock} />
-
+                    <div className='right-container'>
+                        <div className='right-inner-container'>
+                            <div className='buy-sell-container'>
+                                <h2 id='trade-tag'>Trade {selectedStock.ticker}</h2>
+                                <hr></hr>
+                                <form onSubmit={e => handleSubmit(e)}>
+                                    <input
+                                        className='buy-sell-input'
+                                        name='shares'
+                                        type='number'
+                                        // value={shares}
+                                        onKeyDown={(e) => {
+                                            if (e.target.value < 0) { e.target.value = e.target.value * -1 }
+                                        }}
+                                        onChange={e => setShares(e.target.value)}
+                                    ></input>
+                                    <div className='buy-sell-btns'>
+                                        <button id='buy-btn' type="submit" disabled={
+                                            sessionUser.balance <= selectedStock.currentPrice * shares
+                                        }>Buy</button>
+                                        <button id='sell-btn' onClick={e => sellShares(e)} disabled={
+                                            owned()
+                                        }>Sell</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div className='testBtn'>
+                            <AddToListModal stock={selectedStock} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,130 @@
 .usernav-container {
+    position: fixed;
+    top: 0;
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     justify-content: space-between;
+    width: 100vw;
+    background-color: black;
+    height: 75px;
+
+    /* border: 1px solid white; */
+
+}
+
+.outer-container {
+    margin-top: 100px;
+}
+
+.right-nav-container {
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none;
+}
+
+.wallet-link {
+    text-decoration: none;
+    color: white;
+}
+
+.home-logo {
+    max-height: 140px;
+    max-width: 140px;
+
+}
+
+.account-dropdown {
+    position: absolute;
+    background-color: rgb(30, 33, 36);
+    width: 284px;
+    overflow: hidden;
+    border: 0.5px solid grey;
+    border-radius: 4px;
+    font-size: 14px;
+    right: 0px;
+    text-align: left;
+
+    margin-top: 20px;
+    z-index: 5;
+}
+
+.wallet-link:hover {
+    color: rgb(3,200,5);
+}
+
+
+.account-word {
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-underline-offset: 10.5px;
+    text-decoration-color:rgb(3,200,5) !important;
+    text-decoration-thickness: 2px !important;
+    user-select: none;
+    text-decoration: none;
+}
+
+.account-word:hover {
+    color: rgb(255, 80, 0) !important;
+    cursor: pointer;
+  }
+
+.account-links {
+    border-top: 0.5px solid grey
+    ;
+}
+
+.account-link:hover {
+    color: rgb(255, 80, 0);
+}
+
+.account-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-direction: column;
+    font-weight: bold;
+
+}
+
+
+.dropdown-values {
+    font-weight: bold;
+}
+
+.account-name {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    font-size: 20px;
+
+}
+
+#account-user-name {
+display: flex;
+justify-content: center;
+margin-top: 10px;
+font-size: 200px;
+}
+
+.account-value {
+    display: flex;
+    justify-content: center;
+}
+
+.investments-name {
+    color: rgb(255, 80, 0);
+    margin-right: 10px;
+}
+
+.investments-name2 {
+    color:rgb(3,200,5);
+    margin-right: 10px;
 }

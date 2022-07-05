@@ -1,23 +1,10 @@
 const LOAD_STOCKS = 'stocks/LOAD_STOCKS'
-const LOAD_PORTFOLIO = 'stocks/LOAD_PORTFOLIO'
-const LOAD_CURR_PORTFOLIO = 'stocks/LOAD_CURR_PORTFOLIO'
 const GET_STOCK = 'stocks/GET_STOCK'
 const BUY_STOCK = 'stocks/BUY_STOCK'
-const STOCK_CHART = 'stocks/STOCK_CHART'
 const LOAD_OWNED = 'stocks/LOAD_OWNED'
 
 const loadstocks = (stocks) => ({
     type: LOAD_STOCKS,
-    payload: stocks
-})
-
-const loadcurrportfolio = (stocks) => ({
-    type: LOAD_CURR_PORTFOLIO,
-    payload: stocks
-})
-
-const loadportfolio = (stocks) => ({
-    type: LOAD_PORTFOLIO,
     payload: stocks
 })
 
@@ -36,10 +23,6 @@ const loadOwned = (stocks) => ({
     payload: stocks
 })
 
-const loadChart = (data) => ({
-    type: STOCK_CHART,
-    payload: data
-})
 // export const loadOwnedStocks = (id) => async (dispatch) => {
 //     const response = await fetch(`/api/stocks/loadOwnedStocks/${id}`)
 //     const data = await response.json()
@@ -71,19 +54,6 @@ export const loadstocklist = (list) => async (dispatch) => {
     return response
 }
 
-export const loadCurrentPortfolio = (id) => async (dispatch) => {
-    const response = await fetch(`/api/stocks/getportfolio/${id}`);
-    const data = await response.json()
-    dispatch(loadcurrportfolio(data));
-    return response
-}
-
-export const loadPortfolio = (id) => async (dispatch) => {
-    const response = await fetch(`/api/stocks/loadportfolio/${id}`);
-    const data = await response.json()
-    dispatch(loadportfolio(data));
-    return response
-}
 
 export const getOneStock = (ticker) => async (dispatch) => {
     const response = await fetch(`/api/stocks/${ticker}`) //GRAB STOCK FROM DB
@@ -94,14 +64,6 @@ export const getOneStock = (ticker) => async (dispatch) => {
     }
 }
 
-export const stockChartHistory = (ticker) => async (dispatch) => {
-    const response = await fetch(`/api/stocks/chart/${ticker}`)
-
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(loadChart(data))
-    }
-}
 
 export const updateStock = (ticker) => async dispatch => {
     const response = await fetch(`/api/stocks/update/${ticker}`,
@@ -131,20 +93,12 @@ export default function stocksReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_STOCKS:
             return { ...state, stocks: action.payload }
-        case LOAD_PORTFOLIO:
-            return { ...state, portfolio: action.payload }
         case LOAD_OWNED:
             return { ...state, myPortfolio: action.payload }
-        case LOAD_CURR_PORTFOLIO:
-            newState = { ...state }
-            newState["CurrentPortfolio"] = action.payload
-            return newState
         case GET_STOCK:
-            newState = {}
+            newState = {...state}
             newState[action.payload.ticker] = action.payload
             return newState
-        case STOCK_CHART:
-            return {...state, chartHistory: action.payload }
         case BUY_STOCK:
             return { ...state }
         default:

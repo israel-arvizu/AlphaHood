@@ -1,6 +1,6 @@
 from datetime import date
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db, Stock, Portfolio, Transaction
+from app.models import User, db, Stock, Portfolio, Transaction, Watchlist, List
 import datetime
 import yfinance as yf
 import pandas as pd
@@ -82,7 +82,21 @@ def buy_stock(ticker):
     db.session.commit()
     ownedBool = False
 
-    #check if user already owns stock
+    portfolioWatchList = Watchlist.query.filter_by(userId=(currentUserId), name=('Portfolio')).first()
+    portfolioWatchListId = portfolioWatchList.id
+    allLists = List.query.filter_by(watchlistId=(portfolioWatchListId))
+    inPortfolio = False
+    for item in allLists:
+        if item.stockId == stockId:
+            inPortfolio = True
+    if(inPortfolio == False):
+        newList = List(
+            stockId=stockId,
+            watchlistId=portfolioWatchListId
+        )
+        db.session.add(newList)
+        db.session.commit()
+
     allOwned = Portfolio.query.filter_by(userId=(f"{currentUserId}"))
     for row in allOwned:
         if(row.stockId == stockId):
@@ -118,13 +132,27 @@ def sell_stock(ticker):
     user.balance = user.balance + transactionPrice
     db.session.commit()
     ownedBool = False
+    ownedShares = 0
+
+
 
     allOwned = Portfolio.query.filter_by(userId=(f"{currentUserId}"))
     for row in allOwned:
         if(row.stockId == stockId):
             row.shares = row.shares - shareCount
+            ownedShares = row.shares
             db.session.commit()
-            return jsonify('Stock sold')
+
+    portfolioWatchList = Watchlist.query.filter_by(userId=(currentUserId), name=('Portfolio')).first()
+    portfolioWatchListId = portfolioWatchList.id
+    if(ownedShares == 0):
+        allLists = List.query.filter_by(watchlistId=(portfolioWatchListId), stockId=(stockId)).delete()
+        db.session.commit()
+
+    return jsonify('Stock Sold')
+
+
+
 
 @stock_routes.route('/loadOwnedStocks/<int:id>', methods=['GET'])
 @login_required
@@ -171,16 +199,26 @@ def portfolio(id):
         "shares": stock.shares,
         }
         stockList.append(newDict)
-
+    i = 0
+    errors = [];
     for stock in stockList:
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
         numOfShares = stock["shares"]
         for stock in stockTicker:
-            tick = yf.Ticker(stock.ticker)
-            currentStock = tick.info
-            portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+            try:
+                tick = yf.Ticker(stock.ticker)
+                currentStock = tick.info
+                portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+                i += 1;
+                print(i)
+            except:
+                i += 1;
+                print(i)
+                errors.append(stock.ticker);
+                continue
+    returnObject = {"value": portfolioValue, "errors": errors}
 
-    return jsonify(portfolioValue)
+    return jsonify(returnObject)
 
 @stock_routes.route('/loadportfolio/<int:id>')
 def portfolioList(id):
@@ -221,7 +259,6 @@ def portfolioList(id):
             portDict[splitList[0]] += float(splitList[1])
         else:
             portDict[splitList[0]] = float(splitList[1])
-
     return jsonify(portDict)
 
 @stock_routes.route('/chart/<ticker>')

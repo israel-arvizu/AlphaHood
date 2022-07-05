@@ -1,9 +1,5 @@
 [
     {
-        "name": "The AES Corporation",
-        "ticker": "AES"
-    },
-    {
         "name": "A. O. Smith Corporation",
         "ticker": "AOS"
     },
@@ -322,10 +318,6 @@
     {
         "name": "Cadence Design Systems, Inc.",
         "ticker": "CDNS"
-    },
-    {
-        "name": "Caesars Entertainment, Inc.",
-        "ticker": "CZR"
     },
     {
         "name": "Camden Property Trust",

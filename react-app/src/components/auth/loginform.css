@@ -1,12 +1,9 @@
 
-
   .login-page{
     display: flex;
     font-family: 'Open Sans', sans-serif;
     flex-direction: row;
-
   }
-
 
   .login-img {
     display:flex;
@@ -153,3 +150,43 @@
   .submit-button:hover{
     opacity: 90%;
   }
+
+
+
+  .leftSideForm {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    float: left;
+    height: 100%;
+    background-color: #282828;
+    z-index: 1010101010
+
+  }
+
+  .rightsideForm {
+  position: relative;
+  width: 50%;
+  float: left;
+  height: 100%;
+  background-color: #0080ff;
+  z-index: 1010101010
+}
+
+.logout-btn {
+  border: none;
+  background: none;
+  height: 40px;
+  width: 40px;
+  font-weight: bold;
+  color: white;
+
+}
+
+.logout-btn:hover {
+  color: rgb(255,80,0);
+  cursor: pointer;
+
+}
+
