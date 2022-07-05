@@ -1,11 +1,8 @@
-
   .login-page{
     display: flex;
     font-family: 'Open Sans', sans-serif;
     flex-direction: row;
-
   }
-
 
   .login-img {
     display:flex;
@@ -166,8 +163,6 @@
     z-index: 1010101010
 
   }
-
-
 
   .rightsideForm {
   position: relative;

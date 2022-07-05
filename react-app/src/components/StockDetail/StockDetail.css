@@ -1,4 +1,4 @@
-body {
+.stock-detail-container {
     display: grid;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -58,6 +58,8 @@ body {
 
 .about-container {
     display: grid;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .about-inner {
@@ -101,7 +103,7 @@ body {
     align-items: center;
 }
 
-input {
+.buy-sell-input {
     padding: 6px 12px;
     background: rgb(31, 32, 35);
     border: 1px solid rgb(60, 63, 68);
@@ -113,18 +115,18 @@ input {
     transition: border 0.15s ease 0s;
 }
 
-input::placeholder {
+.buy-sell-input::placeholder {
     display: none;
 }
 
-input:focus {
+.buy-sell-input:focus {
     outline: none;
     box-shadow: none;
     border-color: rgb(3, 200, 5);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.buy-sell-input::-webkit-outer-spin-button,
+.buy-sell-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }

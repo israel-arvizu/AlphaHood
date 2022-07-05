@@ -36,7 +36,6 @@ function Dashboard() {
     const watchlists = useSelector(state=>state.lists)
     const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
 
-
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.portfolio.portfolio);
     const currentPortfolio = useSelector(state => state.portfolio.CurrentPortfolio)
@@ -107,8 +106,8 @@ function Dashboard() {
                 <div className='outer-left-container'>
                     <div className='portfolio-container'>
                         <div>
-                            <p>{ updateLog }</p>
-                            <p id='portfolio-value-cont'>${ displayPort }</p>
+                            <p>{updateLog}</p>
+                            <p id='portfolio-value-cont'>${displayPort}</p>
                         </div>
                         <div id='chart-container-main'>
                             <LineChart portfolio={ portfolioHistory } />
@@ -118,38 +117,38 @@ function Dashboard() {
                     </div>
                     <div className='portfolio-buying-container'>
                         <p id='buying-power-header'>Buying Power</p>
-                        <p id='buying-power-header'>${ user.balance.toFixed(2) }</p>
+                        <p id='buying-power-header'>${user.balance.toFixed(2)}</p>
                     </div>
                     <hr className='line-break-dashboard'></hr>
                     <div className='trending-list-main-container'>
                         <p id='trending-list-header'>Trending Lists</p>
                         <hr className='line-break-dashboard'></hr>
                         <div className='trending-list-button-container'>
-                            <NavLink to='/trendinglists/top-hot-10' style={ { textDecoration: 'none' } }>
+                            <NavLink to='/trendinglists/top-hot-10' style={{ textDecoration: 'none' }}>
                                 <div className='trending-list-button'>
                                     <img className='trending-list-image-btn' src='https://cdn.robinhood.com/app_assets/list_illustrations/100_most_popular/circle_28/1x.png' />
                                     <p className='trending-list-text-btn'>Top Hot 10</p>
                                 </div>
                             </NavLink>
-                            <NavLink to='/trendinglists/creators-choice' style={ { textDecoration: 'none' } }>
+                            <NavLink to='/trendinglists/creators-choice' style={{ textDecoration: 'none' }}>
                                 <div className='trending-list-button'>
                                     <img className='trending-list-image-btn' src='https://cdn.robinhood.com/app_assets/list_illustrations/20_most_popular_etfs/circle_28/1x.png' />
                                     <p className='trending-list-text-btn'>Creators Choice</p>
                                 </div>
                             </NavLink>
-                            <NavLink to='/trendinglists/25-most-popular' style={ { textDecoration: 'none' } }>
+                            <NavLink to='/trendinglists/25-most-popular' style={{ textDecoration: 'none' }}>
                                 <div className='trending-list-button'>
                                     <img className='trending-list-image-btn' src='https://cdn.robinhood.com/app_assets/list_illustrations/software/circle_28/1x.png' />
                                     <p className='trending-list-text-btn'>25 Most Popular</p>
                                 </div>
                             </NavLink>
-                            <NavLink to='/trendinglists/technology' style={ { textDecoration: 'none' } }>
+                            <NavLink to='/trendinglists/technology' style={{ textDecoration: 'none' }}>
                                 <div className='trending-list-button'>
                                     <img className='trending-list-image-btn' src='https://cdn.robinhood.com/app_assets/list_illustrations/technology/circle_28/1x.png' />
                                     <p className='trending-list-text-btn'>Technology</p>
                                 </div>
                             </NavLink>
-                            <NavLink to='/trendinglists/automotive' style={ { textDecoration: 'none' } }>
+                            <NavLink to='/trendinglists/automotive' style={{ textDecoration: 'none' }}>
                                 <div className='trending-list-button'>
                                     <img className='trending-list-image-btn' src='https://cdn.robinhood.com/app_assets/list_illustrations/automotive/circle_28/1x.png' />
                                     <p className='trending-list-text-btn'>Automotive</p>
@@ -178,13 +177,29 @@ function Dashboard() {
                     })} */}
                 </div>
                 <div className='outer-right-container'>
+                    WatchList
+                    <button onClick={() => setWatchlistName(true)}>+</button>
+
+                    {watchlistName &&
+                        <div>
+                            <form
+                                onSubmit={createlist}>
+                                <input name="listName"
+                                    type="text"
+                                    placeholder='Your list name'
+                                    value={newListName}
+                                    onChange={(e) => setNewListName(e.target.value)}></input>
+                                <button type="submit">Add List</button>
+                            </form>
+                        </div>
+                    }
                     <div>
                         <div id='create-list-content'>
                             <p id='create-list-header-text'>Lists</p>
                         </div>
                         <ul className='list-stocks-content'>
                             <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
-                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock => (
                                 <div>{stock.ticker}</div>
                             ))}
                             {!!watchlists.length &&
@@ -206,7 +221,6 @@ function Dashboard() {
                                         </li>
                                     )
                                 }})}
-
                         </ul>
                     </div>
                     <div>

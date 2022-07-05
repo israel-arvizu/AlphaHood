@@ -1,0 +1,60 @@
+.dataResult {
+    position: absolute;
+    margin-top: 5px;
+    width: 532px;
+    height: 200px;
+    background-color: rgb(31, 32, 35);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.dataResult::-webkit-scrollbar {
+    display: none;
+}
+
+.dataResult .dataItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+
+.dataResult p {
+    margin-left: 10px;
+}
+
+.dataResult a {
+    text-decoration: none;
+}
+
+.dataResult a:hover {
+    background-color: rgb(3, 200, 5);
+}
+
+.searchInputs {
+    /* margin-top: 105px; */
+    display: flex;
+}
+
+.search input {
+    background-color: rgb(0, 0, 0);
+    border: 2px;
+    border-color: rgb(31, 32, 35);
+    border-style: solid;
+    border-radius: 2px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size: 18px;
+    padding: 15px;
+    height: 20px;
+    width: 500px;
+    color: white;
+}
+
+
+.search input:focus {
+    background-color: rgb(29, 33, 35);
+}
