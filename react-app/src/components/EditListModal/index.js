@@ -7,8 +7,7 @@ function EditListModal({id}) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true) } id="editbuttonlist">Edit</button>
-      {console.log(showModal)}
+      <button className='watchlist-buttons-indivial-btn edit-btn-list' onClick={() => setShowModal(true) } id="editbuttonlist">Edit</button>
       {showModal &&
       (<Modal onClose={() => setShowModal(false)}>
           <EditList id={id} closeModal={() => setShowModal(false)}/>

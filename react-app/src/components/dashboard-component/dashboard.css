@@ -93,7 +93,8 @@
 .outer-right-container{
     border: 1px solid #40494E;
     width: 276px;
-    height: 789px;
+    min-height: 789px;
+    max-width: fit-content;
     margin-left: 3rem;
     background-color: #1E2124;
     border-radius: 5px;
@@ -101,6 +102,7 @@
 
 .list-stocks-content{
     list-style: none;
+    padding-left: 0px;
 }
 
 #create-list-header-text{
@@ -133,5 +135,210 @@
 }
 
 #create-list-add-btn:hover{
+    cursor: pointer;
+}
+
+.watchlist-form-container{
+    width: 276px;
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.watchlist-button-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding-top: 1rem;
+}
+
+#watchlist-input-form{
+    width: 160px;
+    height: 34px;
+    background-color: #30363A;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    padding-left: 1rem;
+    color: white;
+}
+
+.watchlist-button-form{
+    width: 96px;
+    height: 36px;
+    border-radius: 25px;
+    border: 1px solid #5AC53B;
+}
+
+.watchlist-button-form.create-buttn{
+    background-color: #5AC53B;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #1E2124;
+    margin-left: 1rem;
+}
+
+.watchlist-button-form.cancel-buttn{
+    background-color: transparent;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #5AC53B;
+    margin-right: 1rem;
+    border: 1px solid #5AC53B;
+}
+
+.watchlist-button-form:hover{
+    cursor: pointer;
+
+}
+
+.watchlist-dash-title{
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 15px;
+}
+
+.watchlist-headers-container{
+    width: 266px;
+    border-bottom: 1px solid #40494E;
+    padding-left: 10px;
+}
+
+.watchlist-dash-port-name{
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 15px;
+}
+
+.watchlist-headers-container-extra{
+    width: 266px;
+    border-bottom: 1px solid #40494E;
+    border-top: 1px solid #40494E;
+    padding-left: 10px;
+}
+
+.stock-list-link-container{
+    text-decoration: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 228px;
+    height: 60px;
+}
+
+.stock-list-link-container:hover{
+    background-color: #40494E;
+}
+
+.watchlist-stocks-linkable{
+    text-decoration: none !important;
+}
+
+.stock-inside-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stock-title-header{
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+
+}
+
+.stock-title-price-cont{
+    display: flex;
+    color: white;
+    font-size: small;
+    align-items: center;
+    justify-content: center;
+}
+
+.stock-list-link-container-portfolio{
+    text-decoration: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 228px;
+    height: 45px;
+}
+
+.watchlist-buttons-container-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.watchlist-buttons-indivial-btn{
+    width: 96px;
+    height: 36px;
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+.watchlist-buttons-indivial-btn:hover{
+   cursor: pointer;
+}
+
+.watchlist-buttons-indivial-btn.delete-btn-list{
+    background-color: #FF5000;
+    border: 1px solid #FF5000;
+    color: #1E2124
+}
+
+.watchlist-buttons-indivial-btn.edit-btn-list{
+    background-color: transparent;
+    border: 1px solid #FF5000;
+    color: #FF5000
+}
+
+#modal-content{
+    background-color: #40494E;
+    height: 150px;
+    width: 250px;
+    border-radius: 15px;
+}
+
+.modal-edit-list-content{
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+
+}
+
+#editinput-modal{
+    width: 125px;
+    background-color: #30363A;
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding-left: 10px;
+    color: white;
+    height: 20px;
+}
+
+#editlist-modal-header{
+    margin-bottom: 1rem;
+}
+
+.submitedit-btn-container{
+    padding-left: 1rem;
+}
+
+.submiteditbutton-modal{
+    width: 96px;
+    height: 36px;
+    border-radius: 25px;
+    font-weight: 600;
+    background-color: #5AC53B;
+    border: 1px solid #5AC53B;
+    color: #1E2124
+}
+
+.submiteditbutton-modal:hover{
     cursor: pointer;
 }
