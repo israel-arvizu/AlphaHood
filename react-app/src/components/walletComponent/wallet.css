@@ -1,0 +1,81 @@
+.bottom-body-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.money-wallet-container{
+    border: 1px solid #40494E;
+    border-radius: 5px;
+    width: 275px;
+    min-height: 300px;
+    height: fit-content;
+    background-color: #1E2124;
+}
+
+
+#money-wallet-header{
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 1px solid #40494E;
+}
+
+.money-wallet-text{
+    margin-left: 1rem;
+}
+
+.money-wallet-bottom-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#money-amount-label{
+    font-weight: 400;
+    font-size: 13px;
+    margin-left: 3rem;
+}
+
+#wallet-form-input-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 275px;
+    margin-top: 15px;
+}
+
+#wallet-form-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 275px;
+}
+
+#money-amount-select-table{
+    margin-right: 3rem;
+    background-color: transparent;
+    border: 1px solid #40494E;
+    border-radius: 5px;
+    color: #6e787e;
+    width: 120px;
+    height: 25px;
+}
+
+#money-amount-select-table:hover{
+    cursor: pointer;
+}
+
+#wallet-submit-button{
+    width: 150px;
+    height: 36px;
+    border-radius: 25px;
+    font-weight: 600;
+    background-color: #5AC53B;
+    border: 1px solid #5AC53B;
+    margin-top: 3rem;
+}
+
+#wallet-submit-button:hover{
+    cursor: pointer;
+}

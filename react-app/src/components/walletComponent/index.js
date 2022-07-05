@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import UserNavBar from '../UserNavBar';
 import { add_to_balance } from '../../store/session';
+import './wallet.css'
 
 function Wallet(){
     const dispatch = useDispatch()
@@ -23,17 +24,20 @@ function Wallet(){
     return (
         <>
         <UserNavBar />
-            <div>
+        <div className='bottom-body-container'>
+            <div className='money-wallet-container'>
+                <div id='money-wallet-header'>
+                    <p className='money-wallet-text'>Add Money to Your Wallet!</p>
+                </div>
+                <div className='money-wallet-bottom-container'>
+                    <p className='money-wallet-bottom-text'>Please Select Amount from Below</p>
+                </div>
                 <div>
-                    <h2>Add Money to Your Wallet!</h2>
-                    <div>
-                        <p>Please Select Amount from Below</p>
-                    </div>
-                    <div>
-                        <form onSubmit={purchaseAmount}>
-                            <div>
-                                <label htmlFor='amount'>Amount</label>
-                                <select value={amount} onChange={setValue}>
+                    <form onSubmit={purchaseAmount}>
+                        <div id='wallet-form-container'>
+                            <div id='wallet-form-input-container'>
+                                <label htmlFor='amount' id='money-amount-label'>Amount</label>
+                                <select  id='money-amount-select-table' value={amount} onChange={setValue}>
                                     <option value={25}>$25</option>
                                     <option value={50}>$50</option>
                                     <option value={100}>$100</option>
@@ -41,12 +45,13 @@ function Wallet(){
                                     <option value={1000}>$1000</option>
                                     <option value={2500}>$2500</option>
                                 </select>
-                                <button type='submit'>Purchase</button>
                             </div>
-                        </form>
-                    </div>
+                            <button id='wallet-submit-button' type='submit'>Purchase</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </>
     )
 }
