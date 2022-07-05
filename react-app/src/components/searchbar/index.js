@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import stockList from './data.json'
+import './searchbar.css'
 function SearchBar() {
     const [filteredData, setFilteredData] = useState([])
     const [entry, setEntry] = useState('')
@@ -22,7 +23,7 @@ function SearchBar() {
 
     return (
         <div className='search'>
-            <div className='searchInput'>
+            <div className='searchInputs'>
                 <input
                     type='text'
                     placeholder='Search for stocks...'
@@ -32,7 +33,7 @@ function SearchBar() {
             </div>
             {filteredData.length != 0 && (
                 <div className='dataResult'>
-                    {filteredData.slice(0, 15).map(value => {
+                    {filteredData.slice(0, 10).map(value => {
                         return (
                             <a key={value.ticker} className='dataItem' href={`/stocks/${value.ticker}`}>
                                 <p>{value.ticker}  {value.name}</p>
@@ -43,9 +44,6 @@ function SearchBar() {
             )}
         </div>
     )
-
-
-
 
 }
 export default SearchBar
