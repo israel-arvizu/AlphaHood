@@ -11,6 +11,7 @@ const UserAccountNav = () => {
     const { bool, setBool } = useListModal();
     const user = useSelector((state) => state.session.user)
     const myPortfolio = useSelector((state) => state.stocks.CurrentPortfolio)
+    const stocks = useSelector((state) => state.stocks)
 
     const [amount, setAmount] = useState(0);
 

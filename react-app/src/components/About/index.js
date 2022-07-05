@@ -11,6 +11,7 @@ const About = () => {
     const [person, setPerson] = useState();
     const user = useSelector((state) => state.session?.user)
 
+
     const [bio, setBio] = useState();
     const [favStock, setFaveStock] = useState();
     const [linkedIn, setLinkedIn] = useState();
@@ -35,10 +36,10 @@ const About = () => {
 
     const izzy = () => {
         setPerson("Israel Arvizu");
-        setBio("Software Engineering Student at App Academy");
-        setFaveStock("Nike Inc: NKE");
+        setBio("Computer Enthusiast | Technology Lover | City Life | Friends");
+        setFaveStock("Tesla INC: TSLA");
         setLinkedIn("https://www.linkedin.com/in/israel-arvizu-a11b87218/");
-        setGitHub("https://github.com/elisaia55")
+        setGitHub("https://github.com/israel-arvizu")
     }
 
     const brian = () => {
