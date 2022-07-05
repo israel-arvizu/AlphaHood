@@ -5,7 +5,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100vw;
+    width: 98vw;
     background-color: black;
     height: 75px;
 
@@ -117,14 +117,27 @@ font-size: 200px;
 .account-value {
     display: flex;
     justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .investments-name {
     color: rgb(255, 80, 0);
     margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .investments-name2 {
     color:rgb(3,200,5);
     margin-right: 10px;
+
+}
+
+.test-test {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
