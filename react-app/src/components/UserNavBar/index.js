@@ -4,6 +4,7 @@ import LogoutButton from '../auth/LogoutButton';
 import SearchBar from '../searchbar'
 import './UserNavBar.css'
 
+
 const UserNavBar = () => {
 
   return (

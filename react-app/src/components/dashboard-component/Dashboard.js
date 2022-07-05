@@ -17,6 +17,7 @@ function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
     const newsArticles = useSelector(state => state.newsReducer.news);
+    const userlog = useSelector(state=>state.session.user)
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
@@ -31,6 +32,9 @@ function Dashboard() {
     const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
     console.log(portfoliolist)
 
+    if (!userlog){
+        history.push('/')
+    }
 
 
 
