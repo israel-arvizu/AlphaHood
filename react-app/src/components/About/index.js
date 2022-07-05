@@ -52,7 +52,7 @@ const About = () => {
     return (
 
         <div className="about-main">
-            <div className="about-title">About Alphahood Developers</div>
+            <div className="about-title">About alphahood Developers</div>
             <div className="about-lower">
                 <div className="about-left">
                     <div className="about-name">

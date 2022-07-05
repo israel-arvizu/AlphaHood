@@ -51,7 +51,9 @@
     z-index: 5;
 }
 
-
+.wallet-link:hover {
+    color: rgb(3,200,5);
+}
 
 
 .account-word {
@@ -59,7 +61,7 @@
     font-weight: 800;
     cursor: pointer;
     text-underline-offset: 10.5px;
-    text-decoration-color:blue !important;
+    text-decoration-color:rgb(3,200,5) !important;
     text-decoration-thickness: 2px !important;
     user-select: none;
     text-decoration: none;
@@ -75,11 +77,16 @@
     ;
 }
 
+.account-link:hover {
+    color: rgb(255, 80, 0);
+}
+
 .account-link {
     display: flex;
     align-items: center;
     cursor: pointer;
     flex-direction: column;
+    font-weight: bold;
 
 }
 
@@ -93,7 +100,7 @@
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-bottom: .5px rgb(138, 138, 138) solid;
+
     font-size: 20px;
 
 }
@@ -108,4 +115,14 @@ font-size: 200px;
 .account-value {
     display: flex;
     justify-content: center;
+}
+
+.investments-name {
+    color: rgb(255, 80, 0);
+    margin-right: 10px;
+}
+
+.investments-name2 {
+    color:rgb(3,200,5);
+    margin-right: 10px;
 }

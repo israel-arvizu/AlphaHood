@@ -14,13 +14,15 @@
     left: 0;
     top: 0;
 
+
   }
 
   .about-title {
+    margin-top: 30px;
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 60px;
-    color: rgb(3,200,5);
+    color: rgb(0, 0, 0);
 
   }
 
@@ -68,6 +70,7 @@
     object-fit: cover;
     display: flex;
     justify-content: center;
+
   }
 
   .linkedin-img:hover {
@@ -82,7 +85,7 @@
 
   .about-me {
     display: flex;
-    flex-direction: column;
+
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -105,6 +108,7 @@
     font-weight: 600;
     cursor: pointer;
     text-align: center;
+    color: rgb(255, 255, 255);
   }
 
   .name-links:hover {

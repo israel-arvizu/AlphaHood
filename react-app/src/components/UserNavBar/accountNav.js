@@ -28,11 +28,11 @@ const UserAccountNav = () => {
             <div className="account-name"><div id="account-user-name"></div>{ user?.username }</div>
             <div className="portfolio-details">
                 <div className="portfolio-info">
-                    <h3 className="account-value">Total Investments:${ myPortfolio.toLocaleString("en-US") }</h3>
+                    <h3 className="account-value"><span className="investments-name">Total Investments:</span> ${ myPortfolio.toLocaleString("en-US") }</h3>
                     <div className="portfolio-value"></div>
                 </div>
                 <div className="avail-cash">
-                    <h3 className="account-value">Available Balance: ${ user?.balance.toLocaleString("en-US") }</h3>
+                    <h3 className="account-value"><span className="investments-name2"> Available Balance: </span>  ${ user?.balance.toLocaleString("en-US") }</h3>
                     <div className="portfolio-value"></div>
                 </div>
             </div>
