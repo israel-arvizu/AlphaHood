@@ -16,6 +16,8 @@ import './dashboard.css';
 function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const newsArticles = useSelector(state => state.newsReducer.news);
+    const userlog = useSelector(state=>state.session.user)
     // const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
@@ -35,6 +37,15 @@ function Dashboard() {
 
     const watchlists = useSelector(state=>state.lists)
     const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+    console.log(portfoliolist)
+    console.log(userlog)
+
+    if (!userlog){
+        history.push('/')
+    }
+
+
+
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.portfolio.portfolio);

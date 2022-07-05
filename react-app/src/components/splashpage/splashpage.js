@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { loadAllLists } from "../../store/list"
 import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
-import
+import logo from './logo.png'
 import './splashpage.css'
 
 
@@ -20,9 +20,9 @@ function SplashPage(){
         <header className="splash-header">
           <div className="splash-container">
             <div className="logo">
-              <img id="splashLogo" src='./logo.png' alt='a' />
+              <img id="splashLogo" src={logo} alt='a' />
             </div>
-            <nav>
+            <nav className="splashbuttons">
               <ul>
                 <li>
                   <a href='/about' exact={true} className='about-us'>
