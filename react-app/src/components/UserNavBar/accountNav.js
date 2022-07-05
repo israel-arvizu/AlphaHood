@@ -20,7 +20,12 @@ const UserAccountNav = () => {
 
 
     if (myPortfolio === undefined) {
-        return <h2>Loading Balance and Investments</h2>
+        return (
+        <div>
+            <h2>Loading Balance and Investments</h2>
+            <div className="acc-logout"><LogoutButton /></div>
+        </div>
+        )
     }
 
 
