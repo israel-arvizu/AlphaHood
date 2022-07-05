@@ -82,6 +82,7 @@ function Dashboard() {
             userId: userId
         }
         await dispatch(addNewList(newlist))
+        setNewListName("")
     }
 
 

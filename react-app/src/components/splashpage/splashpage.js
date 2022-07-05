@@ -1,5 +1,5 @@
-import {useState, useEffect, } from "react"
-import {useSelector, useDispatch} from 'react-redux'
+import { useState, useEffect, } from "react"
+import { useSelector, useDispatch } from 'react-redux'
 import { loadAllLists } from "../../store/list"
 import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
@@ -7,51 +7,65 @@ import logo from './logo.png'
 import './splashpage.css'
 
 
-function SplashPage(){
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+function SplashPage() {
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.session.user)
 
-
-
-
-
-    return (
-        <>
-        <header className="splash-header">
-          <div className="splash-container">
-            <div className="logo">
-              <img id="splashLogo" src={logo} alt='a' />
-            </div>
-            <nav className="splashbuttons">
-              <ul>
-                <li>
-                  <a href='/about' exact={true} className='about-us'>
-                    About Us
-                  </a>
-                </li>
-                  <button className="demo" type="submit">
-                    Demo
-                  </button>
-                <li>
-                <a href='/login' exact={true} className='login'>
-                    Login
-                    </a>
-                </li>
-                <li>
-                {!user && <a href='/sign-up' exact={true} className='sign-up'>
-                    Sign Up
-                  </a>
+  useEffect(()=>{
+    if(user){
+    dispatch(loadAllLists(user.id))
     }
-    {user && <a href='/dashboard' exact={true} className='sign-up'>
-        Home
-                  </a>}
-                </li>
-              </ul>
-            </nav>
+  }, [])
+
+
+
+
+
+  return (
+    <>
+      <header className="splash-header">
+        <div className="splash-container">
+          <div className="logo">
+            <img id="splashLogo" src={logo} alt='a' />
           </div>
-        </header>
-      </>
-      )
+          <nav className="splashbuttons">
+            <ul>
+              <li>
+                <a href='/about' exact={true} className='about-us'>
+                  About Us
+                </a>
+              </li>
+              <button className="demo" type="submit">
+                Demo
+              </button>
+              <li>
+                <a href='/login' exact={true} className='login'>
+                  Login
+                </a>
+              </li>
+              <li>
+                {!user && <a href='/sign-up' exact={true} className='sign-up'>
+                  Sign Up
+                </a>
+                }
+                {user && <a href='/dashboard' exact={true} className='sign-up'>
+                  Home
+                </a>}
+              </li>
+            </ul>
+          </nav>
+          <div>
+            <div>
+
+            </div>
+            <div>
+
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
+  )
 
 
 
