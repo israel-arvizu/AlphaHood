@@ -5,7 +5,7 @@ def seed_lists():
         stockId=1, watchlistId=1
     )
     listStock = List(
-        stockId=2, watchlistId=1
+        stockId=5, watchlistId=1
     )
 
     db.session.add(first)
