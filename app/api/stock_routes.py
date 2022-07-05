@@ -213,6 +213,7 @@ def portfolioList(id):
                 splitList[1] = float(splitList[1]) * numOfShares
                 listStock.append(splitList[0]+"    "+ str(splitList[1]))
             listTickers.append(listStock)
+    print('This is listTickers!', listTickers)
 
     portDict = {}
     for stockFrames in listStock:
@@ -221,7 +222,7 @@ def portfolioList(id):
             portDict[splitList[0]] += float(splitList[1])
         else:
             portDict[splitList[0]] = float(splitList[1])
-
+    print('This is waht im returning', portDict)
     return jsonify(portDict)
 
 @stock_routes.route('/chart/<ticker>')

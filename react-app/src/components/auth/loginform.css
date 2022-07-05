@@ -1,11 +1,4 @@
 
-body{
-    padding : 0%;
-
-    margin-bottom: 0%;
-    border: 0%;
-  }
-
   .login-page{
     display: flex;
     font-family: 'Open Sans', sans-serif;
