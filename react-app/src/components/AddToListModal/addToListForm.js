@@ -39,9 +39,9 @@ const AddToList = ({ stock, closeModal }) => {
   }
 
   useEffect(()=>{
-    console.log(disableArray.length)
+
     setDisableArraylength(disableArray.length)
-    console.log(disableArray.length)
+
   }, [disableArray])
 
   const checkLists = async (e, id) => {
@@ -113,18 +113,20 @@ const AddToList = ({ stock, closeModal }) => {
     <div classname="addtowatchliststock">
       <div className="addtolisttitle">Add to Your List</div>
       <div className="addtowatchlist">
-        <form
+        <form className="updatelists"
           onSubmit={watchlistsubmit}>
 
           {watchlists.map(watchlist => (
 
 
 
-            <div>
+            <div className="listofwatchlists">
 
 
-              <label>{watchlist.name}</label>
+              <label className="watchlistnames">{watchlist.name}</label>
               <input type="checkbox" id={`check-${watchlist.id}`} className="checkboxwatch" onChange={(e) => checkLists(e, watchlist.id)} />
+              <hr></hr>
+              <br></br>
               {!!liststocks && document.getElementById(`check-${watchlist.id}`) && liststocks[watchlist.id].forEach(list => {
 
                 if (list.ticker === stock.ticker) {
@@ -146,8 +148,6 @@ const AddToList = ({ stock, closeModal }) => {
             ))}
           <button id="submitadd" type="submit" >Update lists</button>
         </form>
-
-
 
       </div>
     </div>

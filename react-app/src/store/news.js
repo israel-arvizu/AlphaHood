@@ -17,7 +17,7 @@ export const loadHomeNews = () => async (dispatch) => {
 export const getNews = ticker => async (dispatch) => {
     const response = await fetch(`/api/news/${ticker}`)
     const data = await response.json();
-    console.log(data, '<--_DATA')
+
     dispatch(loadNews(data));
     return response;
 

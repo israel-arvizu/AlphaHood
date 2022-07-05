@@ -17,7 +17,7 @@ function TrendingLists() {
     let dispatch = useDispatch()
     let topic = []
     let {list} = useParams()
-    console.log(tech)
+
 
     function numToString(num) {
         var newValue = num;
@@ -106,17 +106,17 @@ function TrendingLists() {
                         <img></img>
                     </div>
                     <div>
-                        <div>
+                        <div className="tablecontainer">
                             <h1>{title}</h1>
-                            <p>description</p>
+
                             <div>
-                                <table>
+                                <table className = "trendingtable">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Price</th>
-                                        <th>Today</th>
-                                        <th>Market Cap</th>
+                                        <th className="tlist">Name</th>
+                                        <th className="tlist">Symbol</th>
+                                        <th className="tlist">Price</th>
+                                        <th className="tlist">Today</th>
+                                        <th className="tlist">Market Cap</th>
                                     </tr>
                                         {stockDetails.map(stock=>{
                                             return (
@@ -132,9 +132,7 @@ function TrendingLists() {
                                 </table>
                             </div>
                         </div>
-                        <div>
-                            <h3>WatchList</h3>
-                        </div>
+
 
                     </div>
                 </div>
