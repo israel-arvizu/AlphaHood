@@ -23,8 +23,7 @@ const SignUpForm = () => {
       if (username === "") {
         newErrors.push('Name cant be blank!')
       }
-
-      if (username < 3){
+      if (username.length < 3){
         newErrors.push("username must be at least 3 characters")
       }
 
@@ -154,7 +153,7 @@ const SignUpForm = () => {
           placeholder="Repeat Password"
         ></input>
       </div>
-      <button className= 'signupsubmit-button' type='submit'>Sign Up</button>
+        <button className= 'signupsubmit-button' type='submit' disabled={!!errors.length}>Sign Up</button>
       </div>
     </form>
     </div>

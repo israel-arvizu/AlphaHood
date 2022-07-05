@@ -110,3 +110,7 @@
   .submit-button:hover{
     opacity: 90%;
   }
+
+.signupsubmit-button:hover{
+  cursor: pointer;
+}
