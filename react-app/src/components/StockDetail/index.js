@@ -50,7 +50,7 @@ function StockDetail() {
         dispatch(loadOwnedStocks(sessionUser.id))
         dispatch(stockChartHistory(tickerUpper))
         dispatch(loadAllLists(sessionUser.id))
-        dispatch(updateStock(tickerUpper))
+        // dispatch(updateStock(tickerUpper))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -68,26 +68,26 @@ function StockDetail() {
     }, [dispatch])
 
 
-    useEffect(() => {
-        console.log(marketState, '<==================')
-        if (marketState) {
-            dispatch(updateStock(tickerUpper))
-            dispatch(loadOwnedStocks(sessionUser.id))
-            let currentDate = new Date()
-            let currentHour = currentDate.getHours()
-            let currentDay = currentDate.getDay()
-            let currentMinute = currentDate.getMinutes()
-            if (currentDay > 0 && currentDay < 6) {
-                if (currentHour < 16 && currentHour > 9) {
-                    setMarketState(true)
-                } else if (currentHour === 9 && currentMinute > 29) {
-                    setMarketState(true)
-                }
-            } else {
-                setMarketState(false)
-            }
-        }
-    })
+    // useEffect(() => {
+    //     console.log(marketState, '<==================')
+    //     if (marketState) {
+    //         dispatch(updateStock(tickerUpper))
+    //         dispatch(loadOwnedStocks(sessionUser.id))
+    //         let currentDate = new Date()
+    //         let currentHour = currentDate.getHours()
+    //         let currentDay = currentDate.getDay()
+    //         let currentMinute = currentDate.getMinutes()
+    //         if (currentDay > 0 && currentDay < 6) {
+    //             if (currentHour < 16 && currentHour > 9) {
+    //                 setMarketState(true)
+    //             } else if (currentHour === 9 && currentMinute > 29) {
+    //                 setMarketState(true)
+    //             }
+    //         } else {
+    //             setMarketState(false)
+    //         }
+    //     }
+    // })
 
     // news
     // useEffect(() => {
