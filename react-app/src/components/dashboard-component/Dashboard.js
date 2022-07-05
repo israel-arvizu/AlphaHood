@@ -237,7 +237,7 @@ function Dashboard() {
                                                             <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
                                                                 <div className='stock-inside-content' key={stock.ticker}>
                                                                     <p className='stock-title-header'>{stock.ticker}</p>
-                                                                    <p className='stock-title-price-cont'>${stock.currentPrice}</p>
+                                                                    <p className='stock-title-price-cont'>${stock.currentPrice.toFixed(2)}</p>
                                                                 </div>
                                                             </a>
                                                         </div>
