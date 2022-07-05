@@ -50,6 +50,7 @@ function StockDetail() {
         dispatch(loadOwnedStocks(sessionUser.id))
         dispatch(stockChartHistory(tickerUpper))
         dispatch(loadAllLists(sessionUser.id))
+        dispatch(updateStock(tickerUpper))
         // dispatch(getNews(tickerUpper))
         let currentDate = new Date()
         let currentHour = currentDate.getHours()
@@ -68,6 +69,7 @@ function StockDetail() {
 
 
     useEffect(() => {
+        console.log(marketState, '<==================')
         if (marketState) {
             dispatch(updateStock(tickerUpper))
             dispatch(loadOwnedStocks(sessionUser.id))
@@ -110,7 +112,7 @@ function StockDetail() {
             <div className='loading-dash-container'>
                 <div className='loading-dash-image'>
                     <div className='loading-dash-text-container'>
-                        <img src={ alphahoodblack } className="home-logo-alpha-loading"></img>
+                        <img src={alphahoodblack} className="home-logo-alpha-loading"></img>
                         <p className='loading-dash-text'>Loading the Latest </p>
                         <p className='loading-dash-text'>Please Wait...</p>
                         <div className='loading-dash-message-container'>
@@ -182,10 +184,10 @@ function StockDetail() {
                     <div className='left-container'>
                         <div className='top-details'>
                             <h2>{selectedStock.name}</h2>
-                            <p className='price-container'>${selectedStock.currentPrice}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
-                            <p className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
+                            <p className='price-container'>${selectedStock.currentPrice.toFixed(2)}{marketState ? '' : <p className='after-hours'>After hours</p>}</p>
+                            <div className={number > 0 ? 'positiveNum' : 'negativeNum'}>{
                                 number > 0 ? <p>+${priceDif.toFixed(2)} (+{number}%)</p> : <p>${priceDif.toFixed(2)} ({number}%)</p>
-                            }</p>
+                            }</div>
                         </div>
                         <div className='graph-container'>
                             <StockLineChart stockHistory={chartData} />

@@ -6,12 +6,12 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <li>
+        <li key={1}>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
         </li>
-        <li>
+        <li key={2}>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
