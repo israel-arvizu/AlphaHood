@@ -91,7 +91,6 @@ function StockDetail() {
     // useEffect(() => {
     //     if (marketState) {
 
-    //         console.log('GotNews')
     //     }
     // }, [dispatch])
 

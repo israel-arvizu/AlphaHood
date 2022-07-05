@@ -18,7 +18,6 @@ def loadNews():
         currentNews = yf.Ticker(newsList[random.randrange(0, 6)])
     except:
         raise NewsError("Couldn't Fetch News")
-    # print(currentNews.news)
     return jsonify(currentNews.news)
 
 
@@ -29,5 +28,4 @@ def loadTickerNews(ticker):
     stockNews = yf.Ticker(tickerUpper).news
 
     randomNews = stockNews[random.randrange(0, len(stockNews))]
-    # print(randomNews)
     return jsonify(randomNews)

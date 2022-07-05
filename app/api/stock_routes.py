@@ -16,8 +16,6 @@ stock_routes = Blueprint('stocks', __name__)
 def get_stock(ticker):
     tickerUpper = ticker.upper()
     selectedStock = Stock.query.filter(Stock.ticker == tickerUpper).first()
-    # newStock = yf.Ticker(selectedStock.ticker).info
-    # print(newStock)
     return jsonify(selectedStock.to_dict())
 
 @stock_routes.route('/update/<ticker>', methods=["POST"])
@@ -42,8 +40,6 @@ def update_stock(ticker):
     selectedStock.recommendationKey = newStock['recommendationKey']
 
     db.session.commit()
-    # print(selectedStock.currentPrice)
-    # print(newStock['currentPrice'])
     return jsonify(selectedStock.to_dict())
 
 # buy /create
@@ -60,11 +56,6 @@ def update_trending(ticker):
         stockArray = []
         stockobj = {"price": listStock.CurrentPrice, "Fifty Two Week": listStock.fiftyTwoWeekHigh, "Today": random.uniform(-3, 3), "MarketCap": stock.marketCap }
 
-
-
-
-    # print(selectedStock.currentPrice)
-    # print(newStock['currentPrice'])
     return jsonify(selectedStock.to_dict())
 
 @stock_routes.route('/<ticker>/buy', methods=['GET','POST'])
@@ -199,7 +190,6 @@ def portfolio(id):
         "shares": stock.shares,
         }
         stockList.append(newDict)
-    i = 0
     errors = [];
     for stock in stockList:
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
@@ -209,11 +199,7 @@ def portfolio(id):
                 tick = yf.Ticker(stock.ticker)
                 currentStock = tick.info
                 portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
-                i += 1;
-                print(i)
             except:
-                i += 1;
-                print(i)
                 errors.append(stock.ticker);
                 continue
     returnObject = {"value": portfolioValue, "errors": errors}

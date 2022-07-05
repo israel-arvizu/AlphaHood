@@ -65,10 +65,7 @@ def load_list():
 def add_stock():
 
     req = request.get_json()
-    print("23423423423423424323442", req)
     for lists in req['arrays']:
-        print(lists)
-
         newlist = List(
             stockId=req['stockId'],
             watchlistId=lists
@@ -93,7 +90,6 @@ def add_stock():
 def delete_stock():
     req=request.get_json()
     stockid = req['stockId']
-    print(req)
     for listid in req['arrays']:
         oldlist = List.query.filter_by(watchlistId=int(listid), stockId=stockid)
 
