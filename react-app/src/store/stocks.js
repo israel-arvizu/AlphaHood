@@ -127,7 +127,7 @@ export default function stocksReducer(state = initialState, action) {
             newState["CurrentPortfolio"] = action.payload
             return newState
         case GET_STOCK:
-            newState = {}
+            newState = {...state}
             newState[action.payload.ticker] = action.payload
             return newState
         case BUY_STOCK:
