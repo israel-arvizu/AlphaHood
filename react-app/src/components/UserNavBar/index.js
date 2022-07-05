@@ -56,20 +56,22 @@ const UserNavBar = () => {
       <div className='outer-container'>
 
         <div className='usernav-container'>
-          <div>
-            <NavLink to='/dashboard' exact={ true } className="home-logo">
-              <img src={ HomeLogo } className="home-logo"></img>
-            </NavLink>
-          </div>
-          <div className='searchbar-container'>
-            <SearchBar />
+          <div className='left-usernav-container'>
+            <div>
+              <NavLink to='/dashboard' exact={ true } className="home-logo">
+                <img src={ HomeLogo } className="home-logo-alpha"></img>
+              </NavLink>
+            </div>
+            <div className='searchbar-container'>
+              <SearchBar />
+            </div>
           </div>
           <div className='right-nav-container'>
             <div className='account-link' onClick={ () => history.push("/about") }>
-              About
+              <p className='user-navbar-text'>About</p>
             </div>
             <NavLink to='/wallet' className="account-word wallet-link">
-              Wallet
+              <p className='user-navbar-text'>Wallet</p>
             </NavLink>
             <div className='account'>
               <div
@@ -77,7 +79,7 @@ const UserNavBar = () => {
                 onClick={ () => showDropdown() }
                 ref={ account }
               >
-                Account
+               <p className='user-navbar-text'> Account</p>
               </div>
               <div className='account-dropdown hidden' ref={ dropdown }>
                 <UserAccountNav />

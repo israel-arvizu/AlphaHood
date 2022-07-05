@@ -7,10 +7,17 @@
     justify-content: space-between;
     width: 98vw;
     background-color: black;
-    height: 75px;
+    height: 64px;
 
     /* border: 1px solid white; */
 
+}
+
+.left-usernav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .outer-container {
@@ -21,6 +28,7 @@
     display: flex;
     width: 250px;
     justify-content: space-between;
+    margin-right: 5rem;
 }
 
 .hidden {
@@ -32,10 +40,20 @@
     color: white;
 }
 
-.home-logo {
-    max-height: 140px;
-    max-width: 140px;
+.user-navbar-text{
+    font-weight: 600;
+    font-size: 14px;
+}
 
+.home-logo-alpha {
+    margin-left: 2rem;
+    max-height: 130px;
+    max-width: 130px;
+
+}
+
+.searchbar-container{
+    margin-left: 16rem;
 }
 
 .account-dropdown {
