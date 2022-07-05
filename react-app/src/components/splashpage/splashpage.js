@@ -5,6 +5,7 @@ import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
 import logo from './logo.png'
 import './splashpage.css'
+import robinhood from './robinhood.png'
 
 
 function SplashPage() {
@@ -54,11 +55,13 @@ function SplashPage() {
               </li>
             </ul>
           </nav>
-          <div>
-            <div>
+          <div className="firstsection">
+            <div className="divhalf">
+              <img src={robinhood}></img>
 
             </div>
-            <div>
+            <div className="divhalf2">
+              <div className="innerhalf">Investing is simple here</div>
 
             </div>
           </div>
