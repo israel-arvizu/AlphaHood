@@ -16,7 +16,7 @@ import './dashboard.css';
 function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const newsArticles = useSelector(state => state.newsReducer.news);
+    // const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
@@ -27,9 +27,10 @@ function Dashboard() {
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
 
-    const watchlists = useSelector(state => state.lists)
-    const portfoliolist = watchlists.filter(watchlist => watchlist.name == "Portfolio")
-    console.log(portfoliolist)
+
+    const watchlists = useSelector(state=>state.lists)
+    const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
@@ -38,7 +39,7 @@ function Dashboard() {
 
     useEffect(() => {
         dispatch(loadAllLists(userId))
-        dispatch(loadHomeNews())
+        // dispatch(loadHomeNews())
         dispatch(loadPortfolio(user.id))
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
@@ -169,57 +170,55 @@ function Dashboard() {
                     })} */}
                 </div>
                 <div className='outer-right-container'>
-                    WatchList
-                    <button onClick={ () => setWatchlistName(true) }>+</button>
-
-                    { watchlistName &&
-                        <div>
-                            <form
-                                onSubmit={ createlist }>
-                                <input name="listName"
-                                    type="text"
-                                    placeholder='Your list name'
-                                    value={ newListName }
-                                    onChange={ (e) => setNewListName(e.target.value) }></input>
-                                <button type="submit">Add List</button>
-                            </form>
-                        </div>
-                    }
                     <div>
-                        <ul>
-                            <li>{ !!watchlists.length && !!portfoliolist && portfoliolist[0].name }</li>
-                            { !!liststocks && liststocks[portfoliolist[0].id].map(stock => (
-                                <div>{ stock.ticker }</div>
-                            )) }
-                            { !!watchlists.length &&
+                        <div id='create-list-content'>
+                            <p id='create-list-header-text'>Lists</p>
+                        </div>
+                        <ul className='list-stocks-content'>
+                            <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
+                            {!!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
+                                <div>{stock.ticker}</div>
+                            ))}
+                            {!!watchlists.length &&
+                            watchlists.map(watchlist=>{
+                                if(watchlist.name!=="Portfolio"){
+                                    return (
+                                        <li key={watchlist.id}>{watchlist.name}
 
-
-                                watchlists.map(watchlist => {
-                                    if (watchlist.name !== "Portfolio") {
-
-
-                                        return (
-                                            <li key={ watchlist.id }>{ watchlist.name }
-
-                                                { !!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
-                                                    return (
-                                                        <div key={ stock.ticker }>
-                                                            <span>{ stock.ticker }</span>
-                                                            <span>{ stock.currentPrice }</span>
-                                                        </div>
-                                                    )
-                                                }) }
-                                                <EditListModal id={ watchlist.id } />
-                                                <button id={ watchlist.id } onClick={ deleteAList }>Delete</button>
-                                            </li>
-                                        )
-                                    }
-                                }) }
-
-
-
+                                            {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
+                                                return (
+                                                    <div key={stock.ticker}>
+                                                        <span>{stock.ticker}</span>
+                                                        <span>{stock.currentPrice}</span>
+                                                    </div>
+                                                )
+                                            })}
+                                            <EditListModal id={watchlist.id} />
+                                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
+                                        </li>
+                                    )
+                                }})}
 
                         </ul>
+                    </div>
+                    <div>
+                        <div id='create-list-content'>
+                            <p id='create-list-header-text'>Create a List</p>
+                            <button id='create-list-add-btn' onClick={ () => setWatchlistName(true) }>+</button>
+                        </div>
+                        { watchlistName &&
+                            <div>
+                                <form
+                                    onSubmit={ createlist }>
+                                    <input name="listName"
+                                        type="text"
+                                        placeholder='Your list name'
+                                        value={ newListName }
+                                        onChange={ (e) => setNewListName(e.target.value) }></input>
+                                    <button type="submit">Add List</button>
+                                </form>
+                            </div>
+                        }
                     </div>
                 </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import "./signup.css"
 
 const SignUpForm = () => {
   let history = useHistory()
@@ -47,99 +48,80 @@ const SignUpForm = () => {
   if (user) {
     history.push('/');
   }
-
   return (
-    <div className='signup-page'>
-        <div className="leftimagediv">
-                    <img class="leftimage" src="https://cdn.robinhood.com/app_assets/odyssey/rockets.png" height="420"></img>
-        <div>
-
-
-
-        <div className="form-component-signup"></div>
-            <div className="leftSideForm">
-
-              <div className="topleft">
-                <div className="leftlogo">
-
-                </div>
-                <div className="middleleft">
-                  <div>
-                    <h2 className="logintitle">Create your login</h2>
-                  </div>
-                  <div>
-                    <span className="loginparagraph">We'll need your name, email address, and a unique password. You'll use this login to access Alphahood next time.</span>
-                  </div>
-                  <div className="leftimagediv">
-                    <img class="leftimage" src="https://cdn.robinhood.com/app_assets/odyssey/rockets.png" height="420">
-
-                    </img>
-                  </div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
-            <div className="rightsideForm">
-              {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
-
-            <form onSubmit={onSignUp}>
-            <div>
-
-              <label>User Name</label>
-              <input
-                type='text'
-                name='username'
-                onChange={updateUsername}
-                value={username}
-              ></input>
-            </div>
-            <div>
-              <label>Email</label>
-              <input
-                type='text'
-                name='email'
-                onChange={updateEmail}
-                value={email}
-              ></input>
-            </div>
-            <div>
-              <label>Birthday</label>
-              <input
-                type='date'
-                name='birthday'
-                onChange={updateBirthday}
-                value={birthday}
-              ></input>
-            </div>
-            <div>
-              <label>Password</label>
-              <input
-                type='password'
-                name='password'
-                onChange={updatePassword}
-                value={password}
-              ></input>
-            </div>
-            <div>
-              <label>Repeat Password</label>
-              <input
-                type='password'
-                name='repeat_password'
-                onChange={updateRepeatPassword}
-                value={repeatPassword}
-                required={true}
-              ></input>
-            </div>
-            <button type='submit'>Sign Up</button>
-            </form>
-            </div>
-            </div>
-    </div >
-  </div >
+    <div className = 'signup-page'>
+      <div className = 'background-color'/>
+        <h1 className= 'signup-header'>
+          Create your Login
+        </h1>
+        <p className= 'signup-desc'>
+      We'll need your name, email address, and a unique password. You'll use this login to access Robinhood next time.
+      </p>
+        <div className = 'signup-img'>
+            <img src="https://cdn.robinhood.com/app_assets/odyssey/rockets.png" id="signuprocket" alt="rockets"/>
+        </div>
+    <form className = 'signup-form'
+    onSubmit={onSignUp}>
+      <div className = 'signup-instructions'>
+        Enter your first and last name as they appear on your government ID.
+      </div>
+      <div className = 'inputs'>
+      <div>
+        {errors.map((error, ind) => (
+          <div key={ind}>{error}</div>
+        ))}
+      </div>
+      <div>
+        <input
+          type='text'
+          className='username'
+          onChange={updateUsername}
+          value={username}
+          placeholder="User Name"
+        ></input>
+      </div>
+      <div>
+        <input
+          type='text'
+          className='email'
+          onChange={updateEmail}
+          value={email}
+          placeholder="Email"
+        ></input>
+      </div>
+      <div>
+        <label className='birthday-label'>Birthday</label>
+        <input
+        type='date'
+        className='birthday'
+        onChange={updateBirthday}
+        value={birthday}
+        ></input>
+      </div>
+<div>
+        <input
+          type='password'
+          className='password'
+          onChange={updatePassword}
+          value={password}
+          placeholder="Password"
+        ></input>
+      </div>
+      <div>
+        <input
+          type='password'
+          className='repeat_password'
+          onChange={updateRepeatPassword}
+          value={repeatPassword}
+          required={true}
+          placeholder="Repeat Password"
+        ></input>
+      </div>
+      <button className= 'signupsubmit-button' type='submit'>Sign Up</button>
+      </div>
+    </form>
+    </div>
   );
-
 };
 
 export default SignUpForm;

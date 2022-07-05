@@ -89,3 +89,49 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.outer-right-container{
+    border: 1px solid #40494E;
+    width: 276px;
+    height: 789px;
+    margin-left: 3rem;
+    background-color: #1E2124;
+    border-radius: 5px;
+}
+
+.list-stocks-content{
+    list-style: none;
+}
+
+#create-list-header-text{
+    display: flex;
+    padding-left: 24px;
+    padding-right: 24px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+#create-list-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #40494E;
+    border-bottom: 1px solid #40494E;
+    width: 276px;
+    height: 46px;
+}
+
+#create-list-add-btn{
+    height: 43px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 25px;
+    margin-right: 1rem;
+}
+
+#create-list-add-btn:hover{
+    cursor: pointer;
+}

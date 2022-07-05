@@ -41,7 +41,7 @@ const LoginForm = () => {
   return (
     <div className='login-page'>
       <div className='login-img'>
-        <img src="https://cdn.robinhood.com/assets/generated_assets/webapp/632fcb3e7ed928b2a960f3e003d10b44.jpg" alt="login-img" />
+        <img src="https://cdn.robinhood.com/assets/generated_assets/webapp/632fcb3e7ed928b2a960f3e003d10b44.jpg" id="loginimg"alt="login-img" />
       </div>
 
       <div className='form-component'>
