@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -10,10 +10,44 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+
   const [repeatPassword, setRepeatPassword] = useState('');
   const [birthday, setBirthday] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+
+      let newErrors = []
+      if (username === "") {
+        newErrors.push('Name cant be blank!')
+      }
+
+      if (username < 3){
+        newErrors.push("username must be at least 3 characters")
+      }
+
+      if (!email.includes("@")){
+        newErrors.push('Enter a valid email')
+      }
+
+      if(email === "") {
+        newErrors.push('Email is a mandatory Field')
+      }
+      if (password !== repeatPassword) {
+        newErrors.push("Password should match")
+      }
+
+      if (!birthday){
+        newErrors.push("Enter Birthday")
+      }
+
+      setErrors(newErrors)
+
+
+  }, [username,email, password, repeatPassword] )
 
   const onSignUp = async (e) => {
     e.preventDefault();
