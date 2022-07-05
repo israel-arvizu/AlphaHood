@@ -6,7 +6,18 @@ Alphahood is a Robinhood clone where users are able to trade and invest into the
 
 Start Investing today! https://alphahood.herokuapp.com/
 
-##SPLASH PAGE 
+## SPLASH PAGE 
+![image](https://user-images.githubusercontent.com/99637335/177331424-ea54f8f5-a4b9-49ff-8497-d34b71e1f29a.png)
+
+## DASHBOARD/PORTFOLIO PAGE
+![image](https://user-images.githubusercontent.com/99637335/177331526-3a062b5c-a707-4c11-a7dd-d912bc9d46e9.png)
+
+## STOCK DETAILS PAGE
+![image](https://user-images.githubusercontent.com/99637335/177331605-7785efdd-a483-43f4-b5aa-bf2f0adb2772.png)
+
+## WALLET PAGE
+![image](https://user-images.githubusercontent.com/99637335/177331750-2080d204-a2d2-4315-9166-8de61467928c.png)
+
 
 
 ### Technologies Used : 
