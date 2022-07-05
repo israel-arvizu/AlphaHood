@@ -5,9 +5,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 95vw;
+    width: 100vw;
     background-color: black;
     height: 75px;
+
     /* border: 1px solid white; */
 
 }
@@ -34,6 +35,7 @@
 .home-logo {
     max-height: 140px;
     max-width: 140px;
+
 }
 
 .account-dropdown {

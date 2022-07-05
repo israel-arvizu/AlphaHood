@@ -10,7 +10,7 @@ import { loadOwnedStocks } from "../../store/ownedStocks";
 const UserAccountNav = () => {
     const { bool, setBool } = useListModal();
     const user = useSelector((state) => state.session.user)
-    const myPortfolio = useSelector((state) => state.stocks.CurrentPortfolio)
+    const myPortfolio = useSelector((state) => state.portfolio.CurrentPortfolio)
     const stocks = useSelector((state) => state.stocks)
 
     const [amount, setAmount] = useState(0);
@@ -29,7 +29,7 @@ const UserAccountNav = () => {
             <div className="account-name"><div id="account-user-name"></div>{ user?.username }</div>
             <div className="portfolio-details">
                 <div className="portfolio-info">
-                    <h3 className="account-value"><span className="investments-name">Total Investments:</span> ${ myPortfolio.toLocaleString("en-US") }</h3>
+                    <h3 className="account-value"><span className="investments-name">Total Investments:</span> ${ myPortfolio.value.toLocaleString("en-US") }</h3>
                     <div className="portfolio-value"></div>
                 </div>
                 <div className="avail-cash">
