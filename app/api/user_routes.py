@@ -13,7 +13,6 @@ def users():
 
 
 
-# Profile Page ???
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):

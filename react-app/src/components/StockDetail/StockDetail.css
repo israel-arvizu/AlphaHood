@@ -1,4 +1,4 @@
-body {
+.stock-detail-container {
     display: grid;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -7,6 +7,7 @@ body {
 .parent-container {
     display: grid;
     grid-template-columns: 3fr 1fr;
+    margin-top: -6rem;
 }
 
 .buy-sell-container {
@@ -58,6 +59,8 @@ body {
 
 .about-container {
     display: grid;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .about-inner {
@@ -101,7 +104,7 @@ body {
     align-items: center;
 }
 
-input {
+.buy-sell-input {
     padding: 6px 12px;
     background: rgb(31, 32, 35);
     border: 1px solid rgb(60, 63, 68);
@@ -113,18 +116,18 @@ input {
     transition: border 0.15s ease 0s;
 }
 
-input::placeholder {
+.buy-sell-input::placeholder {
     display: none;
 }
 
-input:focus {
+.buy-sell-input:focus {
     outline: none;
     box-shadow: none;
     border-color: rgb(3, 200, 5);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.buy-sell-input::-webkit-outer-spin-button,
+.buy-sell-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -201,3 +204,54 @@ input::-webkit-inner-spin-button {
     display: flex;
     flex-direction: column-reverse;
 }
+
+/* .analyst-rating-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.recommend-buy p {
+    color: rgb(3, 200, 5);
+}
+
+.recommend-sell p {
+    color: rgb(255, 80, 0);
+}
+
+.recommend-hold p {
+    color: rgb(3, 200, 5);
+}
+
+.reco-circle {
+    margin-top: 30px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#inside-circle {
+    padding: 0rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+#inside-circle-2 {
+    padding: 0rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.circle-inner-contain {
+    display: flex;
+} */
