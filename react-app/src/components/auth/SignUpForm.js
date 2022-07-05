@@ -19,7 +19,6 @@ const SignUpForm = () => {
 
 
   useEffect(()=>{
-
       let newErrors = []
       if (username === "") {
         newErrors.push('Name cant be blank!')

@@ -196,9 +196,9 @@ def portfolio(id):
         numOfShares = stock["shares"]
         for stock in stockTicker:
             try:
-                tick = yf.Ticker(stock.ticker)
-                currentStock = tick.info
-                portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+                # tick = yf.Ticker(stock.ticker)
+                # currentStock = tick.info
+                portfolioValue += stock.currentPrice * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
             except:
                 errors.append(stock.ticker);
                 continue
