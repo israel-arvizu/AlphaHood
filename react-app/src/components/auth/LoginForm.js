@@ -101,6 +101,9 @@ const LoginForm = () => {
               />
               <button type='submit' className='submit-button' >Login</button>
             </div>
+            <br></br>
+            <div><a href="/sign-up">Don't have an account?</a>
+            </div>
           </div>
         </form>
       </div>
