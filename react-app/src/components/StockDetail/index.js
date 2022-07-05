@@ -300,7 +300,6 @@ function StockDetail() {
                         {soldShares &&
                             <div className='sold-shares-content'>
                                 <p>Succesfully Sold {shares} shares</p>
-                                <p>It may take a few seconds to show on your available balance</p>
                             </div>
                         }
                     </div>

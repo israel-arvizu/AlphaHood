@@ -20,6 +20,7 @@
 
 #portfolio-value-cont{
     height: 40px;
+    margin-top: 5px;
     margin-bottom: 0px;
     font-weight: 500;
     font-size: 30px
@@ -427,4 +428,16 @@ table{
 .home-logo-alpha-loading{
     width: 30%;
     color: black;
+}
+
+#dashboard-port-update-text{
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border: 1px solid #FF5000;
+    border-radius: 5px;
+    padding: 6px;
+    width: fit-content;
+    background-color: transparent;
+    color: #FF5000;
 }

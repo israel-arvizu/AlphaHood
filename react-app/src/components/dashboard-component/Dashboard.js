@@ -11,6 +11,7 @@ import { loadStockList } from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
 import alphahoodblack from '../../images/alphahoodblack.png'
 import './dashboard.css';
+import { authenticate } from '../../store/session';
 
 
 
@@ -54,7 +55,7 @@ function Dashboard() {
 
     useEffect(() => {
         dispatch(loadAllLists(userId))
-        // dispatch(loadHomeNews())
+        dispatch(authenticate())
         dispatch(loadPortfolio(user.id))
         dispatch(loadCurrentPortfolio(user.id))
     }, [dispatch])
@@ -130,8 +131,9 @@ function Dashboard() {
             <div className='main-container-dash'>
                 <div className='outer-left-container'>
                     <div className='portfolio-container'>
-                        <div>
-                            <p>{updateLog}</p>
+                        <div>{updateLog.length > 0 &&
+                            <p id='dashboard-port-update-text'>{updateLog}</p>
+                        }
                             <p id='portfolio-value-cont'>${displayPort}</p>
                         </div>
                         <div id='chart-container-main'>
