@@ -21,7 +21,6 @@ function StockDetail() {
     const tickerUpper = ticker.toUpperCase()
     const stocks = useSelector(state => state.stocks)
     const selectedStock = stocks[tickerUpper]
-    const [marketState, setMarketState] = useState(false)
     const formatter = new Intl.NumberFormat('en')
     const letterFormatter = new Intl.NumberFormat('en-US', {
         notation: "compact",
@@ -33,9 +32,13 @@ function StockDetail() {
     const myPortfolio = useSelector(state => state.ownedStocks.myPortfolio)
     const chartData = useSelector(state => state.listStockReducer.chartHistory)
 
+    const [marketState, setMarketState] = useState(false)
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
     const [shares, setShares] = useState(0)
+    const [soldShares, setSoldShares] = useState(false);
+    const [boughtShares, setBoughtShares] = useState(false)
+
     // let marketOpen = false
     // let currentDate = new Date('June 30, 2022 13:20:00')
 
@@ -117,7 +120,7 @@ function StockDetail() {
             stockId: selectedStock.id
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
-        history.push('/dashboard')
+        setBoughtShares(true)
     }
 
     const sellShares = async (e) => {
@@ -131,7 +134,7 @@ function StockDetail() {
             stockId: selectedStock.id
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
-        history.push('/dashboard')
+        setSoldShares(true)
     }
 
     const owned = () => {
@@ -276,6 +279,16 @@ function StockDetail() {
                                         }>Sell</button>
                                     </div>
                                 </form>
+                                {boughtShares &&
+                                    <div>
+                                        <a>Succesfully Bought {shares} shares</a>
+                                    </div>
+                                }
+                                {soldShares &&
+                                    <div>
+                                        <a>Succesfully Sold {shares} shares</a>
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className='testBtn'>
