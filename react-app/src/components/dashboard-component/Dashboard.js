@@ -188,49 +188,48 @@ function Dashboard() {
                     })} */}
                 </div>
                 <div className='outer-right-container'>
-                    WatchList
-                    <button onClick={() => setWatchlistName(true)}>+</button>
-
-                    {watchlistName &&
-                        <div>
-                            <form
-                                onSubmit={createlist}>
-                                <input name="listName"
-                                    type="text"
-                                    placeholder='Your list name'
-                                    value={newListName}
-                                    onChange={(e) => setNewListName(e.target.value)}></input>
-                                <button type="submit">Add List</button>
-                            </form>
-                        </div>
-                    }
                     <div>
                         <div id='create-list-content'>
                             <p id='create-list-header-text'>Lists</p>
                         </div>
                         <ul className='list-stocks-content'>
-                            <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
-
+                            <div className='watchlist-headers-container'>
+                                <li className='watchlist-dash-port-name'>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
+                            </div>
                             {!!watchlists.length && !!liststocks && liststocks[portfoliolist[0].id].map(stock=>(
-
-                                <div>{stock.ticker}</div>
+                                <div className='stock-list-link-container-portfolio'>
+                                    <a style={{textDecoration: 'none'}} href={`/stocks/${stock.ticker.toUpperCase()}`}>
+                                        <div className='stock-inside-content' key={stock.ticker}>
+                                            <p className='stock-title-header'>{stock.ticker}</p>
+                                            <p className='stock-title-price-cont'>${stock.currentPrice}</p>
+                                        </div>
+                                    </a>
+                                </div>
                             ))}
                             {!!watchlists.length &&
                             watchlists.map(watchlist=>{
                                 if(watchlist.name!=="Portfolio"){
                                     return (
-                                        <li key={watchlist.id}>{watchlist.name}
-
+                                        <li key={watchlist.id}>
+                                            <div className='watchlist-headers-container-extra'>
+                                                <p className='watchlist-dash-title'>{watchlist.name}</p>
+                                            </div>
                                             {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
                                                 return (
-                                                    <div key={stock.ticker}>
-                                                        <span>{stock.ticker}</span>
-                                                        <span>{stock.currentPrice}</span>
+                                                    <div className='stock-list-link-container'>
+                                                        <a style={{textDecoration: 'none'}} href={`/stocks/${stock.ticker.toUpperCase()}`}>
+                                                            <div className='stock-inside-content' key={stock.ticker}>
+                                                                <p className='stock-title-header'>{stock.ticker}</p>
+                                                                <p className='stock-title-price-cont'>${stock.currentPrice}</p>
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                 )
                                             })}
-                                            <EditListModal id={watchlist.id} />
-                                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
+                                                <div className='watchlist-buttons-container-list'>
+                                                    <EditListModal id={watchlist.id} />
+                                                    <button className='watchlist-buttons-indivial-btn delete-btn-list' id={watchlist.id} onClick={deleteAList}>Delete List</button>
+                                                </div>
                                         </li>
                                     )
                                 }})}
@@ -243,14 +242,19 @@ function Dashboard() {
                         </div>
                         { watchlistName &&
                             <div>
-                                <form
+                                <form className='watchlist-form-container'
                                     onSubmit={ createlist }>
-                                    <input name="listName"
+                                    <input
+                                        id='watchlist-input-form'
+                                        name="listName"
                                         type="text"
-                                        placeholder='Your list name'
+                                        placeholder='List Name'
                                         value={ newListName }
                                         onChange={ (e) => setNewListName(e.target.value) }></input>
-                                    <button type="submit">Add List</button>
+                                    <div className='watchlist-button-container'>
+                                        <button className='watchlist-button-form cancel-buttn' onClick={() => setWatchlistName(false)}>Cancel</button>
+                                        <button className='watchlist-button-form create-buttn' type="submit">Create List</button>
+                                    </div>
                                 </form>
                             </div>
                         }

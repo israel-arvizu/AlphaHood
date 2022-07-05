@@ -25,40 +25,37 @@ const EditList = ({ id, closeModal}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(editNewList(id, name))
-    //closeModal()
+    closeModal()
   };
 
 
 
   return (
-  <div>
+  <div className="modal-edit-list-container">
     <div className="edit-list-form">
-    <div className="errors">
-          <ul>
-            {errorMessages.map(error=>(
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
+      <div className="errors">
+        <ul>
+          {errorMessages.map(error=>(
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      </div>
 
       <form className="edit-watchlist" onSubmit={handleSubmit}>
-
-        <label>Edit Playlist Name: </label>
-        <input
-        id = "editinput"
-          type="text"
-          placeholder="edit title"
-          value={name}
-          onChange={updateName}
-        />
-
+        <div className="modal-edit-list-content">
+          <label id='editlist-modal-header'>Edit Playlist Name </label>
+          <input
+            id="editinput-modal"
+            type="text"
+            placeholder="edit title"
+            value={name}
+            onChange={updateName}
+          />
+        </div>
         <br></br>
-        <br></br>
-
-
-
-        <button type="submit" className="submiteditbutton" disabled={!!errorMessages.length}>Submit Edit</button>
-
+        <div className="submitedit-btn-container">
+          <button type="submit" className="submiteditbutton-modal" disabled={!!errorMessages.length}>Submit Edit</button>
+        </div>
       </form>
     </div>
   </div>
