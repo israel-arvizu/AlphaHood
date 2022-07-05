@@ -11,6 +11,7 @@ const UserAccountNav = () => {
     const { bool, setBool } = useListModal();
     const user = useSelector((state) => state.session.user)
     const myPortfolio = useSelector((state) => state.stocks.CurrentPortfolio)
+    const stocks = useSelector((state) => state.stocks)
 
     const [amount, setAmount] = useState(0);
 
@@ -25,15 +26,15 @@ const UserAccountNav = () => {
 
     return (
         <>
-            <div className="account-name">{ user?.username }</div>
+            <div className="account-name"><div id="account-user-name"></div>{ user?.username }</div>
             <div className="portfolio-details">
                 <div className="portfolio-info">
-                    <h3 className="account-value">${ myPortfolio.toLocaleString("en-US") }</h3>
-                    <div className="portfolio-value">Total Investments</div>
+                    <h3 className="account-value"><span className="investments-name">Total Investments:</span> ${ myPortfolio.toLocaleString("en-US") }</h3>
+                    <div className="portfolio-value"></div>
                 </div>
                 <div className="avail-cash">
-                    <h3 className="account-value">${ user?.balance.toLocaleString("en-US") }</h3>
-                    <div className="portfolio-value">Available Balance</div>
+                    <h3 className="account-value"><span className="investments-name2"> Available Balance: </span>  ${ user?.balance.toLocaleString("en-US") }</h3>
+                    <div className="portfolio-value"></div>
                 </div>
             </div>
             <div className="account-links">

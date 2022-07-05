@@ -27,8 +27,10 @@ function Dashboard() {
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
 
+
     const watchlists = useSelector(state=>state.lists)
     const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
+
 
     const user = useSelector(state => state.session.user);
     const portfolio = useSelector(state => state.stocks.portfolio);
@@ -101,7 +103,7 @@ function Dashboard() {
                             <p id='portfolio-value-cont'>${ displayPort }</p>
                         </div>
                         <div id='chart-container-main'>
-                            <LineChart portfolio={portfolioHistory} />
+                            <LineChart portfolio={ portfolioHistory } />
                         </div>
                         <p id='period-dash-graph'>24h</p>
                         <hr className='line-break-dashboard'></hr>
@@ -196,6 +198,7 @@ function Dashboard() {
                                         </li>
                                     )
                                 }})}
+
                         </ul>
                     </div>
                     <div>
@@ -221,6 +224,7 @@ function Dashboard() {
 
 
             </div>
+
         </>
     )
 }
