@@ -1,6 +1,7 @@
 const LOAD_CURR_PORTFOLIO = 'stocks/LOAD_CURR_PORTFOLIO'
 const LOAD_PORTFOLIO = 'stocks/LOAD_PORTFOLIO'
 
+//ACTIONS
 const loadcurrportfolio = (stocks) => ({
     type: LOAD_CURR_PORTFOLIO,
     payload: stocks

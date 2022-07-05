@@ -175,7 +175,6 @@ def featurelists():
             tickerList.append(currentStockobj)
         except:
             continue
-
     return jsonify(tickerList)
 
 @stock_routes.route('/getportfolio/<int:id>')
