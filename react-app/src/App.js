@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -46,6 +46,7 @@ function App() {
     <ModalProvider>
       <BrowserRouter>
         <Switch>
+
           <Route path='/' exact={ true }>
             <SplashPage />
           </Route>
@@ -73,6 +74,10 @@ function App() {
           <ProtectedRoute path='/stocks/:ticker' exact={ true }>
             <StockDetail />
           </ProtectedRoute>
+          <Route path = '*'>
+            <Redirect to='/' />
+
+          </Route>
         </Switch>
       </BrowserRouter>
     </ModalProvider>
