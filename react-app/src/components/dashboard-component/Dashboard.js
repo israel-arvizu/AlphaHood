@@ -148,7 +148,7 @@ function Dashboard() {
                         <p id='buying-power-header'>${user.balance.toFixed(2)}</p>
                     </div>
                     <hr className='line-break-dashboard'></hr>
-                    <div className='trending-list-main-container'>
+                    {/* <div className='trending-list-main-container'>
                         <p id='trending-list-header'>Trending Lists</p>
                         <hr className='line-break-dashboard'></hr>
                         <div className='trending-list-button-container'>
@@ -183,7 +183,7 @@ function Dashboard() {
                                 </div>
                             </NavLink>
                         </div>
-                    </div>
+                    </div> */}
                     {/* <h2>News</h2> */}
                     {/* {newsArticles.map((article) => {
                         if (article.thumbnail !== undefined)
@@ -214,7 +214,7 @@ function Dashboard() {
                                 <li className='watchlist-dash-port-name'>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
                             </div>
                             {!!watchlists.length && !!liststocks && liststocks[portfoliolist[0].id].map(stock => (
-                                <div className='stock-list-link-container-portfolio'>
+                                <div className='stock-list-link-container-portfolio' key={stock.currentPrice}>
                                     <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
                                         <div className='stock-inside-content' key={stock.ticker}>
                                             <p className='stock-title-header'>{stock.ticker}</p>
@@ -233,7 +233,7 @@ function Dashboard() {
                                                 </div>
                                                 {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
                                                     return (
-                                                        <div className='stock-list-link-container'>
+                                                        <div className='stock-list-link-container' key={stock.ticker}>
                                                             <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
                                                                 <div className='stock-inside-content' key={stock.ticker}>
                                                                     <p className='stock-title-header'>{stock.ticker}</p>

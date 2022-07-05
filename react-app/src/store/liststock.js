@@ -20,7 +20,6 @@ export const loadStockList = (watchlistIds) => async(dispatch)=>{
         body: JSON.stringify(watchlistIds)
     })
     const data = await response.json()
-    console.log(data)
     dispatch(loadstocks(data))
     return response
 }
