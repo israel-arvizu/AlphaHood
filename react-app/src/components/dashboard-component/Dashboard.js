@@ -184,7 +184,7 @@ function Dashboard() {
                             </NavLink>
                         </div>
                     </div>
-                    <h2>News</h2>
+                    {/* <h2>News</h2> */}
                     {/* {newsArticles.map((article) => {
                         if (article.thumbnail !== undefined)
                             return (
