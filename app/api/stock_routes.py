@@ -199,16 +199,26 @@ def portfolio(id):
         "shares": stock.shares,
         }
         stockList.append(newDict)
-
+    i = 0
+    errors = [];
     for stock in stockList:
         stockTicker = Stock.query.filter(Stock.id == stock["stockId"])
         numOfShares = stock["shares"]
         for stock in stockTicker:
-            tick = yf.Ticker(stock.ticker)
-            currentStock = tick.info
-            portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+            try:
+                tick = yf.Ticker(stock.ticker)
+                currentStock = tick.info
+                portfolioValue += currentStock["currentPrice"] * numOfShares; # <--- CURR PRICE X NUMBER OF SHARES
+                i += 1;
+                print(i)
+            except:
+                i += 1;
+                print(i)
+                errors.append(stock.ticker);
+                continue
+    returnObject = {"value": portfolioValue, "errors": errors}
 
-    return jsonify(portfolioValue)
+    return jsonify(returnObject)
 
 @stock_routes.route('/loadportfolio/<int:id>')
 def portfolioList(id):
@@ -249,7 +259,6 @@ def portfolioList(id):
             portDict[splitList[0]] += float(splitList[1])
         else:
             portDict[splitList[0]] = float(splitList[1])
-
     return jsonify(portDict)
 
 @stock_routes.route('/chart/<ticker>')

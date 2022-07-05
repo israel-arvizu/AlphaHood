@@ -5,7 +5,7 @@ import { addNewList, loadAllLists, deleteList } from '../../store/list';
 import LineChart from '../../components/Linechart-Component/Linechart';
 import EditListModal from '../EditListModal';
 import EditList from '../EditListModal/EditListForm';
-import { loadPortfolio, loadCurrentPortfolio } from '../../store/stocks';
+import { loadCurrentPortfolio, loadPortfolio } from '../../store/portfolio';
 import { NavLink, useHistory } from 'react-router-dom';
 import { loadStockList } from '../../store/liststock';
 import UserNavBar from '../UserNavBar';
@@ -16,24 +16,29 @@ import './dashboard.css';
 function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const newsArticles = useSelector(state => state.newsReducer.news);
+    // const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
     const [displayPort, setDisplayPort] = useState(0)
-    const [portfolioHistory, setPortfolioHistory] = useState({})
+    const [portfolioHistory, setPortfolioHistory] = useState({
+        "2022-07-01 09:30:00-04:00": 0,
+        "2022-07-01 09:35:00-04:00": 0,
+        "2022-07-01 09:40:00-04:00": 0,
+        "2022-07-01 09:45:00-04:00": 0,
+        "2022-07-01 09:50:00-04:00": 0})
     const [portfolioGraph, setPortfolioGraph] = useState(false)
     const [updated, setUpdate] = useState(false)
     const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
     const [enteredWatch, setEnteredWatch] = useState(false)
 
-    const watchlists = useSelector(state => state.lists)
-    const portfoliolist = watchlists.filter(watchlist => watchlist.name == "Portfolio")
-    console.log(portfoliolist)
+
+    const watchlists = useSelector(state=>state.lists)
+    const portfoliolist = watchlists.filter(watchlist=>watchlist.name=="Portfolio")
 
     const user = useSelector(state => state.session.user);
-    const portfolio = useSelector(state => state.stocks.portfolio);
-    const currentPortfolio = useSelector(state => state.stocks.CurrentPortfolio)
+    const portfolio = useSelector(state => state.portfolio.portfolio);
+    const currentPortfolio = useSelector(state => state.portfolio.CurrentPortfolio)
     const liststocks = useSelector(state => state.listStockReducer.listStock)
 
     useEffect(() => {
@@ -78,16 +83,19 @@ function Dashboard() {
     //     return <h2>Loading News Articles</h2>
     // }
     if (currentPortfolio !== undefined && !updated) {
-        let price = currentPortfolio
+        let price = currentPortfolio.value
         price = price.toFixed(2)
         setDisplayPort(price)
         setUpdate(true)
-        setUpdateLog("")
+        if(currentPortfolio.errors.length > 0)
+            setUpdateLog("Errors in the API, Amount may be incorrect, please refresh to retry")
+        else
+            setUpdateLog("")
     }
 
     if (portfolio !== undefined && !portfolioGraph) {
         let portfolioHist = portfolio
-        setPortfolioHistory(portfolioHist)
+        setPortfolioHistory({...portfolioHist})
         setPortfolioGraph(true)
     }
     if (!watchlists) return <h2>loading</h2>
@@ -102,7 +110,7 @@ function Dashboard() {
                             <p id='portfolio-value-cont'>${displayPort}</p>
                         </div>
                         <div id='chart-container-main'>
-                            <LineChart portfolio={portfolioHistory} />
+                            <LineChart portfolio={ portfolioHistory } />
                         </div>
                         <p id='period-dash-graph'>24h</p>
                         <hr className='line-break-dashboard'></hr>
@@ -186,45 +194,59 @@ function Dashboard() {
                         </div>
                     }
                     <div>
-                        <ul>
+                        <div id='create-list-content'>
+                            <p id='create-list-header-text'>Lists</p>
+                        </div>
+                        <ul className='list-stocks-content'>
                             <li>{!!watchlists.length && !!portfoliolist && portfoliolist[0].name}</li>
                             {!!liststocks && liststocks[portfoliolist[0].id].map(stock => (
                                 <div>{stock.ticker}</div>
                             ))}
                             {!!watchlists.length &&
+                            watchlists.map(watchlist=>{
+                                if(watchlist.name!=="Portfolio"){
+                                    return (
+                                        <li key={watchlist.id}>{watchlist.name}
 
-
-                                watchlists.map(watchlist => {
-                                    if (watchlist.name !== "Portfolio") {
-
-
-                                        return (
-                                            <li key={watchlist.id}>{watchlist.name}
-
-                                                {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
-                                                    return (
-                                                        <div key={stock.ticker}>
-                                                            <span>{stock.ticker}</span>
-                                                            <span>{stock.currentPrice}</span>
-                                                        </div>
-                                                    )
-                                                })}
-                                                <EditListModal id={watchlist.id} />
-                                                <button id={watchlist.id} onClick={deleteAList}>Delete</button>
-                                            </li>
-                                        )
-                                    }
-                                })}
-
-
-
-
+                                            {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
+                                                return (
+                                                    <div key={stock.ticker}>
+                                                        <span>{stock.ticker}</span>
+                                                        <span>{stock.currentPrice}</span>
+                                                    </div>
+                                                )
+                                            })}
+                                            <EditListModal id={watchlist.id} />
+                                            <button id={watchlist.id} onClick={deleteAList}>Delete</button>
+                                        </li>
+                                    )
+                                }})}
                         </ul>
+                    </div>
+                    <div>
+                        <div id='create-list-content'>
+                            <p id='create-list-header-text'>Create a List</p>
+                            <button id='create-list-add-btn' onClick={ () => setWatchlistName(true) }>+</button>
+                        </div>
+                        { watchlistName &&
+                            <div>
+                                <form
+                                    onSubmit={ createlist }>
+                                    <input name="listName"
+                                        type="text"
+                                        placeholder='Your list name'
+                                        value={ newListName }
+                                        onChange={ (e) => setNewListName(e.target.value) }></input>
+                                    <button type="submit">Add List</button>
+                                </form>
+                            </div>
+                        }
                     </div>
                 </div>
 
 
             </div>
+
         </>
     )
 }

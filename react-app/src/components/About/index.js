@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+import LinkedInLogo from '../../images/LI-Logo.png'
+import GitHubLogo from '../../images/GitHub_Logo_White.png'
 import "./About.css";
 
 
 const About = () => {
     const [person, setPerson] = useState();
     const user = useSelector((state) => state.session?.user)
+
 
     const [bio, setBio] = useState();
     const [favStock, setFaveStock] = useState();
@@ -32,10 +36,10 @@ const About = () => {
 
     const izzy = () => {
         setPerson("Israel Arvizu");
-        setBio("Software Engineering Student at App Academy");
-        setFaveStock("Nike Inc: NKE");
+        setBio("Computer Enthusiast | Technology Lover | City Life | Friends");
+        setFaveStock("Tesla INC: TSLA");
         setLinkedIn("https://www.linkedin.com/in/israel-arvizu-a11b87218/");
-        setGitHub("https://github.com/elisaia55")
+        setGitHub("https://github.com/israel-arvizu")
     }
 
     const brian = () => {
@@ -47,8 +51,9 @@ const About = () => {
     }
 
     return (
+
         <div className="about-main">
-            <div className="about-title">About Alphahood Developers</div>
+            <div className="about-title">About alphahood Developers</div>
             <div className="about-lower">
                 <div className="about-left">
                     <div className="about-name">
@@ -66,16 +71,16 @@ const About = () => {
                                 <a href={ linkedIn } target="_blank" className="linkedin">
                                     <img
                                         className="linkedin-img"
-                                        src=""
+                                        src={ LinkedInLogo }
                                     />
-                                    LinkedIn
+
                                 </a>
                                 <a className="linkedin" href={ gitHub } target="_blank">
                                     <img
                                         className="linkedin-img"
-                                        src=""
+                                        src={ GitHubLogo }
                                     />
-                                    Github
+
                                 </a>
                             </div>
                         </>
@@ -106,6 +111,7 @@ const About = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 

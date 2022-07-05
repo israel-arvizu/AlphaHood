@@ -1,22 +1,10 @@
 const LOAD_STOCKS = 'stocks/LOAD_STOCKS'
-const LOAD_PORTFOLIO = 'stocks/LOAD_PORTFOLIO'
-const LOAD_CURR_PORTFOLIO = 'stocks/LOAD_CURR_PORTFOLIO'
 const GET_STOCK = 'stocks/GET_STOCK'
 const BUY_STOCK = 'stocks/BUY_STOCK'
 const LOAD_OWNED = 'stocks/LOAD_OWNED'
 
 const loadstocks = (stocks) => ({
     type: LOAD_STOCKS,
-    payload: stocks
-})
-
-const loadcurrportfolio = (stocks) => ({
-    type: LOAD_CURR_PORTFOLIO,
-    payload: stocks
-})
-
-const loadportfolio = (stocks) => ({
-    type: LOAD_PORTFOLIO,
     payload: stocks
 })
 
@@ -66,19 +54,6 @@ export const loadstocklist = (list) => async (dispatch) => {
     return response
 }
 
-export const loadCurrentPortfolio = (id) => async (dispatch) => {
-    const response = await fetch(`/api/stocks/getportfolio/${id}`);
-    const data = await response.json()
-    dispatch(loadcurrportfolio(data));
-    return response
-}
-
-export const loadPortfolio = (id) => async (dispatch) => {
-    const response = await fetch(`/api/stocks/loadportfolio/${id}`);
-    const data = await response.json()
-    dispatch(loadportfolio(data));
-    return response
-}
 
 export const getOneStock = (ticker) => async (dispatch) => {
     const response = await fetch(`/api/stocks/${ticker}`) //GRAB STOCK FROM DB
@@ -118,16 +93,10 @@ export default function stocksReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_STOCKS:
             return { ...state, stocks: action.payload }
-        case LOAD_PORTFOLIO:
-            return { ...state, portfolio: action.payload }
         case LOAD_OWNED:
             return { ...state, myPortfolio: action.payload }
-        case LOAD_CURR_PORTFOLIO:
-            newState = { ...state }
-            newState["CurrentPortfolio"] = action.payload
-            return newState
         case GET_STOCK:
-            newState = {}
+            newState = {...state}
             newState[action.payload.ticker] = action.payload
             return newState
         case BUY_STOCK:
