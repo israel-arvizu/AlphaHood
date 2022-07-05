@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadAllLists } from "../../store/list"
 import { loadPortfolio } from "../../store/stocks"
 import NavBar from "../NavBar"
+import {useHistory} from "react-router-dom"
+import {demo_user_login} from "../../store/session.js"
 import logo from './logo.png'
 import './splashpage.css'
 import robinhood from './robinhood.png'
 
 
 function SplashPage() {
+  const history = useHistory()
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
 
@@ -18,6 +21,11 @@ function SplashPage() {
     }
   }, [])
 
+
+  const getdemo = () =>{
+    dispatch(demo_user_login())
+    history.push('/')
+  }
 
 
 
@@ -36,7 +44,7 @@ function SplashPage() {
                   About Us
                 </a>
               </li>
-              <button className="demo" type="submit">
+              <button className="demo" onClick={getdemo}>
                 Demo
               </button>
               <li>
@@ -57,7 +65,7 @@ function SplashPage() {
           </nav>
           <div className="firstsection">
             <div className="divhalf">
-              <img src={robinhood}></img>
+              <img className="phones" src={robinhood}></img>
 
             </div>
             <div className="divhalf2">

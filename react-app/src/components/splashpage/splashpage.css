@@ -28,6 +28,9 @@
     float: left;
   }
 
+  .phones{
+    margin-top:-100px;
+  }
   .splash-header h1 {
     font-weight: 300;
     font-size: 40px;
@@ -114,8 +117,9 @@
   .divhalf{
     width:80%;
     margin-left: 0px;
-    margin-top: -120px;
+    margin-top: 0px;
     overflow: auto;
+    padding-top: -500px;
   }
 
   .divhalf2{

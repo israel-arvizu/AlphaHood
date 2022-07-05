@@ -92,6 +92,35 @@ export const logout = () => async (dispatch) => {
     dispatch(removeUser());
   }
 };
+export const demo_user_login = () => async (dispatch) => {
+  let email = "demo@aa.io"
+  let password = "password"
+  const response = await fetch('/api/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  });
+
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+
+}
 
 
 export const signUp = (username, email, birthday, password) => async (dispatch) => {

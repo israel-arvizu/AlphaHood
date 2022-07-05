@@ -59,9 +59,6 @@ const LoginForm = () => {
                     <h2 className="logintitle">Log in to Alphahood</h2>
                   </div>
                   <div>
-                    <span className="loginparagraph">We'll need your name, email address, and a unique password. You'll use this login to access Alphahood next time.</span>
-                  </div>
-                  <div>
 
                   </div>
                   <div></div>
