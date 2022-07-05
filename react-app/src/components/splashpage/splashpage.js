@@ -22,7 +22,7 @@ function SplashPage(){
             <div className="logo">
               <img id="splashLogo" src={logo} alt='a' />
             </div>
-            <nav>
+            <nav className="splashbuttons">
               <ul>
                 <li>
                   <a href='/about' exact={true} className='about-us'>
