@@ -235,30 +235,21 @@ function StockDetail() {
                                 <p className='item-info'>${selectedStock.fiftyTwoWeekLow}</p>
                             </div>
                         </div>
-                        {/* <div className='related-list-container'>
-                        <h2>Related Lists</h2>
-                        <button>{selectedStock.industry}</button>
-                        <button>{selectedStock.state}</button>
-                    </div> */}
-                        {/* <div className='news-container'>
-                <h2>News</h2>
-                {
-                    newsArticles ?
-                        <p>{
-                            newsArticles.title
-                        }</p> :
-                        <p> Sorry Couldn't Load News...</p>
-                }
-            </div> */}
-                        <h2>Analyst Ratings</h2>
-                        <hr></hr>
-                        <div className='analyst-rating-container'>
-                            <p>{selectedStock.recommendationKey}</p>
-                        </div>
-                        {/* <div className='Earnings'>
-                <h2>Earnings</h2>
-                <p>PUT EARNINGS HERE</p>
-            </div> */}
+                        {/* <h2>Analyst Ratings</h2>
+                        <hr></hr> */}
+                        {/* <div className='analyst-rating-container'>
+                            <div className='reco-circle'>
+                                <div className='circle-inner-contain'>
+                                    <p id='inside-circle'>{Math.round((Math.random() * (100 - 51) + 51))}%</p>
+                                    <span id='inside-circle-2'>OF RATINGS SUGGEST</span>
+                                </div>
+                            </div>
+                            <div className={selectedStock.recommendationKey.includes('buy') ? 'recommend-buy' : selectedStock.recommendationKey.includes('sell') ? 'recommend-sell' : 'recommend-hold'}>
+                                <p>{Math.round((Math.random() * (100 - 51) + 51))}% OF RATINGS SUGGEST {
+                                    selectedStock.recommendationKey.includes('strong' && 'buy') ? "buy" : selectedStock.recommendationKey.includes('strong' && 'sell') ? "sell" : "hold"
+                                }ing {selectedStock.ticker}</p>
+                            </div>
+                        </div> */}
                     </div>
                     <div className='right-container'>
                         <div className='right-inner-container'>
@@ -289,7 +280,6 @@ function StockDetail() {
                         </div>
                         <div className='testBtn'>
                             <AddToListModal stock={selectedStock} />
-
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@
 .parent-container {
     display: grid;
     grid-template-columns: 3fr 1fr;
+    margin-top: -6rem;
 }
 
 .buy-sell-container {
@@ -203,3 +204,54 @@
     display: flex;
     flex-direction: column-reverse;
 }
+
+/* .analyst-rating-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.recommend-buy p {
+    color: rgb(3, 200, 5);
+}
+
+.recommend-sell p {
+    color: rgb(255, 80, 0);
+}
+
+.recommend-hold p {
+    color: rgb(3, 200, 5);
+}
+
+.reco-circle {
+    margin-top: 30px;
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#inside-circle {
+    padding: 0rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+#inside-circle-2 {
+    padding: 0rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.circle-inner-contain {
+    display: flex;
+} */
