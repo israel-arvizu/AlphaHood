@@ -53,7 +53,6 @@ const About = () => {
 
     return (
         <>
-        <UserNavBar />
         <div className="about-main">
             <div className="about-title">About alphahood Developers</div>
             <div className="about-lower">
