@@ -34,44 +34,44 @@ function SplashPage() {
     <>
       <header className="splash-header">
         <div className="splash-container">
-          <div className="top-nav-bar-container">
+          <div className="splash-nav-bar-container">
             <div className="logo">
               <img id="splashLogo" src={logo} alt='a' />
             </div>
             <nav className="splashbuttons">
-              <ul className="splash-nav-buttons">
-                <li>
+              <div className="splash-nav-buttons">
+                <div>
                   <a href='/about' className='about-us'>
                     About Us
                   </a>
-                </li>
+                </div>
                 <button className="demo-btn" onClick={getdemo}>
                   Demo
                 </button>
                 {!user &&
-                  <li>
+                  <div>
                     <a href='/login' className='login'>
                       Login
                     </a>
-                  </li>
+                  </div>
                 }
                 {!user &&
-                  <li>
+                  <div>
                     <a href='/sign-up' className='sign-up'>
                       Sign Up
                     </a>
-                  </li>
+                  </div>
                 }
                 {user &&
-                  <li>
+                  <div>
                     <a href='/dashboard' className='home-button-splash'>
                       Home
                     </a>
-                  </li>
+                  </div>
                 }
-              </ul>
+              </div>
             </nav>
-          </div>
+            </div>
           <div className="firstsection">
             <div className="divhalf">
               <img className="phones" src={robinhood}></img>

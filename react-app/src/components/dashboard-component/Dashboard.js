@@ -21,7 +21,7 @@ function Dashboard() {
     const newsArticles = useSelector(state => state.newsReducer.news);
     const userlog = useSelector(state => state.session.user)
     //news not needed
-    // const newsArticles = useSelector(state => state.newsReducer.news);
+    //const newsArticles = useSelector(state => state.newsReducer.news);
     const userId = useSelector(state => state.session.user.id)
     const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")

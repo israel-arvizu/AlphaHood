@@ -5,7 +5,6 @@
     flex-direction: column;
     height: 100vh;
     width: 105vw;
-    background-image: url("../../images/AlphahoodBG.png");
     background-color: transparent;
     background-position: center;
     background-repeat: no-repeat;
@@ -39,6 +38,7 @@
     margin-right: 45px;
     margin-top: 150px;
     border-radius: 5px;
+    border: 1px solid #40494E;
   }
 
   .about-right {
@@ -56,12 +56,18 @@
     align-items: center;
     justify-content: center;
     margin-top: 150px;
+    font-family: 'Raleway', sans-serif;
+
   }
 
   .linkedin {
     display: flex;
     align-items: center;
     gap: 25px;
+  }
+
+  .line-break-name-about{
+    border: 0.5px solid #40494E;
   }
 
   .linkedin-img {
@@ -82,6 +88,11 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 100;
   }
 
   .about-me {
@@ -93,13 +104,19 @@
   }
 
   .about-bio {
-    margin-bottom: 50px;
     display: flex;
-
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-weight: 400;
   }
 
   .about-fav-stock {
-    margin-bottom: 50px;
+    margin-top: 25px;
+    margin-bottom: 10px;
   }
 
   .name-links {
@@ -120,8 +137,11 @@
   .about-left-lower {
     display: flex;
     flex-direction: column;
-
-
+    width: 450px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    font-family: 'Raleway', sans-serif;
   }
 
   .aboutlink {
@@ -134,4 +154,49 @@
 
   .aboutlink:hover{
     color: red;
+  }
+
+  .about-dev-bio{
+    text-align: center;
+    width: 400px;
+    font-size: 20px;
+
+  }
+
+  .line-break-fav-stock{
+    margin: 0px;
+    width: 500px;
+    border: 0.5px solid #40494E;
+  }
+
+
+  #code-box{
+    width: 300px;
+    height: 350px;
+    background-color: #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+  }
+
+  #code-section{
+    width: 300px;
+    height: 340px;
+    background-color: #383737;
+  }
+
+  #code-box-content{
+    width: 260px;
+    height: 300px;
+    padding: 20px;
+    font-size: 18px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  #fav-activity-term{
+    font-size: 15px;
+    color: #CCCCCC;
+    margin-left: 15px;
   }

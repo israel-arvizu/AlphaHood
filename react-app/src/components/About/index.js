@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import LinkedInLogo from '../../images/LI-Logo.png'
 import GitHubLogo from '../../images/GitHub_Logo_White.png'
+import UserNavBar from '../UserNavBar/index'
 import "./About.css";
 
 
@@ -20,38 +21,39 @@ const About = () => {
 
     const fino = () => {
         setPerson("Augustino Elisaia");
-        setBio("Software Engineer | Athletics | Food Enthusiast");
-        setFaveStock("Nike Inc: NKE");
+        setBio(['Software Engineer', 'Athletics' , 'Food Enthusiast']);
+        setFaveStock("Nike Inc, NKE");
         setLinkedIn("https://www.linkedin.com/in/augustino-elisaia-7307a822b/");
         setGitHub("https://github.com/elisaia55")
     }
 
     const dylan = () => {
         setPerson("Dylan Peate");
-        setBio("Software Engineer | Photographer | Money Maker");
-        setFaveStock("Mclaren: MLAI");
+        setBio(["Software Engineer", "Photographer", "Money Maker"]);
+        setFaveStock("Mclaren, MLAI");
         setLinkedIn("https://www.linkedin.com/in/dylan-peate-839511231/");
         setGitHub("https://github.com/dylanpeate")
     }
 
     const izzy = () => {
         setPerson("Israel Arvizu");
-        setBio("Computer Enthusiast | Technology Lover | City Life | Friends");
-        setFaveStock("Tesla INC: TSLA");
+        setBio(['Computer Enthusiast', 'Technology Lover', 'City Life', 'Friends']);
+        setFaveStock("Tesla INC, TSLA");
         setLinkedIn("https://www.linkedin.com/in/israel-arvizu-a11b87218/");
         setGitHub("https://github.com/israel-arvizu")
     }
 
     const brian = () => {
         setPerson("Brian Kim");
-        setBio("Cybersecurity | Software Engineer | Video Game Connoisseur");
-        setFaveStock("NVIDIA: NVDA");
+        setBio(['Cybersecurity', 'Software Engineer',  'Video Game Connoisseur']);
+        setFaveStock("NVIDIA, NVDA");
         setLinkedIn("https://www.linkedin.com/in/brian-kim-2217ba125/");
         setGitHub("https://github.com/brianshkim")
     }
 
     return (
-
+        <>
+        <UserNavBar />
         <div className="about-main">
             <div className="about-title">About alphahood Developers</div>
             <div className="about-lower">
@@ -61,11 +63,36 @@ const About = () => {
                             ? person
                             : "Please select a Full-Stack Developer" }
                     </div>
+                    <hr className="line-break-name"></hr>
                     { person?.length > 0 ? (
                         <>
                             <div className="about-left-lower">
-                                <div className="about-bio">About Developer: { bio }</div>
-                                <div className="about-fav-stock">Favorite Stock: { favStock }</div>
+                                {/* <div className="about-bio">About Developer:</div> */}
+                                {/* <div className="about-dev-bio">{ bio }</div>
+                                <span className="about-fav-stock">Favorite Stock:</span>
+                                <span>{ favStock }</span>
+                                <hr className="line-break-fav-stock"></hr> */}
+                                <div id='code-box'>
+                                    <div id="code-section">
+                                        <div id='code-box-content'>
+                                            <span>aboutDeveloper{'{'}</span>
+                                            <br/>
+                                            {bio && bio.map((activity) => {
+                                                return (
+                                                <div>
+                                                    <div id='fav-activity-term'>=>{activity}</div>
+                                                </div>
+                                                )
+                                            })}
+                                            <div>{'}'}</div>
+                                            <br/>
+                                            <br/>
+                                            <div>favoriteStock{'{'}</div>
+                                            <div id='fav-activity-term'>=>'stock':  {favStock}</div>
+                                            <div>{'}'}</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className="about-me">
                                 <a href={ linkedIn } target="_blank" className="linkedin">
@@ -111,7 +138,7 @@ const About = () => {
                 </div>
             </div>
         </div>
-
+        </>
     );
 };
 
