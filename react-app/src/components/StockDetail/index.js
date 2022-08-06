@@ -9,7 +9,7 @@ import alphahoodblack from '../../images/alphahoodblack.png'
 
 import AddToListModal from '../AddToListModal'
 import { loadAllLists } from '../../store/list'
-
+import { refresh_user } from '../../store/session'
 import StockLineChart from '../Linechart-Component/StocksLineChart'
 import { stockChartHistory } from '../../store/liststock';
 import './StockDetail.css'
@@ -136,6 +136,8 @@ function StockDetail() {
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         setBoughtShares(true)
+        setSoldShares(false)
+        dispatch(refresh_user(sessionUser.id))
 
     }
 
@@ -149,9 +151,11 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'sell')).then(()=>dispatch(refresh_user(sessionUser.id)))
+        setBoughtShares(false)
         setSoldShares(true)
-        setShares(0)
+
+
     }
 
     const owned = () => {
@@ -178,6 +182,7 @@ function StockDetail() {
     const onChangeBuy = (e) =>{
         setShares(0)
         setBoughtShares(false)
+        setSoldShares(false)
         setShares(e.target.value)
 
 
