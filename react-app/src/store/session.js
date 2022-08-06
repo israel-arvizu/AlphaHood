@@ -3,6 +3,7 @@ import { loadAllLists } from "./list";
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const RESET_USER = 'session/RESET_USER'
+const SET_BALANCE = 'session/SET_BALANCE'
 
 const resetUser= (user) => ({
   type: RESET_USER,
@@ -32,6 +33,10 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
+})
+
+const setNewBalance =(balance)=>({
+  type: balance
 })
 
 const initialState = { user: null };
@@ -151,6 +156,25 @@ export const signUp = (username, email, birthday, password) => async (dispatch) 
   }
 }
 
+export const refresh_user = (userId) => async(dispatch)=>{
+  const response = await fetch(`/api/users/${userId}`)
+  if (response.ok){
+    const data = await response.json()
+    dispatch(setUser(data))
+
+}else if (response.status < 500) {
+  const data = await response.json();
+  if (data.errors) {
+    return data.errors;
+  }
+} else {
+  return ['An error occurred. Please try again.']
+}
+}
+
+
+
+
 //need to create balance action state
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -160,6 +184,8 @@ export default function reducer(state = initialState, action) {
       return { user: action.user}
     case REMOVE_USER:
       return { user: null }
+
+
     default:
       return state;
   }

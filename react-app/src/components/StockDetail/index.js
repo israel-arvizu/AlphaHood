@@ -9,7 +9,7 @@ import alphahoodblack from '../../images/alphahoodblack.png'
 
 import AddToListModal from '../AddToListModal'
 import { loadAllLists } from '../../store/list'
-
+import { refresh_user } from '../../store/session'
 import StockLineChart from '../Linechart-Component/StocksLineChart'
 import { stockChartHistory } from '../../store/liststock';
 import './StockDetail.css'
@@ -136,6 +136,9 @@ function StockDetail() {
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         setBoughtShares(true)
+        setSoldShares(false)
+        dispatch(refresh_user(sessionUser.id))
+
     }
 
     const sellShares = async (e) => {
@@ -148,8 +151,11 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
+        dispatch(purchaseStock(tickerUpper, transaction, 'sell')).then(()=>dispatch(refresh_user(sessionUser.id)))
+        setBoughtShares(false)
         setSoldShares(true)
+
+
     }
 
     const owned = () => {
@@ -172,6 +178,15 @@ function StockDetail() {
     }
     let number = changeToday()[0]
     let priceDif = changeToday()[1]
+
+    const onChangeBuy = (e) =>{
+        setShares(0)
+        setBoughtShares(false)
+        setSoldShares(false)
+        setShares(e.target.value)
+
+
+    }
 
 
 
@@ -282,7 +297,7 @@ function StockDetail() {
                                 onKeyDown={(e) => {
                                     if (e.target.value < 0) { e.target.value = e.target.value * -1 }
                                 }}
-                                onChange={e => setShares(e.target.value)}
+                                onChange={e => onChangeBuy(e)}
                             ></input>
                             <div className='buy-sell-btns'>
                                 <button id='buy-btn' type="submit" disabled={
@@ -293,9 +308,9 @@ function StockDetail() {
                                 }>Sell</button>
                             </div>
                         </form>
-                        {boughtShares &&
+                        {boughtShares && shares>0 &&
                             <div>
-                                <a>Succesfully Bought {shares} shares</a>
+                                <a>Successfully Bought {shares} shares</a>
                             </div>
                         }
                         {soldShares &&
