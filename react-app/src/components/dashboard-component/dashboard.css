@@ -355,21 +355,7 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
-.trendingtable {
-    width: 50%
-}
 
-.tablecontainer {
-    display: flex;
-    width: 80%;
-
-    flex-direction: column;
-
-}
-
-.tlist {
-    color: grey
-}
 
 .loading-dash-container {
     width: 100%;

@@ -3,6 +3,14 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 import UserNavBar from './UserNavBar'
+import TopHotTen from './TrendingList/tophot10'
+import CreatorsChoice from './TrendingList/creatorschoice'
+import Top25 from './TrendingList/25mostpopular'
+import Technology from './TrendingList/Technology'
+import Automotive from './TrendingList/automotive'
+import './TrendingList/trendinglist.css'
+
+
 
 
 import { topTen, creator, mostpop, tech, auto, topTenDefault,
@@ -101,13 +109,19 @@ function TrendingLists() {
     return(
         <>
             <UserNavBar />
-                <div>
-                    <div>
-                        <img></img>
-                    </div>
+                <div className="trendinglistcontainer">
+                    {list==="top-hot-10" && <TopHotTen/>}
+                    {list==="creators-choice" && <CreatorsChoice />}
+                    {list==="25-most-popular" && <Top25/>}
+                    {list==="technology" && <Technology/>}
+                    {list==="automotive" && <Automotive/>}
+
                     <div>
                         <div className="tablecontainer">
-                            <h1>{title}</h1>
+                            <div className="trendinglisttitle">{title}
+                            {list === "top-hot-10" &&
+                             <span className="trendinglisttitlelogo">  <i class="fa-solid fa-fire-flame-curved"></i></span>}
+                             </div>
 
                             <div>
                                 <table className = "trendingtable">
@@ -120,12 +134,12 @@ function TrendingLists() {
                                     </tr>
                                         {stockDetails.map(stock=>{
                                             return (
-                                                <tr>
-                                                    <td>{stock.name}</td>
-                                                    <td>{stock.ticker}</td>
-                                                    <td>{stock.price}</td>
-                                                    <td>{stock.todayPerformance + "%"}</td>
-                                                    <td>{numToString(stock.marketCap)}</td>
+                                                <tr className="tlistdatacontainer">
+                                                    <td className="tlistdata">{stock.name}</td>
+                                                    <td className="tlistdata">{stock.ticker}</td>
+                                                    <td className="tlistdata">{stock.price}</td>
+                                                    <td className="tlistdata">{stock.todayPerformance + "%"}</td>
+                                                    <td className="tlistdata">{numToString(stock.marketCap)}</td>
                                                 </tr>
                                             )
                                         })}
