@@ -136,6 +136,7 @@ function StockDetail() {
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         setBoughtShares(true)
+
     }
 
     const sellShares = async (e) => {
@@ -150,6 +151,7 @@ function StockDetail() {
         }
         dispatch(purchaseStock(tickerUpper, transaction, 'sell'))
         setSoldShares(true)
+        setShares(0)
     }
 
     const owned = () => {
@@ -172,6 +174,14 @@ function StockDetail() {
     }
     let number = changeToday()[0]
     let priceDif = changeToday()[1]
+
+    const onChangeBuy = (e) =>{
+        setShares(0)
+        setBoughtShares(false)
+        setShares(e.target.value)
+
+
+    }
 
 
 
@@ -282,7 +292,7 @@ function StockDetail() {
                                 onKeyDown={(e) => {
                                     if (e.target.value < 0) { e.target.value = e.target.value * -1 }
                                 }}
-                                onChange={e => setShares(e.target.value)}
+                                onChange={e => onChangeBuy(e)}
                             ></input>
                             <div className='buy-sell-btns'>
                                 <button id='buy-btn' type="submit" disabled={
@@ -293,9 +303,9 @@ function StockDetail() {
                                 }>Sell</button>
                             </div>
                         </form>
-                        {boughtShares &&
+                        {boughtShares && shares>0 &&
                             <div>
-                                <a>Succesfully Bought {shares} shares</a>
+                                <a>Successfully Bought {shares} shares</a>
                             </div>
                         }
                         {soldShares &&
