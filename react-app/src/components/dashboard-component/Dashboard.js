@@ -149,7 +149,7 @@ function Dashboard() {
                         <p id='buying-power-header'>${user.balance.toFixed(2)}</p>
                     </div>
                     <hr className='line-break-dashboard'></hr>
-                    {/* <div className='trending-list-main-container'>
+                    { <div className='trending-list-main-container'>
                         <p id='trending-list-header'>Trending Lists</p>
                         <hr className='line-break-dashboard'></hr>
                         <div className='trending-list-button-container'>
@@ -184,7 +184,7 @@ function Dashboard() {
                                 </div>
                             </NavLink>
                         </div>
-                    </div> */}
+                    </div> }
                     {/* <h2>News</h2> */}
                     {/* {newsArticles.map((article) => {
                         if (article.thumbnail !== undefined)

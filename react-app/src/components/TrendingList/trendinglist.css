@@ -1,0 +1,117 @@
+.top10div{
+    background-color: #ff8b5d  ;
+    padding-top: 50px;
+    margin-top:-5%;
+    width: 100vw;
+
+
+}
+
+
+.Technologydiv{
+    background-color: #2b94f6 ;
+    padding-top: 50px;
+    margin-top:-5%;
+    width: 100vw;
+
+}
+
+
+.creatorschoicediv{
+
+    background-color: #ffa985 ;
+    padding-top: 50px;
+    margin-top:-5%;
+    width: 100vw;
+}
+
+.top25mostpopulardiv{
+    background-color: #ffed89;
+    padding-top: 50px;
+    margin-top:-5%;
+    width: 100vw;
+
+}
+
+.automotivediv{
+    background-color: #c9e7ec;
+    padding-top: 50px;
+    margin-top:-5%;
+    width: 100vw;
+
+}
+
+.trendinglisttitle{
+    margin-top: 30px;
+    margin-left: 35%;
+    margin-bottom: 20px;
+    font-size:24px;
+    font-family: "Capsule Sans Display",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+}
+
+
+.trendingtable {
+    margin-left: 35%;
+    width: 50%
+}
+
+.tablecontainer {
+    display: flex;
+    width: 80%;
+
+    flex-direction: column;
+
+}
+
+.tlist {
+    color: grey;
+    font-size: 13px;
+    font-family: "Capsule Sans Text",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;;
+}
+
+.tlistdata{
+    padding: 15px;
+    color: white;
+    font-size: 13px;
+    font-family: "Capsule Sans Text",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;;
+    font-weight: 500px;
+    border-bottom: 1px solid rgb(255,255,255, .3);
+
+}
+
+.trendinglisttitlelogo{
+    margin-left: 5px;
+    color: red;
+
+    height: 100px;
+}
+
+.trendinglisttitlelogocreator{
+    margin-left: 5px;
+    color: rgb(0,200,5);
+
+    height: 100px;
+}
+
+.trendinglisttitlelogo25{
+    margin-left: 5px;
+    color: orange;
+
+    height: 100px;
+}
+
+
+.trendinglisttitlelogotechnology{
+    margin-left: 5px;
+    color: blue;
+
+    height: 100px;
+}
+
+.trendinglisttitlelogoauto{
+    margin-left: 5px;
+    color: lightgray;
+
+    height: 100px;
+}
