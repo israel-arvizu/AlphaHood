@@ -6,7 +6,7 @@ const TopHotTen = () =>{
     let {list} = useParams()
     let navbarbg = document.getElementsByClassName('usernav-container')
     let outernavbg = document.getElementsByClassName('outer-container')
-    console.log(outernavbg)
+
 
     useEffect(()=>{
 
