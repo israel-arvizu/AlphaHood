@@ -137,6 +137,7 @@ function StockDetail() {
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         setBoughtShares(true)
         setSoldShares(false)
+        dispatch(loadOwnedStocks(sessionUser.id))
         dispatch(refresh_user(sessionUser.id))
 
     }
