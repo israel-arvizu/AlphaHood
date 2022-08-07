@@ -37,6 +37,8 @@ function StockDetail() {
     const [buyStock, setBuyStock] = useState('Buy')
     const [balance, setBalance] = useState(sessionUser.balance)
     const [shares, setShares] = useState(0)
+    const [soldShareNumber, setSoldShareNumber] = useState(0)
+    const [boughtShareNumber, setboughtShareNumber] = useState(0)
     const [soldShares, setSoldShares] = useState(false);
     const [boughtShares, setBoughtShares] = useState(false)
 
@@ -137,8 +139,12 @@ function StockDetail() {
         dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
         setBoughtShares(true)
         setSoldShares(false)
-        dispatch(loadOwnedStocks(sessionUser.id))
-        dispatch(refresh_user(sessionUser.id))
+        await dispatch(loadOwnedStocks(sessionUser.id)).then(()=>dispatch(refresh_user(sessionUser.id))).then(()=>dispatch(refresh_user(sessionUser.id)))
+
+        setboughtShareNumber(shares)
+        setShares(0)
+
+
 
     }
 
@@ -152,9 +158,14 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        dispatch(purchaseStock(tickerUpper, transaction, 'sell')).then(()=>dispatch(refresh_user(sessionUser.id)))
+        await dispatch(purchaseStock(tickerUpper, transaction, 'sell')).then(()=>dispatch(refresh_user(sessionUser.id))).then(()=>dispatch(loadOwnedStocks(sessionUser.id)))
+
         setBoughtShares(false)
         setSoldShares(true)
+        setSoldShareNumber(shares)
+        setShares(0)
+
+
 
 
     }
@@ -181,7 +192,7 @@ function StockDetail() {
     let priceDif = changeToday()[1]
 
     const onChangeBuy = (e) =>{
-        setShares(0)
+
         setBoughtShares(false)
         setSoldShares(false)
         setShares(e.target.value)
@@ -294,7 +305,8 @@ function StockDetail() {
                                 className='buy-sell-input'
                                 name='shares'
                                 type='number'
-                                // value={shares}
+                                value={shares}
+
                                 onKeyDown={(e) => {
                                     if (e.target.value < 0) { e.target.value = e.target.value * -1 }
                                 }}
@@ -309,14 +321,14 @@ function StockDetail() {
                                 }>Sell</button>
                             </div>
                         </form>
-                        {boughtShares && shares>0 &&
+                        {boughtShares &&
                             <div>
-                                <a>Successfully Bought {shares} shares</a>
+                                <a>Successfully Bought {boughtShareNumber} shares</a>
                             </div>
                         }
                         {soldShares &&
                             <div className='sold-shares-content'>
-                                <p>Succesfully Sold {shares} shares</p>
+                                <p>Successfully Sold {soldShareNumber} shares</p>
                             </div>
                         }
                     </div>
