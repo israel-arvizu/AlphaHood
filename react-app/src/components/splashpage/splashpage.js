@@ -45,9 +45,10 @@ function SplashPage() {
                     About Us
                   </a>
                 </div>
-                <button className="demo-btn" onClick={getdemo}>
+                {!user && <button className="demo-btn" onClick={getdemo}>
                   Demo
-                </button>
+
+                </button>}
                 {!user &&
                   <div>
                     <a href='/login' className='login'>
