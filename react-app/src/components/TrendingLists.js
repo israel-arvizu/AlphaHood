@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useParams} from 'react-router-dom'
+import {useParams, NavLink} from 'react-router-dom'
 import { loadstocklist } from '../store/stocks'
 import UserNavBar from './UserNavBar'
 import TopHotTen from './TrendingList/tophot10'
@@ -128,8 +128,8 @@ function TrendingLists() {
                                     </tr>
                                         {stockDetails.map(stock=>{
                                             return (
-                                                <tr className="tlistdatacontainer">
-                                                    <td className="tlistdata">{stock.name}</td>
+                                            <tr className="tlistdatacontainer">
+                                                    <td className="tlistdata"><NavLink className="tlistname" to={`/stocks/${stock.ticker}`}>{stock.name}</NavLink></td>
                                                     <td className="tlistdata">{stock.ticker}</td>
                                                     <td className="tlistdata">{stock.price}</td>
                                                     <td className="tlistdata">{stock.todayPerformance + "%"}</td>
