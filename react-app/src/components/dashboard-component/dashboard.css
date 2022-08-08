@@ -111,8 +111,8 @@
 
 #create-list-header-text {
     display: flex;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
     font-weight: 600;
     font-size: 15px;
 }
@@ -201,8 +201,11 @@
 }
 
 .watchlist-dash-title {
+    padding: 16px;
+    margin-left: -10px;
+
     font-weight: 600;
-    margin-bottom: 1rem;
+
     font-size: 15px;
 }
 
@@ -213,8 +216,12 @@
 }
 
 .watchlist-dash-port-name {
+    margin-left: -10px;
+
+    padding:16px;
+
     font-weight: 600;
-    margin-bottom: 1rem;
+
     font-size: 15px;
 }
 
@@ -263,14 +270,16 @@
 }
 
 .stock-list-link-container-portfolio {
+    margin-top: 5%;
     text-decoration: none;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 16px;
+    padding-right: 16px;
     width: 228px;
     height: 45px;
 }
 
 .watchlist-buttons-container-list {
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
