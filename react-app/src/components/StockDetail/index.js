@@ -173,13 +173,15 @@ function StockDetail() {
     const owned = () => {
         for (let i = 0; i < myPortfolio.length; i++) {
             if (myPortfolio[i].stockId === selectedStock.id) {
+
                 if (shares > myPortfolio[i].shares) {
-                    return false
+                    return true
                 }
             }
         }
-        return true
+        return false
     }
+
 
 
 
@@ -317,7 +319,7 @@ function StockDetail() {
                                     sessionUser.balance <= selectedStock.currentPrice * shares || shares < 1
                                 }>Buy</button>
                                 <button id='sell-btn' onClick={e => sellShares(e)} disabled={
-                                    owned() || shares<1
+                                    owned() || shares < 1
                                 }>Sell</button>
                             </div>
                         </form>
