@@ -110,7 +110,7 @@ const AddToList = ({ stock, closeModal }) => {
   }
 
   return (
-    <div>
+    <div className="addtolistcontainer">
       <div className="addtolisttitle">Add to Your List</div>
       <div className="addtowatchlist">
         <form className="updatelists"
@@ -125,7 +125,7 @@ const AddToList = ({ stock, closeModal }) => {
 
               <label className="watchlistnames">{watchlist.name}</label>
               <input type="checkbox" id={`check-${watchlist.id}`} className="checkboxwatch" onChange={(e) => checkLists(e, watchlist.id)} />
-              <hr></hr>
+              <div className="checkboxseparator"></div>
               <br></br>
               {!!liststocks && document.getElementById(`check-${watchlist.id}`) && liststocks[watchlist.id].forEach(list => {
 
