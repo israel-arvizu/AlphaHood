@@ -67,6 +67,7 @@
     border: solid black 1px;
     cursor: pointer;
     font-weight: 600;
+    margin-right: 5px;
   }
 
   .login{
@@ -83,6 +84,7 @@
     display: inline-block;
     font-size: 16px;
     border: solid rgb(0, 0, 0) 1px;
+    margin-right: 5px;
   }
 
   .sign-up{
