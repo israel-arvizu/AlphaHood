@@ -12,6 +12,7 @@ import UserNavBar from '../UserNavBar';
 import alphahoodblack from '../../images/alphahoodblack.png'
 import './dashboard.css';
 import { authenticate } from '../../store/session';
+import { listenerCount } from 'pg/lib/query';
 
 
 
@@ -88,6 +89,32 @@ function Dashboard() {
         setNewListName("")
     }
 
+    const hidelist = (id)=>{
+        let list = document.querySelectorAll(`#watchlist-${id}`)
+        let arrow = document.getElementById(`hidestocklist${id}`).children[0]
+        if (arrow.className==="fa-solid fa-angle-down"){
+            arrow.className="fa-solid fa-angle-up"
+        }
+        else{
+            arrow.className="fa-solid fa-angle-down"
+
+        }
+
+        for (let i = 0;i<list.length;i++){
+            if (list[i].style.display !== "none") list[i].style.display = "none"
+            else if (list[i].style.display === "none") {
+                if (list[i].className="stock-list-link-container")list[i].style.display = "block"
+                if (i === list.length-1){
+                    list[i].className="watchlist-buttons-container-list"
+                    list[i].style.display="flex"
+
+                }
+
+            }
+
+        }
+    }
+
 
     if (portfolio === undefined) {
         return (
@@ -149,7 +176,7 @@ function Dashboard() {
                         <p id='buying-power-header'>${user.balance.toFixed(2)}</p>
                     </div>
                     <hr className='line-break-dashboard'></hr>
-                    { <div className='trending-list-main-container'>
+                    {<div className='trending-list-main-container'>
                         <p id='trending-list-header'>Trending Lists</p>
                         <hr className='line-break-dashboard'></hr>
                         <div className='trending-list-button-container'>
@@ -184,7 +211,7 @@ function Dashboard() {
                                 </div>
                             </NavLink>
                         </div>
-                    </div> }
+                    </div>}
                     {/* <h2>News</h2> */}
                     {/* {newsArticles.map((article) => {
                         if (article.thumbnail !== undefined)
@@ -230,11 +257,12 @@ function Dashboard() {
                                         return (
                                             <li key={idx}>
                                                 <div className='watchlist-headers-container-extra'>
-                                                    <p className='watchlist-dash-title'>{watchlist.name}</p>
+                                                    <div><p className='watchlist-dash-title'>{watchlist.name}</p></div>
+                                                    <div id={`hidestocklist${watchlist.id}`}className="hidestocklist" onClick={()=>hidelist(watchlist.id)}><i className="fa-solid fa-angle-down"></i></div>
                                                 </div>
                                                 {!!liststocks && liststocks[watchlist.id] !== undefined && liststocks[watchlist.id]?.map((stock) => {
                                                     return (
-                                                        <div className='stock-list-link-container' key={stock.ticker}>
+                                                        <div id={`watchlist-${watchlist.id}`} className='stock-list-link-container' key={stock.ticker}>
                                                             <a style={{ textDecoration: 'none' }} href={`/stocks/${stock.ticker.toUpperCase()}`}>
                                                                 <div className='stock-inside-content' key={stock.ticker}>
                                                                     <p className='stock-title-header'>{stock.ticker}</p>
@@ -244,7 +272,7 @@ function Dashboard() {
                                                         </div>
                                                     )
                                                 })}
-                                                <div className='watchlist-buttons-container-list'>
+                                                <div id={`watchlist-${watchlist.id}`} className='watchlist-buttons-container-list'>
                                                     <EditListModal id={watchlist.id} />
                                                     <button className='watchlist-buttons-indivial-btn delete-btn-list' id={watchlist.id} onClick={deleteAList}>Delete List</button>
                                                 </div>
