@@ -136,10 +136,10 @@ function StockDetail() {
             stockPrice: selectedStock.currentPrice,
             stockId: selectedStock.id
         }
-        dispatch(purchaseStock(tickerUpper, transaction, 'buy'))
+        await dispatch(purchaseStock(tickerUpper, transaction, 'buy')).then(()=>dispatch(loadOwnedStocks(sessionUser.id))).then(()=>dispatch(refresh_user(sessionUser.id)))
         setBoughtShares(true)
         setSoldShares(false)
-        await dispatch(loadOwnedStocks(sessionUser.id)).then(()=>dispatch(refresh_user(sessionUser.id))).then(()=>dispatch(refresh_user(sessionUser.id)))
+
 
         setboughtShareNumber(shares)
         setShares(0)
