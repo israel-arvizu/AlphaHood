@@ -345,7 +345,7 @@
 
 #modal-content {
     background-color: #40494E;
-    height: 150px;
+    height: 200px;
     width: 250px;
     border-radius: 15px;
 }
@@ -353,18 +353,20 @@
 .modal-edit-list-content {
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
+    margin-top: -30px;
+    margin-left: -30px;
+
 
 }
 
 #editinput-modal {
-    width: 125px;
+    width: 178px;
     background-color: #30363A;
     border: 1px solid transparent;
     border-radius: 15px;
-    padding-left: 10px;
+
     color: white;
-    height: 20px;
+    height: 32px;
 }
 
 #editlist-modal-header {
@@ -376,6 +378,7 @@
 }
 
 .submiteditbutton-modal {
+    margin-top: 15%;
     width: 96px;
     height: 36px;
     border-radius: 25px;
