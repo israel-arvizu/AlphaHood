@@ -34,7 +34,7 @@ const EditList = ({ id, closeModal}) => {
   return (
   <div className="modal-edit-list-container">
     <div className="edit-list-form">
-      <div className="errors">
+      <div className="errors-edit-list">
         <ul>
           {errorMessages.map(error=>(
             <li key={error}>{error}</li>
