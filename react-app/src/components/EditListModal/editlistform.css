@@ -1,4 +1,24 @@
+.edit-list-form{
+    margin-top: 10px;;
+}
+
 .edit-watchlist{
+
     padding: 64px;
 
+}
+
+
+.errors-edit-list{
+    margin-bottom: -30px;
+    color: red;
+}
+
+#editinput-modal::placeholder{
+    padding-left: 20px;
+}
+
+#editinput-modal{
+    margin-left: -10px;
+    padding-left: 20px;
 }
