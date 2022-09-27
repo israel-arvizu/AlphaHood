@@ -32,59 +32,49 @@ function SplashPage() {
 
   return (
     <>
-      <header className="splash-header">
         <div className="splash-container">
-          <div className="splash-nav-bar-container">
-            <div className="logo">
-              <img id="splashLogo" src={logo} alt='a' />
-            </div>
-            <nav className="splashbuttons">
-              <div className="splash-nav-buttons">
-                <div>
-                  <a href='/about' className='about-us'>
-                    About Us
-                  </a>
-                </div>
-                {!user && <button className="demo-btn" onClick={getdemo}>
-                  Demo
-
-                </button>}
-                {!user &&
-                  <div>
+          <header className="splash-header">
+            <div className="splash-nav-bar-container">
+              <img id="splashLogo" src={logo} alt='Alpha Hood Logo' />
+              <nav className="splash-header-container">
+                <div className="splash-nav-buttons">
+                    <a href='/about' className='about-us'>
+                      About Us
+                    </a>
+                  {!user &&
+                    <button className="demo-btn" onClick={getdemo}>
+                      Demo
+                    </button>
+                  }
+                  {!user &&
                     <a href='/login' className='login'>
-                      Login
+                      Log in
                     </a>
-                  </div>
-                }
-                {!user &&
-                  <div>
+                  }
+                  {!user &&
                     <a href='/sign-up' className='sign-up'>
-                      Sign Up
+                      Sign up
                     </a>
-                  </div>
-                }
-                {user &&
-                  <div>
+                  }
+                  {user &&
                     <a href='/dashboard' className='home-button-splash'>
                       Home
                     </a>
-                  </div>
-                }
+                  }
+                </div>
+              </nav>
+            </div>
+            </header>
+            <div className="firstsection">
+              <div className="div-section-first">
+                <img className="phones-image-splash" src={robinhood}></img>
               </div>
-            </nav>
+              <div className="div-section-first right">
+                  <div className="div-section-first-inner">Investing is simple here</div>
+                  <a href="/sign-up" className="splash-button main-one-content"> Get Started </a>
+              </div>
             </div>
-          <div className="firstsection">
-            <div className="divhalf">
-              <img className="phones" src={robinhood}></img>
-
-            </div>
-            <div className="divhalf2">
-              <div className="innerhalf">Investing is simple here</div>
-
-            </div>
-          </div>
         </div>
-      </header>
     </>
   )
 
