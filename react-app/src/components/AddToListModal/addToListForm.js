@@ -135,16 +135,7 @@ const AddToList = ({ stock, closeModal }) => {
 
                 }
               })}
-
-
-
-
-
             </div>
-
-
-
-
             ))}
           <button id="submitadd" type="submit" >Update lists</button>
         </form>
