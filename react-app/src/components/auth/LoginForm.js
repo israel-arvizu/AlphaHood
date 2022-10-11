@@ -32,80 +32,48 @@ const LoginForm = () => {
 
   if (user) {
     loadAllLists(user.id)
-
     // return <div><Loading /></div>
-
     history.push('/dashboard');
   }
 
   return (
     <div className='login-page'>
-      <div className='login-img'>
-        <img src="https://cdn.robinhood.com/assets/generated_assets/webapp/632fcb3e7ed928b2a960f3e003d10b44.jpg" id="loginimg"alt="login-img" />
+      <div className='login-img-cont'>
+        <img src="https://cdn.robinhood.com/assets/generated_assets/webapp/632fcb3e7ed928b2a960f3e003d10b44.jpg"  alt="Login Default Image" />
       </div>
-
-      <div className='form-component'>
-
-        <form onSubmit={ onLogin }>
-
-          <div>
-            <header className="">
-              <div className="topleft">
-                <div className="leftlogo">
-
-                </div>
-                <div className="middleleft">
-                  <div>
-                    <h2 className="logintitle">Log in to Alphahood</h2>
-                  </div>
-                  <div>
-
-                  </div>
-                  <div></div>
-                </div>
-
-
+      <div className='login-right-outline'>
+          <form onSubmit={ onLogin }>
+              <h2>Log in to Alphahood</h2>
+              <div className={errors.length > 0 ?'login-error-container' : 'login-error-hidden'}>
+                {errors.map((error, ind) => (
+                  <div key={ind}>{error}</div>
+                ))}
               </div>
-            </header>
-            <div>
-
-              {errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-              ))}
-
-            </div>
-            <div>
-              <label htmlFor='email' className='email-label'>Email</label>
-              <input
-                className='email-input'
-                name='email'
-                type='text'
-                // placeholder='Email'
-
-                value={ email }
-                onChange={ updateEmail }
-
-              />
-            </div>
-            <div>
-              <label htmlFor='password' className='password-label'>Password</label>
-              <input
-                className='password-input'
-                name='password'
-                type='password'
-                // placeholder='Password'
-
-                value={password}
-                onChange={updatePassword}
-
-              />
-              <button type='submit' className='submit-button' >Login</button>
-            </div>
-            <br></br>
-            <div><a href="/sign-up">Don't have an account?</a>
-            </div>
-          </div>
-        </form>
+              <div>
+                <label htmlFor='email'>Email</label>
+                <input
+                  name='email'
+                  type='text'
+                  value={ email }
+                  onChange={ updateEmail }
+                />
+              </div>
+              <div>
+                <label htmlFor='password'>Password</label>
+                <input
+                  name='password'
+                  type='password'
+                  value={password}
+                  onChange={updatePassword}
+                />
+              </div>
+              <button type='submit' className='submit-button'>Log in</button>
+              <br></br>
+              <div className='right-footer'>
+                <p>Not on Alphahood?</p>
+                <a href="/sign-up">Create an account</a>
+              </div>
+          </form>
       </div>
     </div>
   );
