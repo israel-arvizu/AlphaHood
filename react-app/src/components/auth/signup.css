@@ -89,7 +89,8 @@
   width: 76%;
   height: 60px;
   /* margin: 10px; */
-  margin-bottom: 4%;
+  margin-bottom: 20px;
+  margin-top: 10px;
   border-radius: 5px;
   border: solid grey .5px;
   font-size: 20px;
@@ -102,6 +103,31 @@
   font-size: 15px;
   margin-left: 2px;
   color: #757575;
+  }
+
+  .signup-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .signup-footer > div{
+    margin-left: 15px;
+    font-size: 13px;
+  }
+
+  .signup-footer > div > span{
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .signup-footer > div > a{
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-decoration: underline;
+    font-weight: 600;
+    color: black;
   }
 
   .signupsubmit-button{
