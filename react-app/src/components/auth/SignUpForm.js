@@ -142,7 +142,13 @@ const SignUpForm = () => {
                 required={true}
                 placeholder="Repeat Password"
               ></input>
-            <button className='signupsubmit-button' type='submit' disabled={!!errors.length}>Sign Up</button>
+              <div className='signup-footer'>
+                <button className='signupsubmit-button' type='submit'>Sign Up</button>
+                <div>
+                  <span>Already started?</span>
+                  <a href='/login'>Login to access your account</a>
+                </div>
+              </div>
           </div>
         </form>
       </div>
