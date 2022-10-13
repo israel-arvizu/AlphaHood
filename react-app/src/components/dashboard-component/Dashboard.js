@@ -206,13 +206,13 @@ function Dashboard() {
                         </div>
                     </div>}
                     <h2 id='trending-list-header'>News</h2>
-                    <hr className='line-break-dashboard'></hr>
+                    {/* <hr className='line-break-dashboard'></hr> */}
                     {news.map((article) => {
                         if (article.thumbnail !== undefined)
                             return (
                                 <article key={article.title}>
                                     <hr className='line-break-dashboard'></hr>
-                                    <a href={article.link} style={{textDecoration: 'none'}}>
+                                    <a href={article.link}  className='news-article-outline'>
                                         <div className='news-article-publisher-cont'>
                                             <p>{article.publisher}</p>
                                         </div>
@@ -224,7 +224,7 @@ function Dashboard() {
                                                     <a href={`/stocks/${article.relatedTickers[1]}`}>{article.relatedTickers[1]}</a>
                                                 </div>
                                             </div>
-                                            <img src={article.thumbnail.resolutions[1].url} alt='thumbnail' />
+                                            <img src={article.thumbnail.resolutions[1] ? article.thumbnail.resolutions[1].url : null} alt='thumbnail' />
                                         </div>
                                     </a>
                                 </article>
