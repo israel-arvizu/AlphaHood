@@ -19,14 +19,20 @@ import { authenticate } from '../../store/session';
 function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
+    const user = useSelector(state => state.session.user);
     const newsArticles = useSelector(state => state.newsReducer.news);
-    const userlog = useSelector(state => state.session.user)
-    //news not needed
-    //const newsArticles = useSelector(state => state.newsReducer.news);
-    const userId = useSelector(state => state.session.user.id)
+    const watchlists = useSelector(state => state.lists)
+    const portfolio = useSelector(state => state.portfolio.portfolio);
+    const currentPortfolio = useSelector(state => state.portfolio.CurrentPortfolio)
+    const liststocks = useSelector(state => state.listStockReducer.listStock)
+    const portfoliolist = watchlists.filter(watchlist => watchlist.name == "Portfolio")
     const [watchlistName, setWatchlistName] = useState(false)
     const [newListName, setNewListName] = useState("")
     const [displayPort, setDisplayPort] = useState(0)
+    const [portfolioGraph, setPortfolioGraph] = useState(false)
+    const [updated, setUpdate] = useState(false)
+    const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
+    const [enteredWatch, setEnteredWatch] = useState(false)
     const [portfolioHistory, setPortfolioHistory] = useState({
         "2022-07-01 09:30:00-04:00": 0,
         "2022-07-01 09:35:00-04:00": 0,
@@ -34,36 +40,27 @@ function Dashboard() {
         "2022-07-01 09:45:00-04:00": 0,
         "2022-07-01 09:50:00-04:00": 0
     })
-    const [portfolioGraph, setPortfolioGraph] = useState(false)
-    const [updated, setUpdate] = useState(false)
-    const [updateLog, setUpdateLog] = useState("Updating, One Sec!")
-    const [enteredWatch, setEnteredWatch] = useState(false)
+    const [news, setNews] = useState([])
 
 
-    const watchlists = useSelector(state => state.lists)
-    const portfoliolist = watchlists.filter(watchlist => watchlist.name == "Portfolio")
-
-
-    if (!userlog) {
+    if (!user) {
         history.push('/')
     }
 
-
-
-
-    const user = useSelector(state => state.session.user);
-    const portfolio = useSelector(state => state.portfolio.portfolio);
-    const currentPortfolio = useSelector(state => state.portfolio.CurrentPortfolio)
-    const liststocks = useSelector(state => state.listStockReducer.listStock)
-
     useEffect(() => {
-        dispatch(loadAllLists(userId))
+        dispatch(loadAllLists(user.id))
         dispatch(authenticate())
         dispatch(loadPortfolio(user.id))
         dispatch(loadCurrentPortfolio(user.id))
+        dispatch(loadHomeNews())
     }, [dispatch])
 
-
+    useEffect(() => {
+        if(newsArticles && newsArticles.length > 0){
+            setNews(newsArticles)
+        }
+        console.log('this is news', news)
+    }, [newsArticles])
 
     if (watchlists && watchlists.length > 0 && !enteredWatch) {
         let watchListIds = []
@@ -83,7 +80,7 @@ function Dashboard() {
         e.preventDefault()
         const newlist = {
             name: newListName,
-            userId: userId
+            userId: user.id
         }
         await dispatch(addNewList(newlist))
         setNewListName("")
@@ -133,10 +130,6 @@ function Dashboard() {
         )
     }
 
-    // if(newsArticles === undefined){
-    //     dispatch(loadHomeNews())
-    //     return <h2>Loading News Articles</h2>
-    // }
     if (currentPortfolio !== undefined && !updated) {
         let price = currentPortfolio.value
         price = price.toFixed(2)
@@ -153,7 +146,7 @@ function Dashboard() {
         setPortfolioHistory({ ...portfolioHist })
         setPortfolioGraph(true)
     }
-    if (!watchlists) return <h2>loading</h2>
+
     return (
         <>
             <UserNavBar />
@@ -212,25 +205,32 @@ function Dashboard() {
                             </NavLink>
                         </div>
                     </div>}
-                    {/* <h2>News</h2> */}
-                    {/* {newsArticles.map((article) => {
+                    <h2 id='trending-list-header'>News</h2>
+                    {/* <hr className='line-break-dashboard'></hr> */}
+                    {news.map((article) => {
                         if (article.thumbnail !== undefined)
                             return (
-                                <div key={article.title}>
-                                    <hr></hr>
-                                    <a href={article.link}>
-                                        <img src={article.thumbnail.resolutions[1].url} alt='thumbnail' />
-                                        <p>{article.publisher}</p>
-                                        <h3>{article.title}</h3>
+                                <article key={article.title}>
+                                    <hr className='line-break-dashboard'></hr>
+                                    <a href={article.link}  className='news-article-outline'>
+                                        <div className='news-article-publisher-cont'>
+                                            <p>{article.publisher}</p>
+                                        </div>
+                                        <div className='news-article-main-cont'>
+                                            <div>
+                                                <h3>{article.title}</h3>
+                                                <div className='news-article-related-ticks'>
+                                                    <a href={`/stocks/${article.relatedTickers[0]}`}>{article.relatedTickers[0]}</a>
+                                                    <a href={`/stocks/${article.relatedTickers[1]}`}>{article.relatedTickers[1]}</a>
+                                                </div>
+                                            </div>
+                                            <img src={article.thumbnail.resolutions[1] ? article.thumbnail.resolutions[1].url : null} alt='thumbnail' />
+                                        </div>
                                     </a>
-                                    <div>
-                                        <p>{article.relatedTickers[0]}</p>
-                                        <p>{article.relatedTickers[1]}</p>
-                                    </div>
-                                </div>
+                                </article>
                             )
                         return null
-                    })} */}
+                    })}
                 </div>
                 <div className='outer-right-container'>
                     <div>

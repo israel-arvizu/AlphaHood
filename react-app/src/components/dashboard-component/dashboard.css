@@ -14,10 +14,7 @@
 .outer-right-container {
     display: flex;
     flex-direction: column;
-
-
 }
-
 
 #portfolio-value-cont {
     height: 40px;
@@ -98,8 +95,8 @@
 
 .outer-right-container {
     border: 1px solid #40494E;
-    width: 20%px;
-    min-height: 789px;
+    width: 20%;
+    height: 789px;
     max-width: fit-content;
     margin-left: 3rem;
     background-color: #1E2124;
@@ -265,12 +262,9 @@
     text-decoration: none;
     padding: 16px;
     width: 88%;
-
 }
 
 .stock-list-link-container:hover {
-
-
     background-color: #40494E;
 }
 
@@ -279,7 +273,6 @@
 }
 
 .stock-inside-content {
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -289,7 +282,6 @@
     font-weight: 600;
     font-size: 15px;
     color: white;
-
 }
 
 .stock-title-price-cont {
@@ -403,8 +395,6 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
-
-
 .loading-dash-container {
     width: 100%;
     display: flex;
@@ -492,4 +482,57 @@ td {
 .hidestocklist{
     margin-right: 5%;
     margin-top: 6%;
+}
+
+.news-article-outline{
+    text-decoration: none;
+}
+
+.news-article-outline > div:last-child{
+    padding-bottom: 10px;
+}
+
+.news-article-publisher-cont > p{
+    color: white;
+    font-weight: 600;
+}
+
+.news-article-main-cont{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.news-article-main-cont > div > h3{
+    font-size: 18px;
+}
+
+.news-article-main-cont > img{
+    border-radius: 10px;
+}
+
+.news-article-main-cont > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.news-article-related-ticks{
+    display: flex;
+    flex-direction: row;
+}
+
+.news-article-related-ticks > a{
+    font-weight: 600;
+    color: rgb(206, 203, 203);
+}
+
+.news-article-related-ticks > a:first-child{
+    margin-right: 15px;
+}
+
+.news-article-related-ticks > a:hover{
+    font-weight: 600;
+    color: #5AC53B;
 }
